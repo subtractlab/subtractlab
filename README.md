@@ -19,9 +19,13 @@ This is not minimalism as aesthetic. It is minimalism as engineering discipline.
 
 ## Projects
 
-- **Semavault** — AI-native semantic memory architecture
+- **Semavault** — AI-native semantic memory architecture (crystallization, warp navigation, quantum-inspired scoring)
 - **BIApps** — DuckDB-based business intelligence, built subtractive
 - **phiMovie** — Automated video production pipeline
+
+## Architecture
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the full structural definition of Semavault (Crystallization, 3Gravity Model, QIS).
 
 ## Author
 
@@ -30,7 +34,9 @@ Independent builder. Subtractive design practitioner.
 
 - Web: [subtractlab.com](https://subtractlab.com)
 - GitHub: [@subtractlab](https://github.com/subtractlab)
-- X: [@Log28_Okuda](https://x.com/Log28_Okuda)
+- X: [@subtractlabo](https://x.com/subtractlabo)
+- YouTube: [@SUBTRACTLAB](https://www.youtube.com/@SUBTRACTLAB)
+- Note: [subtractlab](https://note.com/subtractlab)
 
 ---
 
