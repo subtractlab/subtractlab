@@ -2,7 +2,7 @@
 
 **AI gets smarter by remembering less, not more.**
 
-The AI industry scales by addition — more parameters, longer context, bigger memory stores. 3Gravity Architecture scales by subtraction: compress conversations into crystals that carry success/failure judgment, organize them by semantic gravity instead of categories, and retrieve by interference scoring instead of similarity matching.
+The AI industry scales by addition — more parameters, longer context, bigger memory stores. **MeaningSpace** scales by subtraction: compress conversations into crystals that carry success/failure judgment, organize them by semantic gravity instead of categories, and retrieve by interference scoring instead of similarity matching.
 
 The result: an AI that knows which memories matter, not just which memories exist.
 
@@ -12,11 +12,11 @@ The result: an AI that knows which memories matter, not just which memories exis
 
 ## What This Is
 
-SubtractLab is the research identity of **Koji Okuda**, building AI memory systems based on a single premise: **storage is computation**. Every unit of memory carries its own evaluation — what worked, what failed, how understanding changed — and that evaluation is used at retrieval time. The act of remembering is itself an act of reasoning.
+SubtractLab is the research identity of **Koji Okuda**, building **MeaningSpace** — an AI memory system where humans enter the LLM's semantic space, rather than pulling the LLM into theirs. Built on a single premise: **storage is computation**. Every unit of memory carries its own evaluation — what worked, what failed, how understanding changed — and that evaluation is used at retrieval time. The act of remembering is itself an act of reasoning.
 
-## Core Architecture
+## MeaningSpace
 
-**[3Gravity Architecture](ARCHITECTURE.md)** — An AI-native semantic memory system, running in production for 2+ years with 1,000+ crystals.
+The product. An AI-native semantic memory system running in production for 2+ years with 1,000+ crystals, powered by **[3Gravity Architecture](ARCHITECTURE.md)**.
 
 - **Crystallization** — Multi-stage distillation that preserves dead ends and pivots, not just conclusions
 - **3Gravity Model** — Crystals self-organize into clusters and galaxies by vector proximity, no labels or folders
