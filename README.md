@@ -14,25 +14,24 @@ This is not minimalism as aesthetic. It is minimalism as engineering discipline.
 
 - **Subtract before you add.** The first question is always: what can be removed?
 - **Natural law over convention.** Align with how things already work, rather than imposing new structure.
-- **Build from scratch when the existing path carries unnecessary weight.** Starting from zero is not waste. It is the purest form of subtraction.
-- **Co-creation over consumption.** AI is not a tool to be used. It is a partner in the act of building meaning.
+- **When existing paths carry unnecessary burden, rebuild from zero.** Starting from nothing is not waste. It is subtraction in its purest form.
+- **Co-creation, not consumption.** AI is not a tool to be used. It is a partner in the act of creating meaning.
 
 ## Projects
 
-- **Semavault** — AI-native semantic memory architecture (crystallization, warp navigation, quantum-inspired scoring)
-- **BIApps** — DuckDB-based business intelligence, built subtractive
+- **3Gravity Architecture** — An AI-native semantic memory architecture inspired by the natural laws of the cosmos. It unifies storage and computation through crystallization, cluster/galaxy structure, warp navigation, and quantum-interference scoring.
+- **BIApps** — DuckDB-based business intelligence, subtractive
 - **phiMovie** — Automated video production pipeline
 
 ## Architecture
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the full structural definition of Semavault (Crystallization, 3Gravity Model, QIS).
+For the structural definition of 3Gravity Architecture (Crystallization, 3Gravity Model, QIS), see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Author
 
-**Koji Okuda**
-Independent builder. Subtractive design practitioner.
+**Koji Okuda** Independent builder. Practitioner of subtractive design.
 
-- Web: [subtractlab.com](https://subtractlab.com)
+- Website: [subtractlab.com](https://subtractlab.com)
 - GitHub: [@subtractlab](https://github.com/subtractlab)
 - X: [@subtractlabo](https://x.com/subtractlabo)
 - YouTube: [@SUBTRACTLAB](https://www.youtube.com/@SUBTRACTLAB)
@@ -40,4 +39,4 @@ Independent builder. Subtractive design practitioner.
 
 ---
 
-*Founded 2026. First public anchor: June 6, 2026.*
+*Founded: 2026. First public anchor: June 6, 2026.*
