@@ -1,143 +1,121 @@
 # 3Gravity Architecture
 
-An AI-native semantic memory system where data serves as both storage and computation.
+**Author: Koji Okuda** · First public anchor: June 6, 2026
 
-**Author: Koji Okuda** First public anchor: June 6, 2026
+---
 
-## Overview
+## The Problem
 
-3Gravity Architecture is a semantic memory architecture designed for human-AI co-creation. It adopts the natural laws of the cosmos — crystallization, cluster formation, galaxy structure, expansion and convergence — as its information processing model. While conventional AI memory systems function as passive storage (retrieve, summarize, forget), this architecture treats every stored unit as a computational element. The act of storing is itself an act of computation.
+Every major AI assistant now offers "memory." They extract facts from your conversations, store them as key-value pairs, and recall them later. This is useful — and fundamentally limited.
 
-This document defines three foundational structures: Crystallization, 3Gravity, and QIS (Quantum Inspired Semantic Space).
+Here's what breaks:
 
-## 1. Crystallization
+- **Memory without judgment.** Current systems remember *what* you said, but not *what worked* and *what failed*. A year of conversations collapses into a flat list of facts, indistinguishable from each other.
+- **Retrieval without computation.** Search returns the closest match by embedding distance. But closeness in vector space doesn't tell you which result led to a breakthrough and which led to a dead end. The system has no way to know.
+- **Storage without structure.** Facts pile up without hierarchy. There's no difference between a passing mention and a hard-won insight. Everything sits at the same depth, at the same weight.
 
-Crystallization is the process of condensing conversations into persistent semantic units called "crystals."
+The result: AI memory systems today are filing cabinets with a search bar. They store. They retrieve. They don't *think*.
 
-### Structure
+3Gravity Architecture is built on a different premise: **storage is computation**. Every unit of memory carries its own evaluation — what succeeded, what failed, how understanding changed — and that evaluation is used at retrieval time to rank, filter, and interfere. The act of remembering is itself an act of reasoning.
 
-Each crystal contains:
+---
 
-- **summary** — Compressed semantic representation (used for embedding/search)
-- **ultra_summary** — Maximum compression (galaxy-scale display)
-- **refined_raw** — Structured but uncompressed record (preserves dead ends, pivots, abandoned directions)
-- **raw** — Unprocessed conversation record
-- **posi** — What worked (technically successful points)
-- **nega** — What failed (dead ends, pitfalls, lessons)
-- **evolution_point** — How the worldview changed (not a progress log, but a shift in understanding)
+## How It Works
 
-### Distillation Direction
+### Crystallization: Memory That Preserves Failure
 
-Information flows in one direction, from more to less:
+A conversation is not summarized into a single note. It is *crystallized* — condensed through a multi-stage distillation that preserves what most systems discard:
 
 ```
-raw (maximum information, unmodified)
--> refined_raw (noise removed, pivots preserved)
--> summary (compressed, embedding source)
--> ultra_summary (maximum compression)
+raw conversation (everything, unmodified)
+  → refined_raw (noise removed; dead ends, pivots, abandoned directions kept)
+    → summary (compressed for search)
+      → ultra_summary (maximum compression for galaxy-scale view)
 ```
 
-Skipping a stage permanently loses fuel. Reverse flow is prohibited.
+Each stage takes only from the stage above. Skipping a stage permanently destroys information. This is deliberate: the dead ends and wrong turns are often more valuable than the conclusions.
 
-### 3-Gate Protocol
+Every crystal also carries three evaluation axes, written by the co-creating AI as a participant in the work — not extracted automatically:
 
-Crystallization proceeds through a 3-stage judgment process:
+| Axis | What it captures |
+|------|-----------------|
+| **posi** | What worked — technically successful approaches |
+| **nega** | What failed — dead ends, pitfalls, time sinks |
+| **evolution_point** | How understanding changed — not progress, but shift in worldview |
 
-- **Gate 1:** Declare kind (General / ClusterSkill / Task / Project). No default — active classification is enforced.
-- **Gate 2:** Propose associations (which task, which cluster) by searching, not by asking.
-- **Gate 3:** Final confirmation with all metadata.
+These are not metadata tags. They are embedded into vector space and used for computation at retrieval time.
 
-The AI makes the judgment. The human only gives yes or no.
+### 3Gravity: Structure Without Labels
 
-## 2. 3Gravity Model
+Crystals organize across three scales, like matter in the cosmos:
 
-The organizational principle of this architecture. Like the structure of the cosmos, it organizes semantic space across three scales, each with its own gravity.
+| Scale | What you see | How deep you read |
+|-------|-------------|-------------------|
+| **Crystal** | A single conversation's distilled output | refined_raw (full structured record) |
+| **Cluster** | A group of related crystals | summary (thematic patterns) |
+| **Galaxy** | An entire domain or project family | ultra_summary (strategic direction) |
 
-| Scale | Unit | Gravity | View |
-|-------|------|---------|------|
-| Crystal | Single conversation summary | Local context, attachments, code | refined_raw depth |
-| Cluster | Group of related crystals | Thematic coherence, shared entities | summary depth |
-| Galaxy | Entire domain or project family | Strategic direction, lifecycle | ultra_summary depth |
+The critical design choice: **no explicit boundaries**. Clusters and galaxies are not folders, categories, or tags. They emerge from vector proximity — observed through distance, never declared through labels. Like constellations: you don't draw borders. You observe gravitational pull.
 
-### Principles
+This means contradictions coexist. Two opposing approaches to the same problem can live at different distances from the same query point. The system doesn't resolve the contradiction — it presents both, weighted by proximity.
 
-- **No explicit boundaries.** Clusters and galaxies have no labels or folder assignments. They emerge from vector proximity — observed, not declared.
-- **Observation over labeling.** Like astronomy: you don't draw borders around constellations. You observe gravitational pull and infer structure.
-- **Distance determines influence.** ClusterSkills (domain-specific practices) affect nearby crystals by vector distance, not by membership. Two skills can overlap; the closer one dominates.
-- **Contradictions coexist.** In continuous vector space, opposing ideas can exist at different distances from the same point. This is a feature, not a bug.
+### QIS: Retrieval as Interference
 
-### Fractal Compression
+This is where storage becomes computation.
 
-The same data supports all three scales through compression granularity:
+Standard semantic search returns results ranked by vector distance: *how similar is this memory to the query?* QIS adds a second dimension: *how much did this memory contribute to success or failure?*
 
-- Galaxy view reads ultra_summary
-- Cluster view reads summary
-- Crystal view reads refined_raw
-- Door (raw data) preserves everything
-
-## 3. QIS — Quantum Inspired Semantic Space
-
-The scoring engine that makes 3Gravity Architecture a computing memory, not just a retrieving one.
-
-### Discovery
-
-The three evaluation axes already present in every crystal — posi, nega, evolution_point — are structurally isomorphic to quantum computation's three elements:
-
-| Quantum Computing | 3Gravity Architecture |
-|-------------------|----------------------|
-| Positive amplitude | posi (what worked) |
-| Negative amplitude | nega (what failed) |
-| Amplitude magnitude | evolution_point (weight of change) |
-
-Quantum computers achieve speedup through interference: correct paths amplify, incorrect paths cancel. QIS applies the same principle to semantic search.
-
-### Interference Score
+The mechanism is structurally inspired by quantum interference. In quantum computing, correct computation paths amplify each other while incorrect paths cancel out. QIS applies the same principle:
 
 ```
-interference_score = (posi_similarity - nega_similarity) * evolution_point * vector_proximity
+interference_score = (posi_similarity - nega_similarity) × evolution_weight × vector_proximity
 ```
 
-Where:
+What this does in practice:
 
-- **posi_similarity**: cosine similarity between query vector and crystal's posi embedding
-- **nega_similarity**: cosine similarity between query vector and crystal's nega embedding
-- **evolution_point**: scalar weight (no embedding needed — it measures magnitude of change, not direction)
-- **vector_proximity**: standard embedding distance (existing warp score)
+- A crystal where the query topic succeeded (high posi match) **amplifies** — it rises in ranking.
+- A crystal where the query topic failed (high nega match) **cancels** — it drops, or surfaces with a warning.
+- A crystal with a large evolution_point — where understanding fundamentally shifted — carries more weight regardless of direction.
 
-### Implementation
+The result: the system doesn't just find *related* memories. It finds memories that *matter* — the ones where real learning happened, weighted by whether that learning was toward success or away from failure.
 
-- posi and nega text fields are embedded into posi_vec and nega_vec (2 columns added to crystals table)
-- All computation is CPU arithmetic (cosine similarity = dot product). No GPU required.
-- Runs as a single SQL query on pgvector/DuckDB.
-- Crystallization adds 2 extra embedding generations per crystal. 3-gate logic unchanged.
+**Implementation is simple.** Two additional vector columns (posi_vec, nega_vec) per crystal. All computation is CPU dot products. Runs as a single SQL query on DuckDB. No GPU. No infrastructure change.
 
-### What QIS Is Not
+---
 
-- **Not quantum computing.** No qubits, no superposition. The structure is inspired by quantum interference patterns.
-- **Not a recommendation engine.** The evaluation axes are authored by the co-creating LLM as a participant, not computed automatically from user behavior.
-- **Not time-aware.** Time is handled separately (warp returns both interference-ranked and time-sorted results; the LLM chooses based on query intent).
+## What Makes This Different
 
-## Differentiation
+| System | What it remembers | How it retrieves |
+|--------|------------------|-----------------|
+| Anthropic Memory | Auto-extracted facts | Key-value lookup |
+| OpenAI Memory | Auto-extracted facts | Embedding similarity |
+| Mem0 | Facts + relationships | Semantic + BM25 + entity search |
+| Letta (MemGPT) | Self-edited memory | Embedding similarity + self-modification |
+| **3Gravity** | **Facts + success + failure + understanding shifts** | **Interference scoring: retrieval is computation, not lookup** |
 
-| System | Memory Model |
-|--------|-------------|
-| Anthropic Memory | Storage (key-value, auto-summarized) |
-| OpenAI Memory | Storage (auto-extracted facts) |
-| Mem0 | Storage + semantic search (3-axis: semantic/BM25/entity) |
-| Letta (MemGPT) | Storage + self-editing memory |
-| **3Gravity Architecture** | **Storage = Computation** (data existence is pre-computed state; interference scoring makes retrieval a calculation, not a lookup) |
+The decisive difference is not in the storage format. It's in who writes the evaluation. In every existing system, memory is either auto-extracted or user-edited. In 3Gravity, the evaluations (posi, nega, evolution_point) are authored by the co-creating LLM — the same model that participated in the conversation. The memory doesn't just record what happened. It records *what the AI learned from what happened*.
 
-The decisive difference: existing systems store and retrieve. 3Gravity Architecture stores and computes. Each crystal's posi/nega/evolution_point is a judgment by the co-creating LLM, not an automatic extraction. This memory remembers not just what happened, but what worked, what failed, and how understanding changed.
+---
 
-## Prior Art Survey
+## Prior Art
 
-Conducted June 4, 2026. No equivalent system found.
+Surveyed June 4, 2026. No equivalent system found across:
 
 - Academic literature (semantic memory + quantum-inspired interference scoring)
 - Patent databases (multi-axis LLM-authored evaluation in semantic memory)
-- Existing AI memory products (Anthropic, OpenAI, Mem0, Letta)
+- Existing AI memory products
 
-The closest analogues — SmartVector (time + confidence), quantum-inspired optimization algorithms, MIT interference research — differ in fundamental purpose and mechanism.
+Closest analogues differ in fundamental mechanism: SmartVector adds time and confidence but no interference; quantum-inspired optimization uses quantum principles for different purposes entirely; MIT interference research operates in different domains.
+
+---
+
+## Status
+
+This architecture is not theoretical. It has been running in production for over two years, accumulating 1,000+ crystals across software engineering, financial systems, video production, and philosophical domains. The interference scoring (QIS) component is in implementation phase.
+
+The system runs on DuckDB, communicates via SSE/MCP, and operates as a co-creation environment between a human operator and Claude (Anthropic).
+
+---
 
 ## License
 
