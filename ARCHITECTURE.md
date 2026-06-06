@@ -112,7 +112,7 @@ Closest analogues differ in fundamental mechanism.
 
 ## Status
 
-This architecture is not theoretical. It has been running in production for over two years, accumulating 1,000+ crystals across software engineering, financial systems, video production, and conceptual research. The system runs on DuckDB, communicates via SSE/MCP, and operates as a co-creation environment between a human operator and Claude (Anthropic). The QIS interference scoring component is in implementation phase.
+This architecture is not theoretical. It powers **MeaningSpace** — an AI-native semantic memory system that has been running in production for over two years, accumulating 1,000+ crystals across software engineering, financial systems, video production, and conceptual research. MeaningSpace runs on DuckDB, communicates via SSE/MCP, and operates as a co-creation environment between a human operator and Claude (Anthropic). The QIS interference scoring component is in implementation phase.
 
 ---
 
