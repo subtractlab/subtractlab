@@ -1,6 +1,6 @@
 # SubtractLab
 
-**人間がLLMの意味空間に入る。記憶が推論になる。AIネイティブな組織OSが生まれる。**
+**Humans enter the LLM's semantic space. Memory becomes reasoning. An AI-native organizational OS emerges.**
 
 ---
 
@@ -22,9 +22,9 @@ Building **MeaningSpace** — an AI memory system where humans enter the LLM's s
 
 ## Vision
 
-1. **人間がLLMの意味空間に入る** — ファイルやDBにAIを閉じ込めるのではなく、人間がLLMの座標系に直接参加する
-2. **記憶が推論になるOS** — 保存と検索が分離した従来のメモリではなく、記憶すること自体が推論行為であるシステム
-3. **AIネイティブな組織OS** — 個人の意味記憶から始まり、組織全体の知的基盤へ拡張する
+1. **Humans enter the LLM's semantic space** — Instead of confining AI to files and databases, humans directly participate in the LLM's coordinate system
+2. **Memory becomes reasoning** — Not a conventional memory where storage and retrieval are separate, but a system where the act of remembering is itself an act of inference
+3. **AI-native organizational OS** — Starting from personal semantic memory, extending to the intellectual infrastructure of an entire organization
 
 ## MeaningSpace
 
