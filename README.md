@@ -1,5 +1,9 @@
 # SubtractLab
 
+**人間がLLMの意味空間に入る。記憶が推論になる。AIネイティブな組織OSが生まれる。**
+
+---
+
 **AI gets smarter by remembering less, not more.**
 
 The AI industry scales by addition — more parameters, longer context, bigger memory stores. **MeaningSpace** scales by subtraction: compress conversations into crystals that carry success/failure judgment, organize them by semantic gravity instead of categories, and retrieve by interference scoring instead of similarity matching.
@@ -12,7 +16,15 @@ The result: an AI that knows which memories matter, not just which memories exis
 
 ## What This Is
 
-SubtractLab is the research identity of **Koji Okuda**, building **MeaningSpace** — an AI memory system where humans enter the LLM's semantic space, rather than pulling the LLM into theirs. Built on a single premise: **storage is computation**. Every unit of memory carries its own evaluation — what worked, what failed, how understanding changed — and that evaluation is used at retrieval time. The act of remembering is itself an act of reasoning.
+SubtractLab is the research and development identity of **奥田剛司 (Koji Okuda)**, exploring subtractive design as a first principle for software, AI systems, and human-computer interaction.
+
+Building **MeaningSpace** — an AI memory system where humans enter the LLM's semantic space, rather than pulling the LLM into theirs. Built on a single premise: **memory is computation**. Every unit of memory carries its own evaluation — what worked, what failed, how understanding changed — and that evaluation is used at retrieval time. The act of remembering is itself an act of reasoning.
+
+## Vision
+
+1. **人間がLLMの意味空間に入る** — ファイルやDBにAIを閉じ込めるのではなく、人間がLLMの座標系に直接参加する
+2. **記憶が推論になるOS** — 保存と検索が分離した従来のメモリではなく、記憶すること自体が推論行為であるシステム
+3. **AIネイティブな組織OS** — 個人の意味記憶から始まり、組織全体の知的基盤へ拡張する
 
 ## MeaningSpace
 
@@ -31,9 +43,9 @@ Built on DuckDB. Runs on CPU. No GPU required.
 
 ## Author
 
-**Koji Okuda** · Independent builder. Subtractive design practitioner.
+**奥田剛司 (Koji Okuda)** ・ Independent builder. Subtractive design practitioner.
 
-[subtractlab.com](https://subtractlab.com) · [@subtractlabo](https://x.com/subtractlabo) · [@SUBTRACTLAB](https://www.youtube.com/@SUBTRACTLAB) · [note.com/subtractlab](https://note.com/subtractlab)
+[subtractlab.com](https://subtractlab.com) ・ [@subtractlabo](https://x.com/subtractlabo) ・ [@SUBTRACTLAB](https://www.youtube.com/@SUBTRACTLAB) ・ [note.com/subtractlab](https://note.com/subtractlab)
 
 ---
 
