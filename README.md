@@ -49,4 +49,6 @@ Built on DuckDB. Runs on CPU. No GPU required.
 
 ---
 
+→ **[About the author](https://subtractlab.com/about)**
+
 *First public anchor: June 6, 2026.*
