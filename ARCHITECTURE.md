@@ -121,3 +121,7 @@ This architecture is not theoretical. It powers **MeaningSpace** — an AI-nativ
 This document establishes prior art and conceptual priority. The architectural concepts described herein are the original work of Koji Okuda.
 
 *First commit: June 6, 2026.*
+
+© 2024–2026 Koji Okuda / SubtractLab. All rights reserved.
+
+MeaningSpace, 3Gravity Architecture, and QIS (Quantum Inspired Semantic Space) were conceived and developed by Koji Okuda.
