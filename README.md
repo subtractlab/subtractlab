@@ -12,6 +12,9 @@ The result: an AI that knows which memories matter, not just which memories exis
 
 → **[Read the architecture](ARCHITECTURE.md)**
 
+**Explore the concepts:**
+[MeaningSpace](https://subtractlab.com/meaningspace) · [3Gravity Architecture](https://subtractlab.com/3gravity) · [QIS](https://subtractlab.com/qis) · [About](https://subtractlab.com/about)
+
 ---
 
 ## What This Is
