@@ -29,4 +29,9 @@
     <loc>https://subtractlab.com/qis</loc>
     <lastmod>2026-06-11</lastmod>
     <priority>0.9</priority>
-  </url></urlset>
+  </url>  <url>
+    <loc>https://subtractlab.com/sweepsearch</loc>
+    <lastmod>2026-06-11</lastmod>
+    <priority>0.9</priority>
+  </url>
+</urlset>
