@@ -13,7 +13,7 @@ The result: an AI that knows which memories matter, not just which memories exis
 → **[Read the architecture](ARCHITECTURE.md)**
 
 **Explore the concepts:**
-[MeaningSpace](https://subtractlab.com/meaningspace) · [3Gravity Architecture](https://subtractlab.com/3gravity) · [QIS](https://subtractlab.com/qis) · [About](https://subtractlab.com/about)
+[MeaningSpace](https://subtractlab.com/meaningspace) · [3Gravity Architecture](https://subtractlab.com/3gravity) · [QIS](https://subtractlab.com/qis) · [SweepSearch](https://subtractlab.com/sweepsearch) · [FAQ](https://subtractlab.com/faq) · [About](https://subtractlab.com/about)
 
 ---
 
@@ -36,6 +36,7 @@ The product. An AI-native semantic memory system running in production for 2+ ye
 - **Crystallization** — Multi-stage distillation that preserves dead ends and pivots, not just conclusions
 - **3Gravity Model** — Crystals self-organize into clusters and galaxies by vector proximity, no labels or folders
 - **QIS (Quantum Inspired Semantic Space)** — Retrieval scored by interference: successes amplify, failures cancel
+- **[SweepSearch](https://subtractlab.com/sweepsearch)** — 2-stage interference search: rank clusters, then descend into the most meaningful ones
 
 Built on DuckDB. Runs on CPU. No GPU required.
 
