@@ -91,6 +91,15 @@ Standard retrieval asks "which memory is most similar?" MeaningSpace asks "which
 
 In production for 2+ years. 1,400+ crystals accumulated across software engineering, financial systems, video production, and conceptual research.
 
+## Explore SubtractLab
+
+- **MeaningSpace** — you are here
+- [3Gravity Architecture](https://subtractlab.com/3gravity)
+- [QIS](https://subtractlab.com/qis)
+- [SweepSearch](https://subtractlab.com/sweepsearch)
+- [FAQ](https://subtractlab.com/faq)
+- [About the author](https://subtractlab.com/about)
+
 ---
 
 Developed by **[Koji Okuda](https://subtractlab.com/about)** at **[SubtractLab](https://subtractlab.com)**.
