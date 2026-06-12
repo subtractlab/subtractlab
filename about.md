@@ -47,6 +47,14 @@ Inspired by Leidy Klotz's research on subtraction bias (Nature, 2021) — humans
 - **YouTube**: [@SUBTRACTLAB](https://www.youtube.com/@SUBTRACTLAB)
 - **Note**: [note.com/subtractlab](https://note.com/subtractlab)
 
+## Explore the Concepts
+
+- [MeaningSpace](https://subtractlab.com/meaningspace) — the semantic memory system
+- [3Gravity Architecture](https://subtractlab.com/3gravity) — how memories self-organize
+- [QIS](https://subtractlab.com/qis) — interference-based retrieval
+- [SweepSearch](https://subtractlab.com/sweepsearch) — 2-stage interference search
+- [FAQ](https://subtractlab.com/faq) — common questions answered
+
 ---
 
 © 2024–2026 Koji Okuda / SubtractLab. All rights reserved.
