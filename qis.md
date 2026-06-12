@@ -94,6 +94,15 @@ Minimal infrastructure. Two additional FLOAT[1024] columns per crystal in DuckDB
 
 QIS operates within the [3Gravity Architecture](https://subtractlab.com/3gravity) that structures MeaningSpace's memory at Crystal, Cluster, and Galaxy scales.
 
+## Explore SubtractLab
+
+- [MeaningSpace](https://subtractlab.com/meaningspace)
+- [3Gravity Architecture](https://subtractlab.com/3gravity)
+- **QIS** — you are here
+- [SweepSearch](https://subtractlab.com/sweepsearch)
+- [FAQ](https://subtractlab.com/faq)
+- [About the author](https://subtractlab.com/about)
+
 ---
 
 Developed by **[Koji Okuda](https://subtractlab.com/about)** at **[SubtractLab](https://subtractlab.com)**.
