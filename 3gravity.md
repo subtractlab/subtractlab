@@ -83,6 +83,15 @@ This means fewer tokens in the context window, not more. Compression at the arch
 
 The architecture powers [MeaningSpace](https://subtractlab.com/meaningspace) and uses [QIS (Quantum Inspired Semantic Space)](https://subtractlab.com/qis) for interference-based retrieval.
 
+## Explore SubtractLab
+
+- [MeaningSpace](https://subtractlab.com/meaningspace)
+- **3Gravity Architecture** — you are here
+- [QIS](https://subtractlab.com/qis)
+- [SweepSearch](https://subtractlab.com/sweepsearch)
+- [FAQ](https://subtractlab.com/faq)
+- [About the author](https://subtractlab.com/about)
+
 ---
 
 Developed by **[Koji Okuda](https://subtractlab.com/about)** at **[SubtractLab](https://subtractlab.com)**.
