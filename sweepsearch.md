@@ -83,6 +83,15 @@ The system uses `intfloat/multilingual-e5-large` for embeddings, the same model 
 - **[3Gravity Architecture](https://subtractlab.com/3gravity)** provides the Crystal → Cluster → Galaxy structure
 - **SweepSearch** combines both into a working search engine
 
+## Explore SubtractLab
+
+- [MeaningSpace](https://subtractlab.com/meaningspace)
+- [3Gravity Architecture](https://subtractlab.com/3gravity)
+- [QIS](https://subtractlab.com/qis)
+- **SweepSearch** — you are here
+- [FAQ](https://subtractlab.com/faq)
+- [About the author](https://subtractlab.com/about)
+
 ---
 
 Developed by **[Koji Okuda](https://subtractlab.com/about)** at **[SubtractLab](https://subtractlab.com)**.
