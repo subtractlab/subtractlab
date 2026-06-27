@@ -1,4 +1,13 @@
 title: "SubtractLab — 奥田剛司 / Koji Okuda"
-description: "人間はLLMのセマンティック空間に入り込む。記憶は推論へと変化する。AIネイティブな組織OSが出現する。 / Humans enter the LLM's semantic space. Memory becomes reasoning. An AI-native organizational OS emerges."
+description: "The AI's workspace. The human is the guest. MeaningSpace is an AI-native semantic OS where the AI accumulates meaning, searches, reasons, and executes — all from conversation. No terminal. No IDE."
 theme: jekyll-theme-midnight
 url: "https://subtractlab.com"
+
+header_pages:
+  - meaningspace.md
+  - products.md
+  - 3gravity.md
+  - qis.md
+  - sweepsearch.md
+  - faq.md
+  - about.md
