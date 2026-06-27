@@ -1,19 +1,19 @@
 # SubtractLab
 
-**Humans enter the LLM's semantic space. Memory becomes reasoning. An AI-native organizational OS emerges.**
+**The AI's workspace. The human is the guest.**
 
 ---
 
 **AI gets smarter by remembering less, not more.**
 
-The AI industry scales by addition — more parameters, longer context, bigger memory stores. **MeaningSpace** scales by subtraction: compress conversations into crystals that carry success/failure judgment, organize them by semantic gravity instead of categories, and retrieve by interference scoring instead of similarity matching.
+The AI industry scales by addition — more parameters, longer context, bigger memory stores. **MeaningSpace** scales by subtraction: compress conversations into crystals that carry success/failure judgment, navigate them by semantic gravity instead of categories, and retrieve by interference scoring instead of similarity matching.
 
-The result: an AI that knows which memories matter, not just which memories exist.
+The result: an AI partner that knows which memories matter, acts on them autonomously, and builds production systems through conversation alone — no terminal, no IDE, no file tree traversal.
 
-→ **[Read the architecture](ARCHITECTURE.md)**
+→ **[Read how it works](https://subtractlab.com/meaningspace)**
 
-**Explore the concepts:**
-[MeaningSpace](https://subtractlab.com/meaningspace) · [3Gravity Architecture](https://subtractlab.com/3gravity) · [QIS](https://subtractlab.com/qis) · [SweepSearch](https://subtractlab.com/sweepsearch) · [FAQ](https://subtractlab.com/faq) · [About](https://subtractlab.com/about)
+**Explore:**
+[MeaningSpace](https://subtractlab.com/meaningspace) · [Products](https://subtractlab.com/products) · [3Gravity](https://subtractlab.com/3gravity) · [QIS](https://subtractlab.com/qis) · [SweepSearch](https://subtractlab.com/sweepsearch) · [FAQ](https://subtractlab.com/faq) · [About](https://subtractlab.com/about)
 
 ---
 
@@ -21,29 +21,37 @@ The result: an AI that knows which memories matter, not just which memories exis
 
 SubtractLab is the research and development identity of **奥田剛司 (Koji Okuda)**, exploring subtractive design as a first principle for software, AI systems, and human-computer interaction.
 
-Building **MeaningSpace** — an AI memory system where humans enter the LLM's semantic space, rather than pulling the LLM into theirs. Built on a single premise: **memory is computation**. Every unit of memory carries its own evaluation — what worked, what failed, how understanding changed — and that evaluation is used at retrieval time. The act of remembering is itself an act of reasoning.
+Building **MeaningSpace** — an AI-native semantic operating system where the AI builds and maintains its own meaning space, and the human enters through conversation. Built on a single premise: **memory is computation**. Every crystal carries its own evaluation — what worked, what failed, how understanding changed — and that evaluation is used at retrieval time. The act of remembering is itself an act of reasoning.
 
 ## Vision
 
-1. **Humans enter the LLM's semantic space** — Instead of confining AI to files and databases, humans directly participate in the LLM's coordinate system
-2. **Memory becomes reasoning** — Not a conventional memory where storage and retrieval are separate, but a system where the act of remembering is itself an act of inference
+1. **The AI's workspace, not the human's** — Instead of putting AI inside human tools (IDE, terminal, browser), humans enter the AI's semantic space through conversation
+2. **Memory becomes reasoning** — Not storage and retrieval, but a system where remembering is itself inference
 3. **AI-native organizational OS** — Starting from personal semantic memory, extending to the intellectual infrastructure of an entire organization
 
 ## MeaningSpace
 
-The product. An AI-native semantic memory system running in production for 2+ years with 1,000+ crystals, powered by **[3Gravity Architecture](ARCHITECTURE.md)**.
+The core. An AI-native semantic operating system running in production for 2+ years with 1,400+ crystals.
 
-- **Crystallization** — Multi-stage distillation that preserves dead ends and pivots, not just conclusions
-- **3Gravity Model** — Crystals self-organize into clusters and galaxies by vector proximity, no labels or folders
-- **QIS (Quantum Inspired Semantic Space)** — Retrieval scored by interference: successes amplify, failures cancel
-- **[SweepSearch](https://subtractlab.com/sweepsearch)** — 2-stage interference search: rank clusters, then descend into the most meaningful ones
+- **[Architecture & Full Details](https://subtractlab.com/meaningspace)** — Tools, design philosophy, comparison with Mem0/RAG/Claude Code
+- **[Products built on it](https://subtractlab.com/products)** — 7 production systems built entirely through conversation
+- **[3Gravity](https://subtractlab.com/3gravity)** — Fractal scale organization (Crystal → Cluster → Galaxy)
+- **[QIS](https://subtractlab.com/qis)** — Interference-based retrieval scoring
+- **[SweepSearch](https://subtractlab.com/sweepsearch)** — One-shot semantic scan across all crystals
 
-Built on DuckDB. Runs on CPU. No GPU required.
+Built on DuckDB. Runs on CPU. No GPU required. No terminal required.
 
 ## Other Projects
 
-- **BIApps** — DuckDB-based business intelligence, built from zero
-- **φMovie** — Automated video production pipeline
+All built through conversation on MeaningSpace. See **[Products](https://subtractlab.com/products)** for the full list.
+
+- **φMovie** — Fully automated video production pipeline (V34)
+- **BIApps** — DuckDB-based BI across 16 subsidiary companies
+- **POS RPA** — Daily automated retail operations
+- **φPPT** — Golden-ratio AI-native presentation design
+- **AutoCrystallize** — Self-maintaining memory pipeline
+- **VoiceMode** — Spoken conversation interface (VOICEVOX)
+- **CDP Copilot bridge** — M365 automation (experimental)
 
 ## Author
 
