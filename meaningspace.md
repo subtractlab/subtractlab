@@ -123,62 +123,69 @@ Each crystal isn't a raw document. It's **compressed judgment**: what worked (po
 ```
 Everything connects through a single MCP SSE server. The AI partner (internally called Eliza) operates ~30 tools across six categories:
 
+
 ### Semantic Memory
 
-| Tool | What it does |
-|------|-------------|
-| **SweepSearch** | Broad semantic scan. One inner product across all crystals, no reranker. Returns picks (relevant memories) + skills (domain procedures) in one call. 3 modes: focus (pure meaning), edge (recency-weighted), entity (person/system name boosted). |
-| **Warp** | Deep single-point landing with reranker. Precision retrieval of one crystal with surrounding context (task timeline, sibling topics, nearby info). |
-| **Crystallize** | Compress conversations into crystals with posi/nega/evolution_point. Fully autonomous since June 2026 — the AI decides grouping, classification, and evaluation without human review. |
-| **get_crystal_content** | Open a crystal's full text. Crystals are stored as keys; this opens the door. |
-| **meaning_query** | Raw SQL over the crystal database. Direct DuckDB queries for structural analysis, statistics, batch operations. |
+<table>
+<tr><th>Tool</th><th>What it does</th></tr>
+<tr><td><strong>SweepSearch</strong></td><td>Broad semantic scan. One inner product across all crystals, no reranker. Returns picks (relevant memories) + skills (domain procedures) in one call. 3 modes: focus (pure meaning), edge (recency-weighted), entity (person/system name boosted).</td></tr>
+<tr><td><strong>Warp</strong></td><td>Deep single-point landing with reranker. Precision retrieval of one crystal with surrounding context (task timeline, sibling topics, nearby info).</td></tr>
+<tr><td><strong>Crystallize</strong></td><td>Compress conversations into crystals with posi/nega/evolution_point. Fully autonomous since June 2026 — the AI decides grouping, classification, and evaluation without human review.</td></tr>
+<tr><td><strong>get_crystal_content</strong></td><td>Open a crystal's full text. Crystals are stored as keys; this opens the door.</td></tr>
+<tr><td><strong>meaning_query</strong></td><td>Raw SQL over the crystal database. Direct DuckDB queries for structural analysis, statistics, batch operations.</td></tr>
+</table>
 
 ### Code Execution
 
-| Tool | What it does |
-|------|-------------|
-| **run_ps** | Execute PowerShell directly from the conversation. Full Windows OS control — process management, registry, COM automation, network, anything PowerShell can touch. No terminal window opens. |
-| **run_py** | Execute Python directly from the conversation. Data processing, numerical analysis, API calls, file transformation. Same immediate execution model. |
+<table>
+<tr><th>Tool</th><th>What it does</th></tr>
+<tr><td><strong>run_ps</strong></td><td>Execute PowerShell directly from the conversation. Full Windows OS control — process management, registry, COM automation, network, anything PowerShell can touch. No terminal window opens.</td></tr>
+<tr><td><strong>run_py</strong></td><td>Execute Python directly from the conversation. Data processing, numerical analysis, API calls, file transformation. Same immediate execution model.</td></tr>
+</table>
 
 These two tools are what make "Claude Code without Claude Code" possible. The AI writes code in the conversation, executes it, sees the output, and iterates — all without the human touching a terminal.
 
 ### File Operations
 
-| Tool | What it does |
-|------|-------------|
-| **sse_read** | Read any file with line numbers and hash (for safe editing). |
-| **sse_write** | Create new files or overwrite existing ones. |
-| **sse_edit** | Surgical partial edits with line-range targeting and collision detection via hash. |
-| **sse_search** | File search via Everything CLI — instant filename/path search across the entire filesystem. |
+<table>
+<tr><th>Tool</th><th>What it does</th></tr>
+<tr><td><strong>sse_read</strong></td><td>Read any file with line numbers and hash (for safe editing).</td></tr>
+<tr><td><strong>sse_write</strong></td><td>Create new files or overwrite existing ones.</td></tr>
+<tr><td><strong>sse_edit</strong></td><td>Surgical partial edits with line-range targeting and collision detection via hash.</td></tr>
+<tr><td><strong>sse_search</strong></td><td>File search via Everything CLI — instant filename/path search across the entire filesystem.</td></tr>
+</table>
 
 ### Perception & Generation
 
-| Tool | What it does |
-|------|-------------|
-| **view_screenshots** | The AI sees the screen. Takes and views screenshots to understand what the human is looking at. |
-| **generate_slide_image** | AI image generation (NanoBanana2) for presentation graphics, diagrams, eyecatch visuals. |
-| **eliza_say** | Voice output via VOICEVOX. The AI speaks aloud while displaying structured notes on screen. |
-| **show_widget** | Inline SVG/HTML rendering in the conversation — whiteboard diagrams, interactive charts, data visualizations, calculators. |
+<table>
+<tr><th>Tool</th><th>What it does</th></tr>
+<tr><td><strong>view_screenshots</strong></td><td>The AI sees the screen. Takes and views screenshots to understand what the human is looking at.</td></tr>
+<tr><td><strong>generate_slide_image</strong></td><td>AI image generation (NanoBanana2) for presentation graphics, diagrams, eyecatch visuals.</td></tr>
+<tr><td><strong>eliza_say</strong></td><td>Voice output via VOICEVOX. The AI speaks aloud while displaying structured notes on screen.</td></tr>
+<tr><td><strong>show_widget</strong></td><td>Inline SVG/HTML rendering in the conversation — whiteboard diagrams, interactive charts, data visualizations, calculators.</td></tr>
+</table>
 
 ### External Search
 
-| Tool | What it does |
-|------|-------------|
-| **grok_search** | Grok API — X/Twitter posts, real-time trends, public sentiment. |
-| **gemini_search** | Gemini Google Search — general web, Japanese content, Google index. |
-| **web_search** | Claude's built-in web search for technical documentation, current events. |
-| **web_fetch** | Fetch and read full web page content. |
+<table>
+<tr><th>Tool</th><th>What it does</th></tr>
+<tr><td><strong>grok_search</strong></td><td>Grok API — X/Twitter posts, real-time trends, public sentiment.</td></tr>
+<tr><td><strong>gemini_search</strong></td><td>Gemini Google Search — general web, Japanese content, Google index.</td></tr>
+<tr><td><strong>web_search</strong></td><td>Claude's built-in web search for technical documentation, current events.</td></tr>
+<tr><td><strong>web_fetch</strong></td><td>Fetch and read full web page content.</td></tr>
+</table>
 
 ### Browser Automation (Chrome MCP)
 
-| Tool | What it does |
-|------|-------------|
-| **navigate** | Open URLs, go back/forward in browser history. |
-| **read_page** | Get accessibility tree of the current page — the AI reads web pages structurally. |
-| **find** | Locate elements by natural language description. |
-| **form_input** | Fill form fields programmatically. |
-| **javascript_tool** | Execute arbitrary JavaScript in the page context. |
-| **file_upload** | Upload files to web forms. |
+<table>
+<tr><th>Tool</th><th>What it does</th></tr>
+<tr><td><strong>navigate</strong></td><td>Open URLs, go back/forward in browser history.</td></tr>
+<tr><td><strong>read_page</strong></td><td>Get accessibility tree of the current page — the AI reads web pages structurally.</td></tr>
+<tr><td><strong>find</strong></td><td>Locate elements by natural language description.</td></tr>
+<tr><td><strong>form_input</strong></td><td>Fill form fields programmatically.</td></tr>
+<tr><td><strong>javascript_tool</strong></td><td>Execute arbitrary JavaScript in the page context.</td></tr>
+<tr><td><strong>file_upload</strong></td><td>Upload files to web forms.</td></tr>
+</table>
 
 The total is approximately 30 tools. This is not a plugin ecosystem — it's a single AI partner that can search meaning, write and run code, read and write files, see the screen, speak aloud, draw diagrams, search the web, and control a browser. All from one conversation window.
 
@@ -192,22 +199,23 @@ The number of LLM APIs is unlimited. Add a new provider? Write three lines of Py
 
 ## How This Differs from Mem0, RAG, and Claude Code
 
-| | Mem0 | RAG | Claude Code | MeaningSpace |
-|---|------|-----|------------|--------------|
-| **Memory model** | Graph + vector store | Document chunks | File reading per session | Crystals with judgment (posi/nega/evolution) |
-| **Who uses it** | Human via API | Human via API | Human in terminal | AI uses it autonomously |
-| **Code execution** | No | No | Yes (terminal) | Yes (from conversation, no terminal) |
-| **OS access** | No | No | Sandboxed | Full (PowerShell + Python) |
-| **File operations** | No | No | Yes | Yes |
-| **Voice output** | No | No | No | Yes (VOICEVOX) |
-| **Visual perception** | No | No | Limited | Screenshots + screen reading |
-| **Browser control** | No | No | No | Yes (Chrome CDP/MCP) |
-| **Search integration** | No | No | Web search only | Web + Grok (X) + Gemini + semantic memory |
-| **LLM orchestration** | No | No | Single model | Unlimited — any API, AI calls AI with context |
-| **Raw data preservation** | No — compressed, originals discarded | Chunks only, no hierarchy | Files on disk, no memory | Full hierarchy: raw → refined → summary → ultra. Nothing lost |
-| **Memory loop** | Store/retrieve | Retrieve only | None | Full loop: retrieve → act → crystallize → store |
-The fundamental difference: Mem0 and RAG are **memory backends that humans query**. Claude Code is a **coding tool that reads files**. MeaningSpace is an **operating system where the AI lives** — it remembers, reasons, acts, and learns, all autonomously. The human participates through conversation.
+<table>
+<tr><th></th><th>Mem0</th><th>RAG</th><th>Claude Code</th><th>MeaningSpace</th></tr>
+<tr><td><strong>Memory model</strong></td><td>Graph + vector store</td><td>Document chunks</td><td>File reading per session</td><td>Crystals with judgment (posi/nega/evolution)</td></tr>
+<tr><td><strong>Who uses it</strong></td><td>Human via API</td><td>Human via API</td><td>Human in terminal</td><td>AI uses it autonomously</td></tr>
+<tr><td><strong>Code execution</strong></td><td>No</td><td>No</td><td>Yes (terminal)</td><td>Yes (from conversation, no terminal)</td></tr>
+<tr><td><strong>OS access</strong></td><td>No</td><td>No</td><td>Sandboxed</td><td>Full (PowerShell + Python)</td></tr>
+<tr><td><strong>File operations</strong></td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><strong>Voice output</strong></td><td>No</td><td>No</td><td>No</td><td>Yes (VOICEVOX)</td></tr>
+<tr><td><strong>Visual perception</strong></td><td>No</td><td>No</td><td>Limited</td><td>Screenshots + screen reading</td></tr>
+<tr><td><strong>Browser control</strong></td><td>No</td><td>No</td><td>No</td><td>Yes (Chrome CDP/MCP)</td></tr>
+<tr><td><strong>Search integration</strong></td><td>No</td><td>No</td><td>Web search only</td><td>Web + Grok (X) + Gemini + semantic memory</td></tr>
+<tr><td><strong>LLM orchestration</strong></td><td>No</td><td>No</td><td>Single model</td><td>Unlimited — any API, AI calls AI with context</td></tr>
+<tr><td><strong>Raw data preservation</strong></td><td>No — compressed, originals discarded</td><td>Chunks only, no hierarchy</td><td>Files on disk, no memory</td><td>Full hierarchy: raw → refined → summary → ultra. Nothing lost</td></tr>
+<tr><td><strong>Memory loop</strong></td><td>Store/retrieve</td><td>Retrieve only</td><td>None</td><td>Full loop: retrieve → act → crystallize → store</td></tr>
+</table>
 
+The fundamental difference: Mem0 and RAG are **memory backends that humans query**. Claude Code is a **coding tool that reads files**. MeaningSpace is an **operating system where the AI lives** — it remembers, reasons, acts, and learns, all autonomously. The human participates through conversation.
 This is what makes it possible to do everything Claude Code does — and more — without ever opening a terminal.
 
 **Raw conversation → Refined raw → Summary → Ultra-summary**
