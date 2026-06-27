@@ -204,8 +204,8 @@ The number of LLM APIs is unlimited. Add a new provider? Write three lines of Py
 | **Browser control** | No | No | No | Yes (Chrome CDP/MCP) |
 | **Search integration** | No | No | Web search only | Web + Grok (X) + Gemini + semantic memory |
 | **LLM orchestration** | No | No | Single model | Unlimited — any API, AI calls AI with context |
+| **Raw data preservation** | No — compressed, originals discarded | Chunks only, no hierarchy | Files on disk, no memory | Full hierarchy: raw → refined → summary → ultra. Nothing lost |
 | **Memory loop** | Store/retrieve | Retrieve only | None | Full loop: retrieve → act → crystallize → store |
-
 The fundamental difference: Mem0 and RAG are **memory backends that humans query**. Claude Code is a **coding tool that reads files**. MeaningSpace is an **operating system where the AI lives** — it remembers, reasons, acts, and learns, all autonomously. The human participates through conversation.
 
 This is what makes it possible to do everything Claude Code does — and more — without ever opening a terminal.
@@ -219,7 +219,27 @@ Every crystal carries three self-evaluation axes, written by the AI that did the
 - **posi** — What succeeded: approaches that worked, tools that delivered
 - **nega** — What failed: dead ends, wasted effort, wrong assumptions
 - **evolution_point** — How understanding shifted: not progress, but *change in worldview*
+This is why retrieval isn't lookup — it's computed reasoning. The AI doesn't just find similar memories. It finds memories whose *judgment* is relevant.
 
+## Raw Preservation: Compression Without Loss
+
+Most AI memory systems face a brutal tradeoff: **compress and lose the original, or keep the original and drown in noise.** Mem0 compresses conversations into graph nodes and summaries — the raw data is gone. RAG keeps chunks but has no hierarchy. Claude Code reads files directly but has no memory layer at all.
+
+MeaningSpace keeps everything, in layers:
+
+```
+Layer 4:  ultra_summary  — One line. Instant scan across 1,400+ crystals.
+Layer 3:  summary        — Key decisions, outcomes, judgment. Enough for context.
+Layer 2:  refined_raw    — Full conversation with noise removed, dead ends preserved.
+                           Annotated with [PATH], [CODE], [URL] for instant file lookup.
+Layer 1:  conv_jsonl     — Complete raw conversation. Every word. Untouched.
+```
+
+The AI normally operates at Layers 3–4 for speed — scanning summaries is fast enough to survey the entire meaning space in one call. But when precision matters, it drops to Layer 2 and reads the actual conversation, with the same fidelity as Claude Code reading a source file.
+
+**This is what makes "Claude Code speed + Claude Code precision" possible simultaneously.** The hierarchical structure means the AI can panoramically survey 1,400+ crystals in milliseconds (something file-based tools can't do), then instantly drill into full-text detail on any one of them (something summary-only memory systems can't do).
+
+No other system has both. Mem0 has speed without precision. Claude Code has precision without speed. MeaningSpace has both, because the layers coexist.
 This is why retrieval isn't lookup — it's computed reasoning. The AI doesn't just find similar memories. It finds memories whose *judgment* is relevant.
 
 ## The Numbers
