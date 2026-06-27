@@ -49,7 +49,7 @@ description: "SweepSearch is a single-pass search that computes one inner produc
 
 **single-pass semantic search. Scan the constellations, then descend into stars.**
 
-SweepSearch is the search engine of [MeaningSpace](https://subtractlab.com/meaningspace). It combines [QIS interference scoring](https://subtractlab.com/qis) with [3Gravity's cluster structure](https://subtractlab.com/3gravity) into a 2-stage retrieval process that finds the most meaningful memories, not just the nearest vectors.
+SweepSearch is the search engine of [MeaningSpace](https://subtractlab.com/meaningspace). It combines [QIS interference scoring](https://subtractlab.com/qis) with [3Gravity's cluster structure](https://subtractlab.com/3gravity) into a single-pass retrieval process that finds the most meaningful memories, not just the nearest vectors.
 
 ## Why 2 Stages?
 
