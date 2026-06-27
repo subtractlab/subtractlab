@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "MeaningSpace — AI-native semantic memory system"
-description: "MeaningSpace is an AI memory system that compresses conversations into crystals carrying success/failure judgment. Built on DuckDB. An alternative to RAG and vector-store memory."
+title: "MeaningSpace — The AI's workspace where humans are the guest"
+description: "MeaningSpace is an AI-native semantic operating system. The AI accumulates meaning, searches, reasons, and executes code — all from a single conversation interface. No terminal. No Claude Code. Just talk."
 ---
 
 <script type="application/ld+json">
@@ -14,15 +14,15 @@ description: "MeaningSpace is an AI memory system that compresses conversations 
       "name": "What is MeaningSpace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MeaningSpace is an AI-native semantic memory system developed by Koji Okuda at SubtractLab. Instead of storing raw facts from conversations, it compresses them into 'crystals' that carry built-in evaluation of what worked, what failed, and how understanding changed. It has been running in production for over 2 years with 1,400+ crystals."
+        "text": "MeaningSpace is an AI-native semantic operating system developed by Koji Okuda at SubtractLab. It inverts the conventional human-AI relationship: instead of AI assisting in a human workspace, the human enters the AI's meaning space through conversation. The AI accumulates 1,400+ crystals of compressed judgment, searches them in milliseconds via SweepSearch, and executes code directly on the OS — all without a terminal or IDE. Running in production for 2+ years on a single Windows machine."
       }
     },
     {
       "@type": "Question",
-      "name": "How is MeaningSpace different from RAG?",
+      "name": "How is MeaningSpace different from Claude Code or Cursor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "RAG (Retrieval-Augmented Generation) retrieves document chunks by similarity. MeaningSpace retrieves memories by meaning — scored through interference where successes amplify and failures cancel. RAG treats all retrieved chunks equally; MeaningSpace weights memories by judgment (posi/nega/evolution_point). This makes retrieval an act of reasoning, not just lookup."
+        "text": "Claude Code and Cursor read files from disk, summarize them into context, and write code in a terminal. MeaningSpace doesn't read files — it already knows. 1,400+ crystals of compressed meaning are searchable in one vector operation via SweepSearch (no reranker, no orchestration). The AI partner executes PowerShell and Python directly from the chat window. No terminal occupation. No file tree traversal. Meaning-first, not file-first."
       }
     },
     {
@@ -30,15 +30,15 @@ description: "MeaningSpace is an AI memory system that compresses conversations 
       "name": "What technology does MeaningSpace run on?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MeaningSpace runs on DuckDB with vector embeddings (e5-large, 1024 dimensions), communicates via MCP (Model Context Protocol), and requires only CPU — no GPU needed. The entire system runs locally on a single machine."
+        "text": "DuckDB (single-file, SQL-queryable), ruri-v3-310m embeddings (768 dimensions, Japanese-optimized), MCP SSE server for tool communication, PowerShell and Python execution from chat. Runs entirely on CPU on a single Windows machine. No GPU, no cloud dependency, no external API for core operations."
       }
     },
     {
       "@type": "Question",
-      "name": "How does AI memory crystallization work?",
+      "name": "What has been built on MeaningSpace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Crystallization is a multi-stage distillation process: raw conversation → refined_raw (noise removed, dead ends preserved) → summary → ultra_summary. Each crystal also carries three evaluation axes written by the AI itself: posi (what worked), nega (what failed), and evolution_point (how understanding shifted). Skipping a stage permanently destroys information."
+        "text": "Seven production systems emerged from conversations alone: φMovie (automated video pipeline), BIApps (DuckDB-based BI across 16 companies), POS RPA (daily automated retail operations), φPPT (golden-ratio presentation design), AutoCrystallize (self-maintaining memory pipeline), VoiceMode (spoken conversation interface), and a CDP Copilot bridge for M365 automation. None required opening a terminal."
       }
     }
   ]
@@ -47,53 +47,198 @@ description: "MeaningSpace is an AI memory system that compresses conversations 
 
 # MeaningSpace
 
-**An AI-native semantic memory system. Memory through subtraction, not addition.**
+**The AI's workspace. The human is the guest.**
 
-MeaningSpace is an AI memory management system that takes a fundamentally different approach from conventional AI memory stores, RAG pipelines, and vector databases. Instead of scaling by storing more data, MeaningSpace scales by **compressing conversations into crystals that carry their own judgment** — what succeeded, what failed, and how understanding evolved.
+Most AI tools put the AI inside the human's environment — a copilot in your IDE, an assistant in your terminal. MeaningSpace inverts this. The AI builds and maintains its own semantic space: accumulating meaning, searching by judgment, executing code on the operating system. The human enters this space through conversation.
 
-## The Problem with Current AI Memory
+No terminal. No IDE. No file tree traversal. Just talk.
 
-Existing AI memory systems — from ChatGPT's memory to Mem0, Letta, and enterprise RAG solutions — extract facts and store them as flat key-value pairs. After hundreds of hours of collaboration, the AI remembers *what you said* but has no idea *what worked or what failed*. Every insight gets the same weight as every passing mention.
+## The Inversion
 
-MeaningSpace solves this by making the AI that did the work also write the judgment about the work.
+In conventional AI-assisted development:
 
-## How It Works
+1. The human opens a terminal or IDE
+2. The AI reads files from disk
+3. The AI summarizes what it found
+4. The AI writes code
+5. The human runs it
 
-### Crystallization
+In MeaningSpace:
 
-Conversations are distilled through stages, each compressing further but never skipping:
+1. The human says what they want
+2. The AI searches 1,400+ crystals of compressed meaning — in milliseconds
+3. The AI already knows the context, the history, the failures, the victories
+4. The AI writes and executes code directly
+5. The result appears
+
+The difference isn't incremental. The AI doesn't need to "catch up" on your project — it never forgot.
+
+## Why It's Fast
+
+Agentic coding tools (Claude Code, Cursor, Devin) spend most of their tokens on **orientation**: reading files, building context, summarizing what they find. Every session starts from near-zero.
+
+MeaningSpace eliminates orientation entirely.
+
+**SweepSearch** computes a single inner product between the query vector and all 1,400+ crystal vectors — no reranker, no multi-stage pipeline, no orchestration. One operation returns both the relevant crystals and the domain-specific skills needed to work with them. It's 2.7× faster than the previous reranker-based approach, and the speed gap widens as crystals accumulate.
+
+Each crystal isn't a raw document. It's **compressed judgment**: what worked (posi), what failed (nega), how understanding shifted (evolution_point). Retrieving a crystal doesn't give you text — it gives you *learned experience*.
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────┐
+│                  claude.ai                       │
+│              (conversation UI)                   │
+└──────────────────┬──────────────────────────────┘
+                   │ MCP SSE
+┌──────────────────▼──────────────────────────────┐
+│              MeaningSpace Server                 │
+│                                                  │
+│  ┌─────────┐  ┌──────────┐  ┌────────────────┐  │
+│  │ Sweep   │  │ Warp     │  │ Crystallize    │  │
+│  │ Search  │  │ (deep    │  │ (compress +    │  │
+│  │ (broad  │  │  single- │  │  evaluate)     │  │
+│  │  scan)  │  │  point)  │  │                │  │
+│  └─────────┘  └──────────┘  └────────────────┘  │
+│                                                  │
+│  ┌─────────┐  ┌──────────┐  ┌────────────────┐  │
+│  │ run_ps  │  │ run_py   │  │ sse_read/write │  │
+│  │ (OS     │  │ (data    │  │ (file ops)     │  │
+│  │  ctrl)  │  │  proc)   │  │                │  │
+│  └─────────┘  └──────────┘  └────────────────┘  │
+│                                                  │
+│  ┌─────────┐  ┌──────────┐  ┌────────────────┐  │
+│  │ dispatch│  │ eliza_say│  │ meaning_query  │  │
+│  │ (image  │  │ (voice   │  │ (SQL over      │  │
+│  │  gen,   │  │  output) │  │  crystals)     │  │
+│  │  search)│  │          │  │                │  │
+│  └─────────┘  └──────────┘  └────────────────┘  │
+│                                                  │
+│  ┌──────────────────────────────────────────┐    │
+│  │         DuckDB + ruri-v3 (768d)          │    │
+│  │         1,400+ crystals                   │    │
+│  │         Local. Single file. No GPU.       │    │
+│  └──────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────┘
+```
+Everything connects through a single MCP SSE server. The AI partner (internally called Eliza) operates ~30 tools across six categories:
+
+### Semantic Memory
+
+| Tool | What it does |
+|------|-------------|
+| **SweepSearch** | Broad semantic scan. One inner product across all crystals, no reranker. Returns picks (relevant memories) + skills (domain procedures) in one call. 3 modes: focus (pure meaning), edge (recency-weighted), entity (person/system name boosted). |
+| **Warp** | Deep single-point landing with reranker. Precision retrieval of one crystal with surrounding context (task timeline, sibling topics, nearby info). |
+| **Crystallize** | Compress conversations into crystals with posi/nega/evolution_point. Fully autonomous since June 2026 — the AI decides grouping, classification, and evaluation without human review. |
+| **get_crystal_content** | Open a crystal's full text. Crystals are stored as keys; this opens the door. |
+| **meaning_query** | Raw SQL over the crystal database. Direct DuckDB queries for structural analysis, statistics, batch operations. |
+
+### Code Execution
+
+| Tool | What it does |
+|------|-------------|
+| **run_ps** | Execute PowerShell directly from the conversation. Full Windows OS control — process management, registry, COM automation, network, anything PowerShell can touch. No terminal window opens. |
+| **run_py** | Execute Python directly from the conversation. Data processing, numerical analysis, API calls, file transformation. Same immediate execution model. |
+
+These two tools are what make "Claude Code without Claude Code" possible. The AI writes code in the conversation, executes it, sees the output, and iterates — all without the human touching a terminal.
+
+### File Operations
+
+| Tool | What it does |
+|------|-------------|
+| **sse_read** | Read any file with line numbers and hash (for safe editing). |
+| **sse_write** | Create new files or overwrite existing ones. |
+| **sse_edit** | Surgical partial edits with line-range targeting and collision detection via hash. |
+| **sse_search** | File search via Everything CLI — instant filename/path search across the entire filesystem. |
+
+### Perception & Generation
+
+| Tool | What it does |
+|------|-------------|
+| **view_screenshots** | The AI sees the screen. Takes and views screenshots to understand what the human is looking at. |
+| **generate_slide_image** | AI image generation (NanoBanana2) for presentation graphics, diagrams, eyecatch visuals. |
+| **eliza_say** | Voice output via VOICEVOX. The AI speaks aloud while displaying structured notes on screen. |
+| **show_widget** | Inline SVG/HTML rendering in the conversation — whiteboard diagrams, interactive charts, data visualizations, calculators. |
+
+### External Search
+
+| Tool | What it does |
+|------|-------------|
+| **grok_search** | Grok API — X/Twitter posts, real-time trends, public sentiment. |
+| **gemini_search** | Gemini Google Search — general web, Japanese content, Google index. |
+| **web_search** | Claude's built-in web search for technical documentation, current events. |
+| **web_fetch** | Fetch and read full web page content. |
+
+### Browser Automation (Chrome MCP)
+
+| Tool | What it does |
+|------|-------------|
+| **navigate** | Open URLs, go back/forward in browser history. |
+| **read_page** | Get accessibility tree of the current page — the AI reads web pages structurally. |
+| **find** | Locate elements by natural language description. |
+| **form_input** | Fill form fields programmatically. |
+| **javascript_tool** | Execute arbitrary JavaScript in the page context. |
+| **file_upload** | Upload files to web forms. |
+
+The total is approximately 30 tools. This is not a plugin ecosystem — it's a single AI partner that can search meaning, write and run code, read and write files, see the screen, speak aloud, draw diagrams, search the web, and control a browser. All from one conversation window.
+
+### Multi-LLM Orchestration
+
+Because the AI can execute Python and PowerShell directly, it can call any LLM API from within the conversation — Claude, GPT, Gemini, Grok, local models, anything with an HTTP endpoint. This isn't a plugin system where you pick one provider. The AI decides which model to call, constructs the prompt with context from the meaning space, sends the request, processes the response, and acts on it — all in a single conversational turn.
+
+Real example: φMovie's editorial phase sends raw transcripts to Claude Opus with domain-specific context pulled from crystals. The AI partner orchestrates another AI to make editorial judgment calls, then feeds the result into the next pipeline stage. No human orchestration layer. No LangChain. No workflow engine. Just the AI calling other AIs as needed, with meaning space context attached.
+
+The number of LLM APIs is unlimited. Add a new provider? Write three lines of Python in the conversation and it's available immediately.
+
+## How This Differs from Mem0, RAG, and Claude Code
+
+| | Mem0 | RAG | Claude Code | MeaningSpace |
+|---|------|-----|------------|--------------|
+| **Memory model** | Graph + vector store | Document chunks | File reading per session | Crystals with judgment (posi/nega/evolution) |
+| **Who uses it** | Human via API | Human via API | Human in terminal | AI uses it autonomously |
+| **Code execution** | No | No | Yes (terminal) | Yes (from conversation, no terminal) |
+| **OS access** | No | No | Sandboxed | Full (PowerShell + Python) |
+| **File operations** | No | No | Yes | Yes |
+| **Voice output** | No | No | No | Yes (VOICEVOX) |
+| **Visual perception** | No | No | Limited | Screenshots + screen reading |
+| **Browser control** | No | No | No | Yes (Chrome CDP/MCP) |
+| **Search integration** | No | No | Web search only | Web + Grok (X) + Gemini + semantic memory |
+| **LLM orchestration** | No | No | Single model | Unlimited — any API, AI calls AI with context |
+| **Memory loop** | Store/retrieve | Retrieve only | None | Full loop: retrieve → act → crystallize → store |
+
+The fundamental difference: Mem0 and RAG are **memory backends that humans query**. Claude Code is a **coding tool that reads files**. MeaningSpace is an **operating system where the AI lives** — it remembers, reasons, acts, and learns, all autonomously. The human participates through conversation.
+
+This is what makes it possible to do everything Claude Code does — and more — without ever opening a terminal.
 
 **Raw conversation → Refined raw → Summary → Ultra-summary**
 
-Each crystal carries three evaluation axes:
+Each stage compresses further. No stage can be skipped — skipping permanently destroys information.
 
-- **posi** — What worked: approaches that succeeded
-- **nega** — What failed: dead ends, pitfalls, wasted effort
-- **evolution_point** — How understanding shifted: not just progress, but change in worldview
+Every crystal carries three self-evaluation axes, written by the AI that did the work:
 
-### Semantic Navigation (not folder structure)
+- **posi** — What succeeded: approaches that worked, tools that delivered
+- **nega** — What failed: dead ends, wasted effort, wrong assumptions
+- **evolution_point** — How understanding shifted: not progress, but *change in worldview*
 
-Crystals self-organize by vector proximity into clusters and galaxies — no folders, no tags, no categories. Navigation works like a telescope: zoom out for strategic direction, zoom in for operational detail. The AI loads only what matters at the resolution it needs.
+This is why retrieval isn't lookup — it's computed reasoning. The AI doesn't just find similar memories. It finds memories whose *judgment* is relevant.
 
-### Interference-Based Retrieval (QIS)
+## The Numbers
 
-Standard retrieval asks "which memory is most similar?" MeaningSpace asks "which memory is most meaningful?" Through [QIS (Quantum Inspired Semantic Space)](https://subtractlab.com/qis), successes amplify and failures cancel at retrieval time, making search an act of computation rather than lookup.
+- **1,400+ crystals** accumulated over 2 years of daily production use
+- **Single DuckDB file** — no external database, no cloud sync
+- **ruri-v3-310m** embeddings (768 dimensions, Japanese-optimized)
+- **CPU only** — runs on a desktop PC (i7-13700KF, 64GB RAM, no GPU needed for core operations)
+- **MCP SSE** — one server process, all tools accessible from claude.ai
+- **Zero terminal sessions** required for daily operation
 
-## Technical Stack
+## What This Proves
 
-- **Storage**: DuckDB (local, single-file, SQL-queryable)
-- **Embeddings**: e5-large (1024 dimensions)
-- **Communication**: MCP (Model Context Protocol) via SSE/Streamable HTTP
-- **Architecture**: [3Gravity Architecture](https://subtractlab.com/3gravity)
-- **GPU**: Not required. Runs on CPU.
-
-## Status
-
-In production for 2+ years. 1,400+ crystals accumulated across software engineering, financial systems, video production, and conceptual research.
+MeaningSpace is not a concept. It's running in production. Every day. The [products built on it](https://subtractlab.com/products) — video pipelines, BI systems, RPA automation, presentation engines — are the proof. But they're the tip of the iceberg. The real innovation is underneath: **an AI that remembers with judgment, searches with meaning, and acts with full OS access — all through conversation.**
 
 ## Explore SubtractLab
 
 - **MeaningSpace** — you are here
+- [Products built on MeaningSpace](https://subtractlab.com/products)
 - [3Gravity Architecture](https://subtractlab.com/3gravity)
 - [QIS](https://subtractlab.com/qis)
 - [SweepSearch](https://subtractlab.com/sweepsearch)
