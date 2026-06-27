@@ -1,0 +1,13 @@
+title: "SubtractLab — 奥田剛司 / Koji Okuda"
+description: "The AI's workspace. The human is the guest. MeaningSpace is an AI-native semantic OS where the AI accumulates meaning, searches, reasons, and executes — all from conversation. No terminal. No IDE."
+theme: jekyll-theme-midnight
+url: "https://subtractlab.com"
+
+header_pages:
+  - meaningspace.md
+  - products.md
+  - 3gravity.md
+  - qis.md
+  - sweepsearch.md
+  - faq.md
+  - about.md
