@@ -254,9 +254,30 @@ No other system has both. Mem0 has speed without precision. Claude Code has prec
 
 Layer 2 (refined_raw) isn't just cleaned text. Every file path, code block, and URL referenced during the conversation is annotated inline with `[PATH]`, `[CODE]`, and `[URL]` markers followed by their full location. These annotations act as an **index into the real world** — when the AI lands on a crystal through semantic search, it instantly knows which files were touched, which URLs were consulted, and which code was written, all in the context they were used.
 
-This is fundamentally different from a file search. A file search returns files that match a name. MeaningSpace returns files that are **semantically relevant to what you're doing** — because they're embedded in the crystal that recorded the judgment about that work. Ask about a data pipeline bug, and the crystal doesn't just describe the fix — it points directly to the exact Python file, the exact config path, the exact API endpoint involved.
-
 The AI reads the annotations, opens the files via `sse_read`, and has the full source in front of it — all within the same conversational turn that started with a meaning search. **Semantic retrieval → context-linked annotation → live file access.** Three steps, one turn, no manual lookup.
+
+## Unlimited Scale, Instant Panorama
+
+Every AI system today hits a wall: the context window. 128K tokens. 200K tokens. Whatever the number, there's a ceiling. Past that ceiling, information is discarded, summarized away, or simply unavailable. The AI forgets.
+
+MeaningSpace has no ceiling. Crystals live in DuckDB — a local database file that scales with your disk. 1,400 crystals today. 10,000 tomorrow. 100,000 next year. The structure doesn't change. The speed barely changes. SweepSearch computes one inner product per crystal — linear, no index fragmentation, no reranker overhead.
+
+What makes this different from "just a bigger database" is the **multi-resolution panorama**:
+
+- **Ultra-summary** — Survey all 1,400+ crystals in a single tool call. See the shape of everything.
+- **Summary** — Drop into any crystal's key decisions, outcomes, and judgment.
+- **Refined raw** — Read the full conversation with context-linked file annotations.
+- **Conv_jsonl** — Access the complete raw conversation, every word, untouched.
+
+And the panorama isn't limited to one angle:
+
+- **Focus mode** (θ=0) — Pure semantic meaning. Find crystals by what they're about.
+- **Edge mode** (θ=0.3) — Recency-weighted. Find the latest developments in a topic.
+- **Entity mode** — Person/system name boosted. Find everything a specific person or tool touched.
+- **SQL queries** — Direct DuckDB access for structural analysis across the entire crystal database.
+
+This is what "freed from the context window" looks like. The AI doesn't fit your project into 128K tokens. It navigates 2 years of accumulated judgment — with raw data intact — in milliseconds, from any angle, at any resolution.
+
 
 ## The Numbers
 
