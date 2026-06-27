@@ -240,7 +240,15 @@ The AI normally operates at Layers 3–4 for speed — scanning summaries is fas
 **This is what makes "Claude Code speed + Claude Code precision" possible simultaneously.** The hierarchical structure means the AI can panoramically survey 1,400+ crystals in milliseconds (something file-based tools can't do), then instantly drill into full-text detail on any one of them (something summary-only memory systems can't do).
 
 No other system has both. Mem0 has speed without precision. Claude Code has precision without speed. MeaningSpace has both, because the layers coexist.
-This is why retrieval isn't lookup — it's computed reasoning. The AI doesn't just find similar memories. It finds memories whose *judgment* is relevant.
+No other system has both. Mem0 has speed without precision. Claude Code has precision without speed. MeaningSpace has both, because the layers coexist.
+
+### Inline Annotations: Meaning-Linked Raw Data Access
+
+Layer 2 (refined_raw) isn't just cleaned text. Every file path, code block, and URL referenced during the conversation is annotated inline with `[PATH]`, `[CODE]`, and `[URL]` markers followed by their full location. These annotations act as an **index into the real world** — when the AI lands on a crystal through semantic search, it instantly knows which files were touched, which URLs were consulted, and which code was written, all in the context they were used.
+
+This is fundamentally different from a file search. A file search returns files that match a name. MeaningSpace returns files that are **semantically relevant to what you're doing** — because they're embedded in the crystal that recorded the judgment about that work. Ask about a data pipeline bug, and the crystal doesn't just describe the fix — it points directly to the exact Python file, the exact config path, the exact API endpoint involved.
+
+The AI reads the annotations, opens the files via `sse_read`, and has the full source in front of it — all within the same conversational turn that started with a meaning search. **Semantic retrieval → context-linked annotation → live file access.** Three steps, one turn, no manual lookup.
 
 ## The Numbers
 
