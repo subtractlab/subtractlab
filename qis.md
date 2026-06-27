@@ -90,7 +90,7 @@ The parallel with existing academic work on quantum-inspired information retriev
 
 ## Implementation
 
-Minimal infrastructure. Two additional FLOAT[1024] columns per crystal in DuckDB. CPU dot products. A single SQL query. No GPU. No external service.
+Minimal infrastructure. Two additional FLOAT[768] columns per crystal in DuckDB. CPU dot products. A single SQL query. No GPU. No external service.
 
 QIS operates within the [3Gravity Architecture](https://subtractlab.com/3gravity) that structures MeaningSpace's memory at Crystal, Cluster, and Galaxy scales.
 
