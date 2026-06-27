@@ -52,7 +52,7 @@ Inspired by Leidy Klotz's research on subtraction bias (Nature, 2021) — humans
 - [MeaningSpace](https://subtractlab.com/meaningspace) — the semantic memory system
 - [3Gravity Architecture](https://subtractlab.com/3gravity) — how memories self-organize
 - [QIS](https://subtractlab.com/qis) — interference-based retrieval
-- [SweepSearch](https://subtractlab.com/sweepsearch) — 2-stage interference search
+- [SweepSearch](https://subtractlab.com/sweepsearch) — single-pass semantic search
 - [FAQ](https://subtractlab.com/faq) — common questions answered
 
 ---
