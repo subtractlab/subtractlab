@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "SweepSearch — 2-stage interference search for AI memory"
-description: "SweepSearch is a 2-stage search that ranks clusters by interference scoring, then descends into top clusters to find the most meaningful memories. Built on QIS and 3Gravity Architecture."
+title: "SweepSearch — single-pass semantic search for AI memory"
+description: "SweepSearch is a single-pass search that computes one inner product across all crystals with island-relative recency weighting to find the most meaningful memories. Built on QIS and 3Gravity Architecture."
 ---
 
 <script type="application/ld+json">
@@ -14,7 +14,7 @@ description: "SweepSearch is a 2-stage search that ranks clusters by interferenc
       "name": "What is SweepSearch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "SweepSearch is a 2-stage search engine for AI memory systems developed by Koji Okuda at SubtractLab. Stage 1 (panorama) ranks all memory clusters by interference scoring. Stage 2 (descend) drops into the top clusters and re-ranks individual memories. It combines QIS interference scoring with 3Gravity's cluster structure to find the most meaningful memories, not just the most similar."
+        "text": "SweepSearch is a single-pass semantic search engine for AI memory systems developed by Koji Okuda at SubtractLab. Stage 1 (panorama) ranks all memory clusters by interference scoring. Stage 2 (descend) drops into the top clusters and re-ranks individual memories. It combines QIS interference scoring with 3Gravity's cluster structure to find the most meaningful memories, not just the most similar."
       }
     },
     {
@@ -47,7 +47,7 @@ description: "SweepSearch is a 2-stage search that ranks clusters by interferenc
 
 # SweepSearch
 
-**2-stage interference search. Scan the constellations, then descend into stars.**
+**single-pass semantic search. Scan the constellations, then descend into stars.**
 
 SweepSearch is the search engine of [MeaningSpace](https://subtractlab.com/meaningspace). It combines [QIS interference scoring](https://subtractlab.com/qis) with [3Gravity's cluster structure](https://subtractlab.com/3gravity) into a 2-stage retrieval process that finds the most meaningful memories, not just the nearest vectors.
 
@@ -73,9 +73,9 @@ Only the component of posi/nega that *exceeds* topical proximity counts. The sha
 
 ## Implementation
 
-Proven on 1,400+ real crystals. KMeans clustering (24 clusters, ~60 crystals each) on DuckDB-stored 1024-dimensional embeddings. The entire pipeline — clustering, embedding, scoring — runs on CPU. No GPU. No external service.
+Proven on 1,400+ real crystals. KMeans clustering (24 clusters, ~60 crystals each) on DuckDB-stored 768-dimensional embeddings. The entire pipeline — clustering, embedding, scoring — runs on CPU. No GPU. No external service.
 
-The system uses `intfloat/multilingual-e5-large` for embeddings, the same model that powers MeaningSpace's warp navigation.
+The system uses `cl-nagoya/ruri-v3-310m` (768 dimensions, Japanese-optimized) for embeddings, optimized for Japanese semantic search.
 
 ## Relation to Other Concepts
 
