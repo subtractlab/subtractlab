@@ -79,7 +79,7 @@ This means fewer tokens in the context window, not more. Compression at the arch
 
 ## Technical Foundation
 
-3Gravity runs on DuckDB with 1024-dimensional vector embeddings (e5-large). Cluster detection uses vector proximity with time-decay weighting. No GPU required — all operations are CPU dot products and SQL queries.
+3Gravity runs on DuckDB with 768-dimensional vector embeddings (ruri-v3-310m, Japanese-optimized). Cluster detection uses vector proximity with time-decay weighting. No GPU required — all operations are CPU dot products and SQL queries.
 
 The architecture powers [MeaningSpace](https://subtractlab.com/meaningspace) and uses [QIS (Quantum Inspired Semantic Space)](https://subtractlab.com/qis) for interference-based retrieval.
 
