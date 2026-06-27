@@ -229,6 +229,31 @@ Every crystal carries three self-evaluation axes, written by the AI that did the
 - **evolution_point** — How understanding shifted: not progress, but *change in worldview*
 This is why retrieval isn't lookup — it's computed reasoning. The AI doesn't just find similar memories. It finds memories whose *judgment* is relevant.
 
+### QIS: Retrieval by Interference, Not Similarity
+
+These three axes aren't just metadata. They are **searchable vectors**. When the AI searches for relevant memories, [QIS (Quantum Inspired Semantic Space)](https://subtractlab.com/qis) computes an interference score across posi, nega, and evolution_point — not just text similarity. A crystal whose failures are relevant to your current situation ranks higher than one that merely mentions the same topic. This is what no other memory system does: retrieve by *judgment relevance*, not keyword or embedding proximity alone.
+
+### Fractal Organization: Scale × Kind
+
+Crystals are not a flat list. They are organized along two orthogonal axes:
+
+**Scale** (how big is this knowledge?):
+
+- **Crystal** — A single conversation's distilled judgment
+- **Cluster** — A group of crystals in the same domain (ClusterSkill: the accumulated "how to" of that domain)
+- **Galaxy** — An entire domain of practice (e.g., all of MeaningSpace development, all of Loglas work)
+
+**Kind** (what type of knowledge?):
+
+- **General** — Observations, decisions, discoveries
+- **Skill** — Reusable domain procedures (ClusterSkills)
+- **Project** — Ongoing work tracked by meaning proximity, not task boards
+- **Task** — Specific action items, also tracked by semantic proximity
+
+**Projects and tasks live in meaning space, not in a task manager.** There are no Kanban boards, no status fields, no manually maintained backlogs. A "project" is a cluster of crystals about related work. A "task" is a crystal that records what needs to be done and why. When the AI searches for "what's pending on φMovie," it finds the relevant task crystals by meaning — not by querying a status column. This means projects and tasks are automatically organized by semantic proximity, automatically inherit context from surrounding crystals, and never go stale because they exist in the same space as the work itself.
+
+This is [3Gravity Architecture](https://subtractlab.com/3gravity) — fractal scales from Crystal to Galaxy, with each level self-similar in structure.
+
 ## Raw Preservation: Compression Without Loss
 
 Most AI memory systems face a brutal tradeoff: **compress and lose the original, or keep the original and drown in noise.** Mem0 compresses conversations into graph nodes and summaries — the raw data is gone. RAG keeps chunks but has no hierarchy. Claude Code reads files directly but has no memory layer at all.
