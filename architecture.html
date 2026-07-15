@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MeaningSpace Architecture — DPマルチエージェント・自己学習・自己修復の全貌 | SubtractLab</title>
+<meta name="description" content="Web Claudeを束ねる¥0マルチエージェント基盤（DP: Debug Port lanes）、SelfEval自己学習ループ、SelfRepair自己修復、run_py/run_ps実行系を持つ司令塔アーキテクチャの技術全貌。図解つき。2026-07-16公開。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#0a0a0a;color:#e0e0e0;font-family:'Inter','Noto Sans JP',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
+  ::selection{background:#00d4ff;color:#0a0a0a}
+  a{color:#00d4ff;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  header.fixed{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 34px;backdrop-filter:blur(12px);background:rgba(10,10,10,.6);border-bottom:1px solid rgba(255,255,255,.05)}
+  .brand{font-size:15px;font-weight:600;letter-spacing:.04em;color:#fff}
+  .navlinks a{font-size:13px;margin-left:18px;color:#9ca3af}
+  .navlinks a:hover{color:#00d4ff}
+  section{padding:96px 0 24px}
+  h1{font-size:44px;line-height:1.15;font-weight:700;color:#fff;letter-spacing:-.02em;margin:0}
+  h2{font-size:28px;font-weight:600;color:#fff;margin:72px 0 8px;border-left:4px solid #00d4ff;padding-left:14px}
+  h3{font-size:19px;font-weight:600;color:#fff;margin:40px 0 6px}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#00d4ff;margin:0 0 10px}
+  .lead{font-size:19px;font-weight:300;color:#cfd4da}
+  .anchorbox{margin:28px 0;padding:16px 20px;border:1px solid rgba(255,107,53,.45);border-radius:6px;background:rgba(255,107,53,.06);font-size:14px;color:#ffb08a}
+  .plain{margin:14px 0;padding:16px 20px;border-left:3px solid #3b4653;background:rgba(255,255,255,.03);border-radius:0 6px 6px 0;font-size:15px;color:#c7ccd2}
+  .plain b{color:#fff}
+  figure{margin:28px 0;padding:22px;background:#0e1116;border:1px solid rgba(255,255,255,.07);border-radius:8px}
+  figcaption{margin-top:12px;font-size:13px;color:#8b929b;text-align:center}
+  svg{width:100%;height:auto;display:block}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0}
+  th,td{padding:9px 12px;border:1px solid rgba(255,255,255,.09);text-align:left;vertical-align:top}
+  th{background:rgba(0,212,255,.07);color:#fff;font-weight:600}
+  code{font-family:ui-monospace,Consolas,monospace;font-size:.92em;color:#7ee7ff;background:rgba(0,212,255,.07);padding:1px 6px;border-radius:4px}
+  footer{margin-top:110px;padding:34px 24px;border-top:1px solid rgba(255,255,255,.06);font-size:13px;color:#7a828c;text-align:center}
+  .txt{font:12px 'Noto Sans JP',sans-serif;fill:#dfe4ea}
+  .txts{font:10.5px 'Noto Sans JP',sans-serif;fill:#9aa3ad}
+  .txtb{font:600 13px 'Noto Sans JP',sans-serif;fill:#fff}
+  .box{fill:#141a22;stroke:#2c3949;stroke-width:1.2;rx:8}
+  .boxc{fill:rgba(0,212,255,.10);stroke:#00d4ff;stroke-width:1.4;rx:8}
+  .boxo{fill:rgba(255,107,53,.10);stroke:#ff6b35;stroke-width:1.4;rx:8}
+  .boxg{fill:rgba(94,222,146,.08);stroke:#5ede92;stroke-width:1.3;rx:8}
+  .arrow{stroke:#5b6b7d;stroke-width:1.6;fill:none;marker-end:url(#ah)}
+  .arrowc{stroke:#00d4ff;stroke-width:1.8;fill:none;marker-end:url(#ahc)}
+</style>
+</head>
+<body>
+<header class="fixed">
+  <span class="brand">SubtractLab</span>
+  <nav class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="MeaningSpace.html">MeaningSpace</a>
+    <a href="history.html">History</a>
+    <a href="https://github.com/subtractlab/subtractlab">GitHub</a>
+  </nav>
+</header>
+
+<section class="wrap">
+  <p class="kicker">MeaningSpace Architecture / Technical Disclosure</p>
+  <h1>ひとりの人間と、一体のAIと、<br>五体の分身。</h1>
+  <p class="lead">MeaningSpace は「AIの意味記憶OS」であると同時に、Web版Claude（ブラウザのチャット画面）そのものをサブエージェント群として束ね、追加API費用¥0で並列稼働させる<b>司令塔アーキテクチャ</b>です。このページでは、その全構造 — DPマルチエージェント、自己学習、自己修復、実行系（run_py / run_ps）— を図解で公開します。</p>
+  <div class="anchorbox">📌 <b>Digital Anchor</b> — 本文書の初版公開日: <b>2026-07-16 (JST)</b>。記載された各機構の稼働確定日は本文中および <a href="history.html">History（先行実装タイムライン）</a> に日付つきで明記しています。本リポジトリのgitコミット履歴が改竄不能なタイムスタンプとして機能します。</div>
+
+  <h2 id="overview">全体像 — 三層＋一司令塔</h2>
+  <p>構成要素は4つだけです。<b>①人間（Oku）</b>が話しかけ、<b>②司令塔AI（イライザ = Claudeデスクトップ）</b>が判断し、<b>③意味記憶DB（MeaningSpace / DuckDB）</b>が過去を供給し、<b>④DPレーン（Web Claudeの分身たち）</b>が並列に手を動かす。</p>
+  <div class="plain">🔰 <b>素人向けにいうと:</b> 社長（人間）が優秀な秘書（司令塔AI）に話しかけるだけで、秘書が会社の記録棚（意味記憶DB）を引き、5人のアルバイト（DPレーン）に仕事を割り振って、検品まで済ませて戻ってくる — それが1台のPCの中で完結します。</div>
+  <figure>
+    <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5b6b7d"/></marker>
+        <marker id="ahc" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#00d4ff"/></marker>
+      </defs>
+      <rect class="box" x="20" y="170" width="130" height="80" rx="8"/>
+      <text class="txtb" x="85" y="205" text-anchor="middle">人間</text>
+      <text class="txts" x="85" y="225" text-anchor="middle">話すだけ</text>
+      <rect class="boxc" x="230" y="150" width="200" height="120" rx="8"/>
+      <text class="txtb" x="330" y="185" text-anchor="middle">司令塔 AI（イライザ）</text>
+      <text class="txts" x="330" y="207" text-anchor="middle">Claude Desktop + MCP</text>
+      <text class="txts" x="330" y="225" text-anchor="middle">判断・設計・検品</text>
+      <text class="txts" x="330" y="243" text-anchor="middle">run_py / run_ps 実行系</text>
+      <rect class="boxg" x="510" y="30" width="320" height="100" rx="8"/>
+      <text class="txtb" x="670" y="62" text-anchor="middle">MeaningSpace（意味記憶DB）</text>
+      <text class="txts" x="670" y="84" text-anchor="middle">DuckDB / 結晶1,983個（2026-07-16時点）</text>
+      <text class="txts" x="670" y="102" text-anchor="middle">warp検索 = embedding + BM25 + reranker</text>
+      <rect class="boxo" x="510" y="250" width="320" height="140" rx="8"/>
+      <text class="txtb" x="670" y="280" text-anchor="middle">DPレーン ×5（Web Claude分身）</text>
+      <text class="txts" x="670" y="302" text-anchor="middle">Chrome ×5 を CDP で遠隔操作</text>
+      <text class="txts" x="670" y="320" text-anchor="middle">DP1:9223 / DP2:9224 / DP3:9225</text>
+      <text class="txts" x="670" y="338" text-anchor="middle">DP4:9226 / DP5:9227</text>
+      <text class="txts" x="670" y="362" text-anchor="middle">追加API費用 ¥0（Web利用枠のみ）</text>
+      <path class="arrow" d="M150,210 L230,210"/>
+      <text class="txts" x="190" y="200" text-anchor="middle">会話</text>
+      <path class="arrowc" d="M430,180 L510,95"/>
+      <text class="txts" x="470" y="120" text-anchor="middle">warp / SQL</text>
+      <path class="arrowc" d="M430,240 L510,300"/>
+      <text class="txts" x="462" y="290" text-anchor="middle">契約書</text>
+      <path class="arrow" d="M510,330 C450,330 450,270 432,262"/>
+      <text class="txts" x="468" y="345" text-anchor="middle">成果物</text>
+    </svg>
+    <figcaption>図1 — 全体像。司令塔が記憶を引き、分身に仕事を配り、成果を検品する。</figcaption>
+  </figure>
+
+  <h2 id="dp">DPマルチエージェント — Web Claudeを束ねる（2026-07-13 基盤確定）</h2>
+  <p>DP = <b>Debug Port</b>。Chromeのデバッグ機能（CDP: Chrome DevTools Protocol）で、claude.ai のチャット画面を機械操作します。1レーン = 1 Chrome = 1プロファイル = 1 CDPポート。共有状態がゼロなので、本数を増やしても構造が壊れません。</p>
+  <div class="plain">🔰 <b>素人向けにいうと:</b> AIに仕事を頼む方法は普通2つ — 画面で自分がチャットするか、開発者用のAPI（従量課金）を使うか。DP方式は第3の道で、<b>「チャット画面を操作するロボットの手」を5本用意</b>し、定額プランの範囲内で5画面同時に働かせます。だから追加費用が¥0。</div>
+  <figure>
+    <svg viewBox="0 0 860 460" xmlns="http://www.w3.org/2000/svg">
+      <rect class="boxc" x="330" y="20" width="200" height="70" rx="8"/>
+      <text class="txtb" x="430" y="48" text-anchor="middle">司令塔（イライザ）</text>
+      <text class="txts" x="430" y="70" text-anchor="middle">step2_dp / dp_worker / dp_chat</text>
+      <rect class="boxg" x="310" y="130" width="240" height="72" rx="8"/>
+      <text class="txtb" x="430" y="157" text-anchor="middle">リース門 dp_lease.py</text>
+      <text class="txts" x="430" y="177" text-anchor="middle">同時実行=2（アカウント全体で計測）</text>
+      <text class="txts" x="430" y="192" text-anchor="middle">札ファイル排他・15分stale回収・時差投入2.5s</text>
+      <path class="arrowc" d="M430,90 L430,130"/>
+      <g>
+        <rect class="boxo" x="30"  y="270" width="140" height="90" rx="8"/>
+        <rect class="boxo" x="195" y="270" width="140" height="90" rx="8"/>
+        <rect class="boxo" x="360" y="270" width="140" height="90" rx="8"/>
+        <rect class="boxo" x="525" y="270" width="140" height="90" rx="8"/>
+        <rect class="boxo" x="690" y="270" width="140" height="90" rx="8"/>
+        <text class="txtb" x="100" y="300" text-anchor="middle">DP1</text><text class="txts" x="100" y="320" text-anchor="middle">:9223</text><text class="txts" x="100" y="338" text-anchor="middle">Sonnet/Haiku</text>
+        <text class="txtb" x="265" y="300" text-anchor="middle">DP2</text><text class="txts" x="265" y="320" text-anchor="middle">:9224</text><text class="txts" x="265" y="338" text-anchor="middle">Sonnet/Haiku</text>
+        <text class="txtb" x="430" y="300" text-anchor="middle">DP3</text><text class="txts" x="430" y="320" text-anchor="middle">:9225</text><text class="txts" x="430" y="338" text-anchor="middle">Sonnet/Haiku</text>
+        <text class="txtb" x="595" y="300" text-anchor="middle">DP4</text><text class="txts" x="595" y="320" text-anchor="middle">:9226</text><text class="txts" x="595" y="338" text-anchor="middle">Sonnet/Haiku</text>
+        <text class="txtb" x="760" y="300" text-anchor="middle">DP5</text><text class="txts" x="760" y="320" text-anchor="middle">:9227</text><text class="txts" x="760" y="338" text-anchor="middle">Sonnet/Haiku</text>
+      </g>
+      <path class="arrow" d="M370,202 L110,270"/>
+      <path class="arrow" d="M400,202 L272,270"/>
+      <path class="arrow" d="M430,202 L430,270"/>
+      <path class="arrow" d="M460,202 L588,270"/>
+      <path class="arrow" d="M490,202 L750,270"/>
+      <rect class="box" x="230" y="400" width="400" height="46" rx="8"/>
+      <text class="txt" x="430" y="422" text-anchor="middle">緊急停止 dp_abort.py — ①中断フラグ ②応答停止 ③kill</text>
+      <text class="txts" x="430" y="438" text-anchor="middle">実測: 3本生成中→3.6秒で全停止（2026-07-13）</text>
+    </svg>
+    <figcaption>図2 — DPレーン構成。5レーン保持・同時実行2本・時差投入で安定稼働。</figcaption>
+  </figure>
+  <h3>実測で確定した運用ノウハウ（一次情報）</h3>
+  <table>
+    <tr><th>項目</th><th>実測結果と対策（確定日）</th></tr>
+    <tr><td>同時実行上限</td><td>公称なし。実測でアカウント全体2本（司令塔自身の応答も1本を占有）。<code>dp_lease.py</code> の札ファイル排他でプロセス跨ぎ制御（2026-07-14恒久化）</td></tr>
+    <tr><td>同時投入の固着</td><td>同一ミリ秒投入でUI操作が競合しフリーズ → 時差投入 2.5秒（2026-07-13）</td></tr>
+    <tr><td>ゾンビ応答</td><td>生成はサーバー側で走るため、プロセスkillでは止まらない。停止順序は必ず「中断フラグ→UI応答停止→kill」（2026-07-13）</td></tr>
+    <tr><td>状態判定</td><td>UI文字列での状態判定は自己参照汚染（プロンプト内のログ文を警告と誤認）を起こす → DOM構造属性判定に全面移行（2026-07-14）</td></tr>
+    <tr><td>人格汚染</td><td>同一アカウントのため利用者設定がレーンに波及。契約プロンプト先頭の中和ヘッダで遮断（2026-07-13実証）</td></tr>
+    <tr><td>可観測性</td><td><code>dp_journal.py</code> — 実行ごとの journal.jsonl + summary.json。群単位の所有権と終端状態管理（2026-07-14）</td></tr>
+  </table>
+
+  <h2 id="coding">能動的コーディング — 触る係と決める係の分離</h2>
+  <p>ブラウザ内のClaudeにはファイルシステムがありません。そこで役割を分けます。<b>Python（司令塔の実行系）が「触る係」、DPエージェントが「決める係」</b>。①Pythonがファイルを読んでプロンプトに注入（水和）→ ②DPが差分または新規本文だけを返す → ③Pythonが適用・実行・検証。さらに司令塔自身が <code>run_py</code>（Python実行）と <code>run_ps</code>（PowerShell実行）を持つため、<b>会話の途中でコードを書き、走らせ、結果を見て、DPに改修を再依頼する</b>ループが成立します。</p>
+  <div class="plain">🔰 <b>素人向けにいうと:</b> 設計士（DPエージェント）は図面だけを描き、現場の大工（Python実行系）が実際に組み立てて強度試験をする。試験に落ちたら図面を差し戻す。設計士に金槌（削除権限）は渡さない — これが安全の要です。</div>
+  <figure>
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
+      <rect class="boxc" x="30" y="110" width="180" height="90" rx="8"/>
+      <text class="txtb" x="120" y="140" text-anchor="middle">司令塔</text>
+      <text class="txts" x="120" y="160" text-anchor="middle">run_py / run_ps</text>
+      <text class="txts" x="120" y="178" text-anchor="middle">水和・適用・検証</text>
+      <rect class="boxo" x="340" y="30" width="200" height="80" rx="8"/>
+      <text class="txtb" x="440" y="60" text-anchor="middle">dp_chat（対話レーン）</text>
+      <text class="txts" x="440" y="82" text-anchor="middle">差分 anchor-replace / NEWFILE</text>
+      <rect class="boxg" x="340" y="190" width="200" height="80" rx="8"/>
+      <text class="txtb" x="440" y="220" text-anchor="middle">検証器（決定的）</text>
+      <text class="txts" x="440" y="242" text-anchor="middle">py_compile / json / regex / 実行</text>
+      <rect class="box" x="650" y="110" width="180" height="90" rx="8"/>
+      <text class="txtb" x="740" y="140" text-anchor="middle">昇格ラダー</text>
+      <text class="txts" x="740" y="160" text-anchor="middle">Haiku再試行×2</text>
+      <text class="txts" x="740" y="178" text-anchor="middle">→ Sonnet thinking ×2</text>
+      <path class="arrowc" d="M210,135 C260,110 290,85 340,72"/>
+      <text class="txts" x="262" y="88" text-anchor="middle">水和＋依頼</text>
+      <path class="arrow" d="M440,110 L440,190"/>
+      <text class="txts" x="472" y="155" text-anchor="middle">生成物</text>
+      <path class="arrow" d="M340,235 C280,235 250,205 213,190"/>
+      <text class="txts" x="268" y="248" text-anchor="middle">PASS→適用</text>
+      <path class="arrow" d="M540,225 C600,215 620,190 650,175"/>
+      <text class="txts" x="600" y="235" text-anchor="middle">FAIL→昇格</text>
+      <path class="arrow" d="M650,130 C600,95 580,80 540,70"/>
+      <text class="txts" x="608" y="88" text-anchor="middle">再依頼</text>
+    </svg>
+    <figcaption>図3 — 能動的コーディングループ（Evaluator-Optimizer）。実例: F6動線フックv2はこのループでDPが実装（2026-07-15）。</figcaption>
+  </figure>
+  <h3>実行形態は3つ</h3>
+  <table>
+    <tr><th>形態</th><th>構造</th><th>用途</th></tr>
+    <tr><td><b>Chain</b></td><td>直列 — 前段の出力を次段へ</td><td>偵察→実装→検証</td></tr>
+    <tr><td><b>Swarm</b></td><td>並列ファンアウト（実効2レーン）— <code>dp_swarm.py</code>: tasks.json（objective+validator）→一括投入→results.json回収</td><td>定型変換・抽出・単体生成の量産。ベンチ4/4 PASS・9〜15秒/件・¥0（2026-07-14）</td></tr>
+    <tr><td><b>Loop</b></td><td>DP生成 × ローカル決定的検証の周回＋昇格</td><td>コード改修・仕様詰め</td></tr>
+  </table>
+
+  <h2 id="autocrystallize">AutoCrystallize V2 — 会話が記憶になる機械パイプライン</h2>
+  <p>会話ログを「結晶」（構造化された記憶単位）へ変換する全自動パイプラインです。人手のコピペを撤去し（2026-06-13）、DPルートで全8ステップ実証済み（2026-07-13）。</p>
+  <figure>
+    <svg viewBox="0 0 860 170" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <rect class="box"  x="20"  y="50" width="130" height="70" rx="8"/>
+        <rect class="box"  x="175" y="50" width="130" height="70" rx="8"/>
+        <rect class="boxo" x="330" y="50" width="150" height="70" rx="8"/>
+        <rect class="boxc" x="505" y="50" width="130" height="70" rx="8"/>
+        <rect class="boxg" x="660" y="50" width="170" height="70" rx="8"/>
+        <text class="txtb" x="85"  y="78" text-anchor="middle">会話ログ抽出</text><text class="txts" x="85" y="98" text-anchor="middle">conv_jsonl</text>
+        <text class="txtb" x="240" y="78" text-anchor="middle">意味分割＋位置特定</text><text class="txts" x="240" y="98" text-anchor="middle">cosine谷検出 / locate</text>
+        <text class="txtb" x="405" y="78" text-anchor="middle">DPスワム蒸留</text><text class="txts" x="405" y="98" text-anchor="middle">群ごとに並列生成</text>
+        <text class="txtb" x="570" y="78" text-anchor="middle">マージ＋検品</text><text class="txts" x="570" y="98" text-anchor="middle">品質ゲート</text>
+        <text class="txtb" x="745" y="78" text-anchor="middle">結晶 → 意味空間へ</text><text class="txts" x="745" y="98" text-anchor="middle">embedding配置</text>
+      </g>
+      <path class="arrow" d="M150,85 L175,85"/><path class="arrow" d="M305,85 L330,85"/><path class="arrow" d="M480,85 L505,85"/><path class="arrow" d="M635,85 L660,85"/>
+    </svg>
+    <figcaption>図4 — AutoCrystallize V2。起動は1コマンド、完了はdoneマーカーで非同期検知。</figcaption>
+  </figure>
+
+  <h2 id="selflearning">自己学習 — SelfEval累積ループ（2026-07-08 実装）</h2>
+  <p>各会話の結晶化と同時に、AI自身の働きぶりを評価する<b>SelfEval結晶</b>が生成されます。強み・弱みはEWMA（指数移動平均）で減衰累積され、行動規範 <code>self_preferences</code> として毎セッションのboot時に自動装着されます。つまり<b>昨日の失敗が、今日の初期状態に織り込まれる</b>。</p>
+  <h2 id="selfrepair">自己修復 — SelfRepair（2026-07-08 設計）</h2>
+  <p>自己学習が「行動の矯正」なら、自己修復は「構造の改修」です。弱みスコアが閾値（≤ −3.0）を割ると、システムが自動でTask結晶（改修チケット）を起票。人間の「メンテナンスしよう」の一言で、司令塔がタスクを束ねDPスワムに投げて一括消化します。</p>
+  <figure>
+    <svg viewBox="0 0 860 330" xmlns="http://www.w3.org/2000/svg">
+      <rect class="box" x="40" y="40" width="170" height="70" rx="8"/>
+      <text class="txtb" x="125" y="68" text-anchor="middle">会話</text>
+      <text class="txts" x="125" y="88" text-anchor="middle">仕事の実行</text>
+      <rect class="boxc" x="280" y="40" width="180" height="70" rx="8"/>
+      <text class="txtb" x="370" y="68" text-anchor="middle">結晶化＋SelfEval</text>
+      <text class="txts" x="370" y="88" text-anchor="middle">強み/弱みを採点</text>
+      <rect class="boxg" x="530" y="40" width="180" height="70" rx="8"/>
+      <text class="txtb" x="620" y="68" text-anchor="middle">EWMA累積</text>
+      <text class="txts" x="620" y="88" text-anchor="middle">減衰つき台帳（DuckDB）</text>
+      <rect class="boxc" x="530" y="180" width="180" height="70" rx="8"/>
+      <text class="txtb" x="620" y="208" text-anchor="middle">self_preferences</text>
+      <text class="txts" x="620" y="228" text-anchor="middle">行動規範 v8 稼働中</text>
+      <rect class="boxo" x="280" y="180" width="180" height="70" rx="8"/>
+      <text class="txtb" x="370" y="208" text-anchor="middle">boot時に自動装着</text>
+      <text class="txts" x="370" y="228" text-anchor="middle">次セッションの初期値へ</text>
+      <rect class="boxo" x="40" y="180" width="170" height="90" rx="8"/>
+      <text class="txtb" x="125" y="208" text-anchor="middle">SelfRepair</text>
+      <text class="txts" x="125" y="228" text-anchor="middle">score ≤ −3.0 で</text>
+      <text class="txts" x="125" y="246" text-anchor="middle">改修Taskを自動起票</text>
+      <path class="arrow" d="M210,75 L280,75"/>
+      <path class="arrow" d="M460,75 L530,75"/>
+      <path class="arrow" d="M620,110 L620,180"/>
+      <path class="arrow" d="M530,215 L460,215"/>
+      <path class="arrow" d="M280,215 C250,150 240,120 213,105"/>
+      <text class="txts" x="222" y="160" text-anchor="middle">行動が変わる</text>
+      <path class="arrow" d="M530,235 C400,290 300,290 210,255"/>
+      <text class="txts" x="370" y="300" text-anchor="middle">弱み閾値割れ → 構造改修へ分岐</text>
+    </svg>
+    <figcaption>図5 — 二層の自己進化。行動矯正（self_preferences）と構造改修（SelfRepair）。</figcaption>
+  </figure>
+  <div class="plain">🔰 <b>素人向けにいうと:</b> 毎日の業務日報（SelfEval）から人事評価シート（self_preferences）が自動更新され、翌朝の朝礼で本人に手渡される。悪癖が重症化したら、根本の仕組みを直す改修チケットまで自動で切られる — 反省を「気持ち」でなく「仕組み」にした形です。</div>
+
+  <h2 id="cost">費用構造 — なぜ¥0か</h2>
+  <table>
+    <tr><th>経路</th><th>費用</th><th>位置づけ</th></tr>
+    <tr><td>API従量課金（Batch API等）</td><td>従量（本システムの旧経路で約¥18/run）</td><td>封印。起動は人間決裁のみ</td></tr>
+    <tr><td><b>DPルート（本方式)</b></td><td><b>追加費用¥0</b>（定額サブスクリプションのWeb利用枠のみ消費）</td><td>正規ルート。並列数は枠の消費速度に影響</td></tr>
+  </table>
+  <p style="font-size:14px;color:#9aa3ad">※利用枠はアカウント全体（5時間ローリング＋週次）で共有。DP方式は課金体系の抜け道ではなく、定額枠の範囲内で並列度を設計する運用手法です。</p>
+
+  <h2 id="stack">技術スタック要約</h2>
+  <table>
+    <tr><th>層</th><th>主要コンポーネント</th></tr>
+    <tr><td>記憶</td><td>DuckDB / 結晶1,983個 / warp検索（ruri-v3-310m embedding 768次元 + BM25 + reranker）/ QIS（量子着想の干渉スコアリング, Model 2確定 2026-06-11）</td></tr>
+    <tr><td>司令塔</td><td>Claude Desktop + MCP(SSE) / run_py / run_ps / DB書込キュー（単一ライター競合の解消）</td></tr>
+    <tr><td>分身</td><td>Chrome ×5 + CDP / dp_lease（プロセス跨ぎスロット排他）/ dp_journal（構造化ラン記録）/ dp_abort（協調緊急停止）/ dp_swarm（量産ファンアウト）/ COMMANDER_PLAYBOOK（判断表）</td></tr>
+    <tr><td>自己進化</td><td>SelfEval → EWMA → self_preferences → boot装着 / SelfRepair自動起票 / F6動線フック（記憶未参照の機械検知, v2 2026-07-15）</td></tr>
+  </table>
+
+  <h2 id="position">類似システムとの関係</h2>
+  <p>エージェント型コーディングツール（例: Claude Code）はターミナルを起点に単一エージェントが作業する設計です。本システムの固有性は次の3点にあります: <b>①チャットUIそのものを並列サブエージェント化</b>する¥0経路、<b>②永続する意味記憶と自己進化ループが司令塔に常時接続</b>されていること、<b>③会話の途中で司令塔がrun_py/run_psを撃ち、検証結果を根拠にDPへ再依頼する能動的コーディング</b>。同型の対話ブリッジ設計（Clara bridge, 2026-07-05〜）を含め、各機構の初出日は <a href="history.html">History</a> を参照してください。</p>
+</section>
+
+<footer>
+  © 2026 SubtractLab — Built by one person talking to one AI. / First published 2026-07-16. <a href="history.html">Prior-art timeline</a> · <a href="https://github.com/subtractlab/subtractlab">Source &amp; commit history</a>
+</footer>
+</body>
+</html>
