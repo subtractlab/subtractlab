@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>History — MeaningSpace 先行実装タイムライン（Prior-Art Timeline） | SubtractLab</title>
+<meta name="description" content="MeaningSpaceとDPマルチエージェント基盤の先行実装を日付つきで記録するタイムライン。2024年9月から2026年7月まで。gitコミット履歴によるタイムスタンプ証明。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#0a0a0a;color:#e0e0e0;font-family:'Inter','Noto Sans JP',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
+  ::selection{background:#00d4ff;color:#0a0a0a}
+  a{color:#00d4ff;text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:820px;margin:0 auto;padding:96px 24px 40px}
+  header.fixed{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 34px;backdrop-filter:blur(12px);background:rgba(10,10,10,.6);border-bottom:1px solid rgba(255,255,255,.05)}
+  .brand{font-size:15px;font-weight:600;color:#fff}
+  .navlinks a{font-size:13px;margin-left:18px;color:#9ca3af}.navlinks a:hover{color:#00d4ff}
+  h1{font-size:40px;color:#fff;font-weight:700;letter-spacing:-.02em;margin:0 0 10px}
+  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#00d4ff;margin:0 0 10px}
+  .lead{font-size:17px;font-weight:300;color:#cfd4da}
+  .anchorbox{margin:26px 0 46px;padding:16px 20px;border:1px solid rgba(255,107,53,.45);border-radius:6px;background:rgba(255,107,53,.06);font-size:14px;color:#ffb08a}
+  .era{margin:56px 0 18px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#5ede92}
+  .tl{border-left:2px solid #26313e;margin-left:8px;padding-left:26px}
+  .ev{position:relative;margin:0 0 26px}
+  .ev::before{content:"";position:absolute;left:-33px;top:8px;width:12px;height:12px;border-radius:50%;background:#0a0a0a;border:2px solid #00d4ff}
+  .ev.major::before{background:#00d4ff;box-shadow:0 0 12px rgba(0,212,255,.6)}
+  .d{font-family:ui-monospace,Consolas,monospace;font-size:13px;color:#ff6b35;font-weight:600}
+  .t{font-size:16px;font-weight:600;color:#fff;margin:2px 0}
+  .b{font-size:14px;color:#aab2bc;margin:0}
+  footer{margin-top:90px;padding:30px 24px;border-top:1px solid rgba(255,255,255,.06);font-size:13px;color:#7a828c;text-align:center}
+</style>
+</head>
+<body>
+<header class="fixed">
+  <span class="brand">SubtractLab</span>
+  <nav class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="MeaningSpace.html">MeaningSpace</a>
+    <a href="architecture.html">Architecture</a>
+    <a href="https://github.com/subtractlab/subtractlab">GitHub</a>
+  </nav>
+</header>
+<div class="wrap">
+  <p class="kicker">Prior-Art Timeline / 先行実装の記録</p>
+  <h1>作った日付は、動かない。</h1>
+  <p class="lead">MeaningSpace と DPマルチエージェント基盤の各機構について、設計・実装・実証の確定日を記録します。個人開発（SubtractLab, 開発者1名 + AI）による先行実装のデジタルアンカーです。</p>
+  <div class="anchorbox">📌 本ページの初版公開: <b>2026-07-16 (JST)</b>。本リポジトリのgitコミット履歴・GitHub Pagesの配信記録・検索エンジンのインデックス日時が、記載内容の存在時点を第三者的に裏付けます。以後の追記もコミット単位で日付が刻まれます。</div>
+
+  <div class="era">Era 1 — 業務自動化からの出発</div>
+  <div class="tl">
+    <div class="ev"><span class="d">2024-09</span><p class="t">Claudeによる業務自動化を開始</p><p class="b">RPA・BI・帳票処理などの実務自動化。以後すべての基盤となる「AIとの共同作業」の運用知見を蓄積。</p></div>
+    <div class="ev major"><span class="d">2025-03</span><p class="t">MeaningSpace構想 — 方向の反転</p><p class="b">「AIを人間のファイル構造に合わせる」のをやめ、「人間がAIの意味空間に入る」設計へ転換。減算設計（ノイズを引けば意味が結晶する）を基本哲学として個人AI記憶OSの開発を開始。</p></div>
+  </div>
+
+  <div class="era">Era 2 — 意味記憶OSの確立</div>
+  <div class="tl">
+    <div class="ev major"><span class="d">2026-01-02</span><p class="t">現行DuckDB結晶データベース稼働（第1結晶）</p><p class="b">会話を「結晶」として保存する現行スキーマの初日。以後2026-07-16までに1,983結晶へ成長。</p></div>
+    <div class="ev"><span class="d">2026-05-16</span><p class="t">マルチエージェント企業OS構想を文書化</p><p class="b">MeaningSpaceを基盤に複数AIエージェントを組織として運用する構想を結晶化。</p></div>
+    <div class="ev"><span class="d">2026-06-04 〜 06-07</span><p class="t">QIS（Quantum Inspired Semantic Space）設計〜Phase 0+1実装</p><p class="b">成功・失敗ベクトル（posi_vec/nega_vec）を全結晶にバックフィルし、干渉スコアリングの土台を実装。</p></div>
+    <div class="ev"><span class="d">2026-06-05 〜 06-07</span><p class="t">SubtractLabブランド確立・subtractlab.com公開</p><p class="b">GitHub Pages公開（06-07 deploy）、Search Console登録、sitemap送信。</p></div>
+    <div class="ev"><span class="d">2026-06-11</span><p class="t">QIS干渉式 Model 2 確定</p><p class="b">proximity主軸＋成功超過ボーナス／失敗超過ペナルティの合成式を実データで実証。</p></div>
+    <div class="ev"><span class="d">2026-06-13</span><p class="t">結晶化の完全機械化 — 手動Raw方式を撤去</p><p class="b">画面コピペ由来の生データ経路を封鎖し、会話ログ（conv_jsonl）起点の機械パイプラインへ一本化。</p></div>
+  </div>
+
+  <div class="era">Era 3 — 司令塔と自己進化</div>
+  <div class="tl">
+    <div class="ev"><span class="d">2026-07-04</span><p class="t">サブエージェント作法v2 — Chain / Swarm / Loopの3形態を体系化</p><p class="b">直列・並列・検証周回の使い分けと昇格ラダー（軽量モデル→上位モデル）を運用規約化。</p></div>
+    <div class="ev"><span class="d">2026-07-05 〜</span><p class="t">Clara bridge — AI同士のファイルキュー対話ブリッジ設計</p><p class="b">別AI（Clara）との双方向ブリッジをファイルキュー＋CDP監視で設計・部分実装。</p></div>
+    <div class="ev major"><span class="d">2026-07-08</span><p class="t">自己学習パイプライン実装（SelfEval → EWMA → self_preferences）</p><p class="b">毎会話の自己評価を減衰累積し、行動規範として次セッションのboot時に自動装着。同日、SelfRepair（弱みスコア≤−3.0で改修Taskを自動起票）を設計。司令塔の構造欠陥4点修正とLoop体系化も同日完了。</p></div>
+    <div class="ev"><span class="d">2026-07-11</span><p class="t">self_preferences v8 稼働・コスト構造の実測解剖</p><p class="b">API課金経路とWeb枠経路の費用構造を実測比較し、DPルート優先の方針を確定。</p></div>
+  </div>
+
+  <div class="era">Era 4 — DPマルチエージェント（Web Claudeを束ねる）</div>
+  <div class="tl">
+    <div class="ev major"><span class="d">2026-07-13</span><p class="t">DPマルチエージェント基盤確定 — 5レーンCDP構成</p><p class="b">1レーン=1Chrome=1プロファイル=1CDPポートの分離設計。実測で確定した知見: 同時実行上限（アカウント全体）、時差投入2.5秒、ゾンビ応答と協調停止の順序（3本生成中→3.6秒で全停止）、利用者設定の人格汚染と中和ヘッダによる遮断、ファイル操作の「触る係=Python/決める係=DP」分離、削除権限の不付与。同日、AutoCrystallize DPルート全8ステップを実証。</p></div>
+    <div class="ev major"><span class="d">2026-07-14</span><p class="t">恒久化 — dp_lease / dp_journal / dp_swarm / COMMANDER_PLAYBOOK</p><p class="b">プロセス跨ぎのグローバルスロット排他（札ファイル・stale回収15分）、構造化ランジャーナル、UI文字列判定の全廃（DOM構造属性へ移行）、Haiku量産プリセット（決定的検証→同モデル再試行→上位モデル昇格）、司令塔判断表。dp_swarm.pyベンチ4/4 PASS・9〜15秒/件・追加費用¥0。</p></div>
+    <div class="ev major"><span class="d">2026-07-15</span><p class="t">能動的コーディングループの実戦投入</p><p class="b">司令塔がrun_py/run_psで検証を回しながらDP対話レーン（dp_chat）に改修を再依頼するEvaluator-Optimizerループで、F6動線フックv2（記憶未参照の機械検知）をDPが実装。dp_swarm完成・応答洗浄の恒久化。システム取扱説明書自体もDPが生成。</p></div>
+    <div class="ev major"><span class="d">2026-07-16</span><p class="t">本タイムライン・アーキテクチャ全貌を公開</p><p class="b">DPマルチエージェント／自己学習／自己修復／能動的コーディングの全構造を <a href="architecture.html">Architecture</a> で図解公開。</p></div>
+  </div>
+
+  <p style="margin-top:50px;font-size:14px;color:#9aa3ad">出典: 各日付はMeaningSpace内の結晶（構造化された開発記録、作成日時つき）に基づきます。結晶データベースは開発者のローカル環境に実在し、本サイトの記述はその要約です。</p>
+</div>
+<footer>© 2026 SubtractLab — First published 2026-07-16 · <a href="architecture.html">Architecture</a> · <a href="https://github.com/subtractlab/subtractlab">GitHub</a></footer>
+</body>
+</html>
