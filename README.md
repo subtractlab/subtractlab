@@ -7,6 +7,7 @@
 | Repository | The problem it solves |
 |---|---|
 | **[meaningspace](https://github.com/subtractlab/meaningspace)** | Every AI session starts from zero. Keep every conversation whole, load only the meaning — with line-level addresses back to the source. |
+| **[ai-native-groupware](https://github.com/subtractlab/ai-native-groupware)** | Everyone writes, everyone reads — without a SaaS or a database server. One file per person on shared storage, DuckDB on every PC. |
 
 Each repository explains the problem, the mechanism and how it compares with what exists today. Implementations are not published.
 
@@ -25,7 +26,7 @@ Each repository explains the problem, the mechanism and how it compares with wha
 All built through conversation on MeaningSpace. See **[Products](https://subtractlab.com/products)**.
 
 - **φMovie** — automated video production pipeline
-- **BIApps** — serverless BI on shared storage + local DuckDB
+- **BIApps** — serverless BI on shared storage + local DuckDB (architecture: [ai-native-groupware](https://github.com/subtractlab/ai-native-groupware))
 - **POS RPA** — daily automated back-office operations
 - **φPPT** — golden-ratio, AI-native presentation design
 - **AutoCrystallize** — self-maintaining memory pipeline
@@ -43,6 +44,7 @@ All built through conversation on MeaningSpace. See **[Products](https://subtrac
 | 2026-09 | Line-level addresses for every crystal section (closed-set selection) |
 | 2026-10-04 | Progress map: file map + change ledger with reasons and reverse patches |
 | 2026-10-07 | MeaningSpace architecture published as its own repository: [subtractlab/meaningspace](https://github.com/subtractlab/meaningspace) |
+| 2026-10-07 | AI Native Groupware architecture published: [subtractlab/ai-native-groupware](https://github.com/subtractlab/ai-native-groupware) |
 
 Full dated history: **[timeline.md](timeline.md)**
 
