@@ -1,90 +1,119 @@
-# SubtractLab
+# MeaningSpace
 
-**The AI's workspace. The human is the guest.**
+**Keep every word. Load only the meaning.**
 
----
+A local memory layer for people who work with an AI all day, every day.
+The full conversation log is never summarized away. A meaning layer with **line-level addresses** sits on top of it, so a new session pulls in only the few sections it needs — and can still walk back to the exact lines they came from.
 
-**AI gets smarter by remembering less, not more.**
-
-The AI industry scales by addition — more parameters, longer context, bigger memory stores. **MeaningSpace** scales by subtraction: compress conversations into crystals that carry success/failure judgment, navigate them by semantic gravity instead of categories, and retrieve by interference scoring instead of similarity matching.
-
-The result: an AI partner that knows which memories matter, acts on them autonomously, and builds production systems through conversation alone — no terminal, no IDE, no file tree traversal.
-
-→ **[Read how it works](https://subtractlab.com/meaningspace)**
-
-**Explore:**
-[MeaningSpace](https://subtractlab.com/meaningspace) · [Architecture (図解)](https://subtractlab.com/architecture.html) · [History / Prior-Art Timeline](https://subtractlab.com/history.html) · [Products](https://subtractlab.com/products) · [3Gravity](https://subtractlab.com/3gravity) · [QIS](https://subtractlab.com/qis) · [SweepSearch](https://subtractlab.com/sweepsearch) · [FAQ](https://subtractlab.com/faq) · [About](https://subtractlab.com/about)
+![storage](https://img.shields.io/badge/storage-DuckDB%20(single%20file)-yellow)
+![runs](https://img.shields.io/badge/runs-local%20%2B%20MCP-blue)
+![status](https://img.shields.io/badge/status-in%20daily%20use-brightgreen)
+![first anchor](https://img.shields.io/badge/first%20public%20anchor-2026--06--06-lightgrey)
 
 ---
 
-## NEW (2026-07-16): DP Multi-Agent — orchestrating Web Claude itself
+## The problem
 
-MeaningSpace now runs a **commander + sub-agent architecture where the sub-agents are Web Claude browser instances**, driven via Chrome DevTools Protocol (CDP). Five isolated lanes, global slot leasing, cooperative emergency stop, deterministic validators, and an escalation ladder — at **zero marginal API cost** (subscription usage only).
+Every new AI session starts from zero. You explain the architecture again. The agent retries the fix that already failed last week. Rebuilding context burns your usage limit before any real work starts.
 
-On top of it: a **self-learning loop** (per-conversation SelfEval → EWMA accumulation → behavioral norms auto-equipped at boot) and a **self-repair loop** (weakness score ≤ −3.0 auto-files a repair Task). The commander holds runtime execution (`run_py` / `run_ps`) and re-briefs sub-agents mid-conversation based on real verification results — **active coding through dialogue**.
+Today there are two common answers, and both hurt:
 
-- **[dp-multiagent.md](dp-multiagent.md)** — full technical disclosure (JP)
-- **[architecture.html](https://subtractlab.com/architecture.html)** — illustrated overview for non-engineers (JP)
-- **[timeline.md](timeline.md)** / **[history.html](https://subtractlab.com/history.html)** — dated prior-art timeline
+| Approach | What happens |
+|---|---|
+| **Summarize and discard** | Fits in context, but the original reasoning is gone. When your understanding changes, there is nothing to go back to. |
+| **Reload everything / grep the files** | Nothing is lost, but every question costs a pile of reading — and keyword search often lands in the wrong file. |
 
-## What This Is
+MeaningSpace takes a third path: **keep the ground, carry the meaning.**
 
-SubtractLab is the research and development identity of **奥田剛司 (Koji Okuda)**, exploring subtractive design as a first principle for software, AI systems, and human-computer interaction.
+## How it works
 
-Building **MeaningSpace** — an AI-native semantic operating system where the AI builds and maintains its own meaning space, and the human enters through conversation. Built on a single premise: **memory is computation**. Every crystal carries its own evaluation — what worked, what failed, how understanding changed — and that evaluation is used at retrieval time. The act of remembering is itself an act of reasoning.
+```mermaid
+flowchart LR
+    A["Conversation logs<br/>(kept whole, never edited)"] -->|crystallize| B["Crystals<br/>sections with outcome:<br/>decided / overturned / open"]
+    B -->|address| A
+    B --> C["Skills<br/>light up only above a<br/>similarity threshold"]
+    D["Files & code"] --> E["Progress map<br/>purpose, links,<br/>change ledger with reasons"]
+    E -->|reason → conversation section| B
+```
+
+1. **Ground** — every conversation is stored as a line-numbered log. Nothing is deleted or rewritten.
+2. **Crystals** — each conversation is distilled into sections. Every section carries its outcome (*decided / overturned / open*) and the **addresses of the log lines** it came from. Addresses are *selected from a closed candidate set*, not recalled by the model.
+3. **Skills** — working procedures are stored as crystals too. A search returns only a title and a query to descend; the body is read only when a skill clears the threshold. Adding skills does not grow every prompt.
+4. **Progress map** — files and code get the same treatment: what each file is for, what it links to, and a change ledger where every edit carries a reason and a reverse patch tied to the conversation section that caused it.
+
+Everything — text, vectors, a lexical index, addresses and the map — lives in **one DuckDB file**, so a single query can go from *meaning → section → log line → file → reason for the change*.
+
+## What survives 60 days later
+
+Both approaches keep you from re-explaining everything. The difference is what is still there when a question comes up that nobody expected.
+
+| | Claude Code auto memory | MeaningSpace |
+|---|---|---|
+| What gets written | Notes Claude decides are worth keeping, while it works | Every conversation, crystallized section by section |
+| When "important" is decided | At write time | At read time |
+| Original conversation logs | Deleted after the retention period | Kept whole, never edited |
+| Can you go back to the exact lines? | Only if the log still exists | Yes — every section carries line addresses |
+| Overturned decisions | Stale notes are merged or dropped when noticed | Each section is marked *decided / overturned / open* |
+| Loaded at session start | First 200 lines or 25 KB of the index | Only the sections the question pulls in |
+
+Sources for the left column: [Claude Code docs — How Claude remembers your project](https://code.claude.com/docs/en/memory).
+
+Auto memory is good at what it noticed at the time. MeaningSpace is built for what turns out to matter later: the essence of a long history, the decision that was reversed, and the exact line it came from.
+
+## In daily use
+
+- **2,405** conversation crystals over **3,036** logs
+- **74** active skills
+- Used every day on a Claude Max 5x plan
+- Search is lexical (BM25) + vector, fused by rank; an optional GPU reranker sorts the final candidates
+
+## What is (and isn't) here
+
+This repository is a **dated public record of the design**, not an installable package. The implementation is not published.
+If you want to build something like it, or talk about using it in a team, reach out through **[subtractlab.com](https://subtractlab.com)**.
+
+**Related work.** [Graphiti](https://github.com/getzep/graphiti) also keeps raw input as episodes and traces facts back to them. MeaningSpace differs in what it puts on top: narrative crystals and behavior-changing skills rather than an entity graph, with addresses down to the line.
+
+**More:**
+[MeaningSpace overview](https://subtractlab.com/meaningspace) · [Architecture (illustrated)](https://subtractlab.com/architecture.html) · [3Gravity](https://subtractlab.com/3gravity) · [QIS](https://subtractlab.com/qis) · [DP Multi-Agent](dp-multiagent.md) · [Products](https://subtractlab.com/products) · [Prior-art timeline](timeline.md) · [FAQ](https://subtractlab.com/faq)
+
+---
 
 ## Vision
 
-1. **The AI's workspace, not the human's** — Instead of putting AI inside human tools (IDE, terminal, browser), humans enter the AI's semantic space through conversation
-2. **Memory becomes reasoning** — Not storage and retrieval, but a system where remembering is itself inference
-3. **AI-native organizational OS** — Starting from personal semantic memory, extending to the intellectual infrastructure of an entire organization
+1. **The AI's workspace, not the human's** — instead of putting AI inside human tools, people enter the AI's meaning space through conversation.
+2. **Memory becomes reasoning** — every crystal carries its own judgment (what worked, what failed, what was overturned), and that judgment is used at retrieval time.
+3. **AI-native organizational OS** — personal meaning spaces first; the *who* of every crystal is already stored as a column, so groups and organizations can share a common layer later.
 
-## MeaningSpace
+## Other projects
 
-The core. An AI-native semantic operating system running in production for 2+ years, **1,983 crystals as of 2026-07-16**.
+All built through conversation on MeaningSpace. See **[Products](https://subtractlab.com/products)**.
 
-- **[Architecture & Full Details](https://subtractlab.com/meaningspace)** — Tools, design philosophy, comparison with Mem0/RAG/Claude Code
-- **[DP Multi-Agent](dp-multiagent.md)** — Web Claude instances as parallel sub-agents (¥0 route)
-- **[Products built on it](https://subtractlab.com/products)** — 7 production systems built entirely through conversation
-- **[3Gravity](https://subtractlab.com/3gravity)** — Fractal scale organization (Crystal → Cluster → Galaxy)
-- **[QIS](https://subtractlab.com/qis)** — Interference-based retrieval scoring
-- **[SweepSearch](https://subtractlab.com/sweepsearch)** — One-shot semantic scan across all crystals
-
-Built on DuckDB. Runs on CPU. No GPU required. No terminal required.
-
-## Other Projects
-
-All built through conversation on MeaningSpace. See **[Products](https://subtractlab.com/products)** for the full list.
-
-- **φMovie** — Fully automated video production pipeline (V34)
-- **BIApps** — DuckDB-based BI across 16 subsidiary companies
-- **POS RPA** — Daily automated retail operations
-- **φPPT** — Golden-ratio AI-native presentation design
-- **AutoCrystallize** — Self-maintaining memory pipeline (V2: fully mechanical, DP-swarm distillation)
-- **VoiceMode** — Spoken conversation interface (VOICEVOX)
-- **CDP bridges** — AI↔AI file-queue dialogue bridge (Clara bridge) & M365 automation (experimental)
+- **φMovie** — automated video production pipeline
+- **BIApps** — serverless BI on shared storage + local DuckDB
+- **POS RPA** — daily automated back-office operations
+- **φPPT** — golden-ratio, AI-native presentation design
+- **AutoCrystallize** — self-maintaining memory pipeline
+- **VoiceMode** — spoken conversation interface (VOICEVOX)
 
 ## Changelog (dated anchors)
 
 | Date | Milestone |
 |---|---|
 | 2026-06-06 | First public anchor — brand & site launch |
-| 2026-07-08 | Self-learning pipeline (SelfEval → EWMA → self_preferences) + SelfRepair design |
-| 2026-07-13 | DP multi-agent foundation (5 CDP lanes, cooperative stop, neutralization header) |
-| 2026-07-14 | dp_lease / dp_journal / dp_swarm / Commander Playbook — production hardening |
-| 2026-07-15 | Active-coding loop in production (run_py/run_ps × dp_chat Evaluator-Optimizer) |
+| 2026-07-08 | Self-learning pipeline + SelfRepair design |
+| 2026-07-13 | DP multi-agent foundation |
 | 2026-07-16 | Public disclosure: architecture.html / history.html / dp-multiagent.md / timeline.md |
+| 2026-09-01 | SweepSearch retired; search moved to lexical + vector fusion with descend |
+| 2026-09 | Line-level addresses for every crystal section (closed-set selection) |
+| 2026-10-04 | Progress map: file map + change ledger with reasons and reverse patches |
 
 Full dated history: **[timeline.md](timeline.md)**
 
 ## Author
 
-**奥田剛司 (Koji Okuda)** ・ Independent builder. Subtractive design practitioner.
+**奥田剛司 (Koji Okuda)** · Independent builder. Subtractive design practitioner.
 
-[subtractlab.com](https://subtractlab.com) ・ [@subtractlabo](https://x.com/subtractlabo) ・ [@SUBTRACTLAB](https://www.youtube.com/@SUBTRACTLAB) ・ [note.com/subtractlab](https://note.com/subtractlab)
-
----
-
-→ **[About the author](https://subtractlab.com/about)**
+[subtractlab.com](https://subtractlab.com) · [@subtractlabo](https://x.com/subtractlabo) · [@SUBTRACTLAB](https://www.youtube.com/@SUBTRACTLAB) · [note.com/subtractlab](https://note.com/subtractlab)
 
 *First public anchor: June 6, 2026. This README and all pages are timestamped by git commit history.*
