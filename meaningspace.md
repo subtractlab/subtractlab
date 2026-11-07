@@ -142,7 +142,7 @@ Crystals are not a flat list. They are organized along two orthogonal axes:
 
 - **Crystal** — A single conversation's distilled judgment
 - **Cluster** — A group of crystals in the same domain (ClusterSkill: the accumulated "how to" of that domain)
-- **Galaxy** — An entire domain of practice (e.g., all of MeaningSpace development, all of ledger work)
+- **Galaxy** — An entire domain of practice (e.g., all of MeaningSpace development, all of one business domain)
 
 **Kind** (what type of knowledge?):
 
