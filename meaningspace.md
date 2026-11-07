@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "MeaningSpace — The AI's workspace where humans are the guest"
-description: "MeaningSpace is an AI-native semantic operating system. The AI accumulates meaning, searches, reasons, and executes code — all from a single conversation interface. No terminal. No Claude Code. Just talk."
+description: "MeaningSpace is an AI-native semantic operating system. The AI accumulates meaning, searches, reasons, and builds — all from a single conversation. No terminal. No Claude Code. No Codex. Just talk."
 ---
 
 <script type="application/ld+json">
@@ -14,7 +14,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
       "name": "What is MeaningSpace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MeaningSpace is an AI-native semantic operating system developed by Koji Okuda at SubtractLab. It inverts the conventional human-AI relationship: instead of AI assisting in a human workspace, the human enters the AI's meaning space through conversation. The AI accumulates 4,600+ crystals of compressed judgment, searches them in milliseconds via SweepSearch, and executes code directly on the OS — all without a terminal or IDE. Running in production for 2+ years on a single Windows machine."
+        "text": "MeaningSpace is an AI-native semantic operating system developed by Koji Okuda at SubtractLab. It inverts the conventional human-AI relationship: instead of AI assisting in a human workspace, the human enters the AI's meaning space through conversation. The AI accumulates 4,600+ crystals of compressed judgment, searches them in milliseconds via SweepSearch, and does the work inside the same conversation — without a terminal, an IDE, Claude Code or Codex. Running in production for 2+ years."
       }
     },
     {
@@ -22,7 +22,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
       "name": "How is MeaningSpace different from Claude Code or Cursor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Claude Code and Cursor read files from disk, summarize them into context, and write code in a terminal. MeaningSpace doesn't read files — it already knows. 4,600+ crystals of compressed meaning are searchable in one vector operation via SweepSearch (no reranker, no orchestration). The AI partner works directly from the chat window. No terminal occupation. No file tree traversal. Meaning-first, not file-first."
+        "text": "Claude Code and Cursor read files from disk, summarize them into context, and write code in a terminal. MeaningSpace doesn't read files — it already knows. 4,600+ crystals of compressed meaning are searchable in one vector operation via SweepSearch (no reranker, no orchestration). The AI partner works inside MeaningSpace's own environment, directly from the chat window. No terminal. No file tree traversal. Meaning-first, not file-first."
       }
     },
     {
@@ -30,7 +30,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
       "name": "What technology does MeaningSpace run on?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "DuckDB (single-file, SQL-queryable), ruri-v3-310m embeddings (768 dimensions, Japanese-optimized), MCP SSE server for tool communication. Runs entirely on CPU on a single Windows machine. No GPU, no cloud dependency, no external API for core operations."
+        "text": "DuckDB (single-file, SQL-queryable), ruri-v3-310m embeddings (768 dimensions, Japanese-optimized), and a proprietary conversation-first environment built by SubtractLab. Runs on CPU. No GPU, no cloud dependency for core operations."
       }
     },
     {
@@ -49,7 +49,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
 
 **The AI's workspace. The human is the guest.**
 
-Most AI tools put the AI inside the human's environment — a copilot in your IDE, an assistant in your terminal. MeaningSpace inverts this. The AI builds and maintains its own semantic space: accumulating meaning, searching by judgment, executing code on the operating system. The human enters this space through conversation.
+Most AI tools put the AI inside the human's environment — a copilot in your IDE, an assistant in your terminal. MeaningSpace inverts this. The AI builds and maintains its own semantic space: accumulating meaning, searching by judgment, doing the work itself. The human enters this space through conversation.
 
 No terminal. No IDE. No file tree traversal. Just talk.
 
@@ -68,7 +68,7 @@ In MeaningSpace:
 1. The human says what they want
 2. The AI searches 4,600+ crystals of compressed meaning — in milliseconds
 3. The AI already knows the context, the history, the failures, the victories
-4. The AI writes and executes code directly
+4. The AI does the work and checks it
 5. The result appears
 
 The difference isn't incremental. The AI doesn't need to "catch up" on your project — it never forgot.
@@ -85,44 +85,9 @@ Each crystal isn't a raw document. It's **compressed judgment**: what worked (po
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────┐
-│                  claude.ai                       │
-│              (conversation UI)                   │
-└──────────────────┬──────────────────────────────┘
-                   │ MCP SSE
-┌──────────────────▼──────────────────────────────┐
-│              MeaningSpace Server                 │
-│                                                  │
-│  ┌─────────┐  ┌──────────┐  ┌────────────────┐  │
-│  │ Sweep   │  │ Warp     │  │ Crystallize    │  │
-│  │ Search  │  │ (deep    │  │ (compress +    │  │
-│  │ (broad  │  │  single- │  │  evaluate)     │  │
-│  │  scan)  │  │  point)  │  │                │  │
-│  └─────────┘  └──────────┘  └────────────────┘  │
-│                                                  │
-│  ┌─────────┐  ┌──────────┐  ┌────────────────┐  │
-│  │ checks  │  │ checks   │  │ tools │  │
-│  │ (OS     │  │ (data    │  │ (file ops)     │  │
-│  │  ctrl)  │  │  proc)   │  │                │  │
-│  └─────────┘  └──────────┘  └────────────────┘  │
-│                                                  │
-│  ┌─────────┐  ┌──────────┐  ┌────────────────┐  │
-│  │ dispatch│  │ eliza_say│  │ meaning_query  │  │
-│  │ (image  │  │ (voice   │  │ (SQL over      │  │
-│  │  gen,   │  │  output) │  │  crystals)     │  │
-│  │  search)│  │          │  │                │  │
-│  └─────────┘  └──────────┘  └────────────────┘  │
-│                                                  │
-│  ┌──────────────────────────────────────────┐    │
-│  │         DuckDB + ruri-v3 (768d)          │    │
-│  │         4,600+ crystals                   │    │
-│  │         Local. Single file. No GPU.       │    │
-│  └──────────────────────────────────────────┘    │
-└──────────────────────────────────────────────────┘
-```
-Everything connects through a single MCP SSE server. The AI partner (internally called Eliza) operates ~30 tools across six categories:
+One conversation window. Behind it, MeaningSpace — a proprietary environment built and run by SubtractLab. Not Claude Code, not Codex, not an IDE plugin. Inside it the AI partner (internally called Eliza) remembers, searches, builds and checks its own work.
 
+How the environment is wired, and what it is allowed to touch, is deliberately not published. What is published is the memory model below.
 
 ### Semantic Memory
 
@@ -135,67 +100,9 @@ Everything connects through a single MCP SSE server. The AI partner (internally 
 <tr><td><strong>meaning_query</strong></td><td>Raw SQL over the crystal database. Direct DuckDB queries for structural analysis, statistics, batch operations.</td></tr>
 </table>
 
-### Code Execution
+### Making and checking
 
-<table>
-<tr><th>Tool</th><th>What it does</th></tr>
-<tr><td><strong>checks</strong></td><td>Work inside the conversation. </td></tr>
-<tr><td><strong>checks</strong></td><td>Work inside the conversation. Data processing, numerical analysis, API calls, file transformation. Same immediate execution model.</td></tr>
-</table>
-
-These two tools are what make "Claude Code without Claude Code" possible. The AI writes code in the conversation, executes it, sees the output, and iterates — all without the human touching a terminal.
-
-### File Operations
-
-<table>
-<tr><th>Tool</th><th>What it does</th></tr>
-<tr><td><strong>tools</strong></td><td>Read any file with line numbers and hash (for safe editing).</td></tr>
-<tr><td><strong>tools</strong></td><td>Create new files or overwrite existing ones.</td></tr>
-<tr><td><strong>tools</strong></td><td>Surgical partial edits with line-range targeting and collision detection via hash.</td></tr>
-<tr><td><strong>tools</strong></td><td>Search.</td></tr>
-</table>
-
-### Perception & Generation
-
-<table>
-<tr><th>Tool</th><th>What it does</th></tr>
-<tr><td><strong>view_screenshots</strong></td><td>The AI sees the screen. Takes and views screenshots to understand what the human is looking at.</td></tr>
-<tr><td><strong>generate_slide_image</strong></td><td>AI image generation (NanoBanana2) for presentation graphics, diagrams, eyecatch visuals.</td></tr>
-<tr><td><strong>eliza_say</strong></td><td>Voice output via VOICEVOX. The AI speaks aloud while displaying structured notes on screen.</td></tr>
-<tr><td><strong>show_widget</strong></td><td>Inline SVG/HTML rendering in the conversation — whiteboard diagrams, interactive charts, data visualizations, calculators.</td></tr>
-</table>
-
-### External Search
-
-<table>
-<tr><th>Tool</th><th>What it does</th></tr>
-<tr><td><strong>grok_search</strong></td><td>Grok API — X/Twitter posts, real-time trends, public sentiment.</td></tr>
-<tr><td><strong>gemini_search</strong></td><td>Gemini Google Search — general web, Japanese content, Google index.</td></tr>
-<tr><td><strong>web_search</strong></td><td>Claude's built-in web search for technical documentation, current events.</td></tr>
-<tr><td><strong>web_fetch</strong></td><td>Fetch and read full web page content.</td></tr>
-</table>
-
-### Browser Automation (Chrome MCP)
-
-<table>
-<tr><th>Tool</th><th>What it does</th></tr>
-<tr><td><strong>navigate</strong></td><td>Open URLs, go back/forward in browser history.</td></tr>
-<tr><td><strong>read_page</strong></td><td>Get accessibility tree of the current page — the AI reads web pages structurally.</td></tr>
-<tr><td><strong>find</strong></td><td>Locate elements by natural language description.</td></tr>
-<tr><td><strong>form_input</strong></td><td>Fill form fields programmatically.</td></tr>
-<tr><td><strong>browser tool</strong></td><td>Works with web pages.</td></tr>
-<tr><td><strong>file_upload</strong></td><td>Upload files to web forms.</td></tr>
-</table>
-
-The total is approximately 30 tools. This is not a plugin ecosystem — it's a single AI partner that can search meaning, write and run code, read and write files, see the screen, speak aloud, draw diagrams, search the web, and control a browser. All from one conversation window.
-
-### Multi-LLM Orchestration
-
-Inside its own environment, the AI can bring in other models — Claude, GPT, Gemini, Grok, local models, anything with an HTTP endpoint. This isn't a plugin system where you pick one provider. The AI decides which model to call, constructs the prompt with context from the meaning space, sends the request, processes the response, and acts on it — all in a single conversational turn.
-
-
-
-
+Writing, images, video, sites and code are produced inside the conversation and verified before they are reported. The AI also speaks aloud (VOICEVOX) while showing structured notes on screen.
 
 ## How This Differs from Mem0, RAG, and Claude Code
 
@@ -203,14 +110,8 @@ Inside its own environment, the AI can bring in other models — Claude, GPT, Ge
 <tr><th></th><th>Mem0</th><th>RAG</th><th>Claude Code</th><th>MeaningSpace</th></tr>
 <tr><td><strong>Memory model</strong></td><td>Graph + vector store</td><td>Document chunks</td><td>File reading per session</td><td>Crystals with judgment (posi/nega/evolution)</td></tr>
 <tr><td><strong>Who uses it</strong></td><td>Human via API</td><td>Human via API</td><td>Human in terminal</td><td>AI uses it autonomously</td></tr>
-<tr><td><strong>Code execution</strong></td><td>No</td><td>No</td><td>Yes (terminal)</td><td>Yes (from conversation, no terminal)</td></tr>
-<tr><td><strong>Environment</strong></td><td>No</td><td>No</td><td>Sandboxed</td><td>Own environment</td></tr>
-<tr><td><strong>File operations</strong></td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><strong>Where the work happens</strong></td><td>Your app</td><td>Your app</td><td>Terminal</td><td>The conversation (own environment)</td></tr>
 <tr><td><strong>Voice output</strong></td><td>No</td><td>No</td><td>No</td><td>Yes (VOICEVOX)</td></tr>
-<tr><td><strong>Visual perception</strong></td><td>No</td><td>No</td><td>Limited</td><td>Screenshots + screen reading</td></tr>
-<tr><td><strong>Browser control</strong></td><td>No</td><td>No</td><td>No</td><td>Yes (Chrome CDP/MCP)</td></tr>
-<tr><td><strong>Search integration</strong></td><td>No</td><td>No</td><td>Web search only</td><td>Web + Grok (X) + Gemini + semantic memory</td></tr>
-<tr><td><strong>LLM orchestration</strong></td><td>No</td><td>No</td><td>Single model</td><td>Unlimited — any API, AI calls AI with context</td></tr>
 <tr><td><strong>Raw data preservation</strong></td><td>No — compressed, originals discarded</td><td>Chunks only, no hierarchy</td><td>Files on disk, no memory</td><td>Full hierarchy: raw → refined → summary → ultra. Nothing lost</td></tr>
 <tr><td><strong>Memory loop</strong></td><td>Store/retrieve</td><td>Retrieve only</td><td>None</td><td>Full loop: retrieve → act → crystallize → store</td></tr>
 </table>
@@ -273,13 +174,12 @@ The AI normally operates at Layers 3–4 for speed — scanning summaries is fas
 **This is what makes "Claude Code speed + Claude Code precision" possible simultaneously.** The hierarchical structure means the AI can panoramically survey 4,600+ crystals in milliseconds (something file-based tools can't do), then instantly drill into full-text detail on any one of them (something summary-only memory systems can't do).
 
 No other system has both. Mem0 has speed without precision. Claude Code has precision without speed. MeaningSpace has both, because the layers coexist.
-No other system has both. Mem0 has speed without precision. Claude Code has precision without speed. MeaningSpace has both, because the layers coexist.
 
 ### Inline Annotations: Meaning-Linked Raw Data Access
 
 Layer 2 (refined_raw) isn't just cleaned text. Every file path, code block, and URL referenced during the conversation is annotated inline with `[PATH]`, `[CODE]`, and `[URL]` markers followed by their full location. These annotations act as an **index into the real world** — when the AI lands on a crystal through semantic search, it instantly knows which files were touched, which URLs were consulted, and which code was written, all in the context they were used.
 
-The AI reads the annotations, opens the files via `tools`, and has the full source in front of it — all within the same conversational turn that started with a meaning search. **Semantic retrieval → context-linked annotation → live file access.** Three steps, one turn, no manual lookup.
+The AI follows the annotations to the source and has it in front of it — all within the same conversational turn that started with a meaning search. **Semantic retrieval → context-linked annotation → live file access.** Three steps, one turn, no manual lookup.
 
 ## Unlimited Scale, Instant Panorama
 
@@ -309,8 +209,8 @@ This is what "freed from the context window" looks like. The AI doesn't fit your
 - **4,600+ crystals** accumulated over 2 years of daily production use
 - **Single DuckDB file** — no external database, no cloud sync
 - **ruri-v3-310m** embeddings (768 dimensions, Japanese-optimized)
-- **CPU only** — runs on a desktop PC (no GPU needed for core operations)
-- **MCP SSE** — one server process, all tools accessible from claude.ai
+- **CPU only** — no GPU needed for core operations
+- **One proprietary environment** — reached from the chat app
 - **Zero terminal sessions** required for daily operation
 
 ## What This Proves

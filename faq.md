@@ -22,7 +22,7 @@ description: "Frequently asked questions about SubtractLab and MeaningSpace — 
     {
       "@type": "Question",
       "name": "What technology does MeaningSpace run on?",
-      "acceptedAnswer": { "@type": "Answer", "text": "MeaningSpace runs on DuckDB with vector embeddings (ruri-v3-310m, 768 dimensions, Japanese-optimized), communicates via MCP (Model Context Protocol), and requires only CPU — no GPU needed. The entire system runs locally on a single machine." }
+      "acceptedAnswer": { "@type": "Answer", "text": "MeaningSpace runs on DuckDB with vector embeddings (ruri-v3-310m, 768 dimensions, Japanese-optimized), works inside a proprietary conversation-first environment, and requires only CPU — no GPU needed. The entire system runs locally on a single machine." }
     },
     {
       "@type": "Question",
@@ -116,7 +116,7 @@ RAG (Retrieval-Augmented Generation) retrieves document chunks by similarity. Me
 
 ### What technology does MeaningSpace run on?
 
-MeaningSpace runs on DuckDB with vector embeddings (ruri-v3-310m, 768 dimensions, Japanese-optimized), communicates via MCP (Model Context Protocol), and requires only CPU — no GPU needed. The entire system runs locally on a single machine.
+MeaningSpace runs on DuckDB with vector embeddings (ruri-v3-310m, 768 dimensions, Japanese-optimized), works inside a proprietary conversation-first environment, and requires only CPU — no GPU needed. The entire system runs locally on a single machine.
 
 ### How does AI memory crystallization work?
 

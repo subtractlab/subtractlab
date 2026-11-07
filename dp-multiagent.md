@@ -8,7 +8,7 @@ Related: [architecture.html](https://subtractlab.com/architecture.html) · [time
 ## 1. The physical model
 
 - **One lane = one Chrome = one profile = one CDP port = one dedicated thread.** With zero shared state, adding lanes does not break the structure.
-- Five lanes: DP1 / DP2 / DP3 / DP4 / DP5. The ledger is `lanes.json` (the source of truth for window positions, default model and max_concurrent). UI dependencies are isolated in `selectors.json`.
+- Five lanes: DP1 to DP5. The ledger is `lanes.json` (the source of truth for window positions, default model and max_concurrent). UI dependencies are isolated in `selectors.json`.
 - Every entry point (bulk swarm / dialogue / worker / pipeline) goes through a shared lane client, which places the windows and titles each lane automatically at start.
 - A new lane is a copy of an existing profile (the logged-in session comes with it). Copy only while Chrome is stopped.
 
@@ -48,11 +48,11 @@ All DP lanes share one account, so the user's custom settings (persona and outpu
 
 Claude in a browser has no file system. So:
 
-1. **Hydrate** — Python reads the target file and injects it into the prompt
+1. **Hydrate** — the commander puts the target source into the prompt
 2. **Generate** — DP returns only a body or a diff (anchor-replace / the `===NEWFILE path=...===` convention)
-3. **Apply and verify** — Python applies it, runs it and checks it
+3. **Apply and verify** — the commander applies it and checks it
 
-**DP is never given delete permission.** Hydration puts the body of someone else's file into the prompt, so a line inside it saying "delete this file" could pass as an injection. Deleting belongs to Python alone, through three gates: (a) refuse anything outside allowed directories, (b) a whitelist of prefixes and extensions, (c) a backup copy first.
+**DP is never given delete permission.** Hydration puts the body of someone else's file into the prompt, so a line inside it saying "delete this file" could pass as an injection. Deleting stays with the commander alone, behind its own gates.
 
 ## 7. Ways to run — Chain / Swarm / Loop
 
@@ -66,7 +66,7 @@ Claude in a browser has no file system. So:
 
 Response cleaning made permanent: (1) remove lines read out by the UI, (2) strip output-convention markers, (3) code must be fenced (the chat page does not preserve indentation outside fences).
 
-**Loop = active coding:** the commander has checks  and checks , and **sends fixes back to the dialogue lane (dp_chat) on the strength of checks run mid-conversation** — an evaluator-optimizer. First real use was 2026-07-15: DP implemented the F6 flow hook v2 (a mechanism that detects the moment an AI answers without consulting its memory) through this loop.
+**Loop = active coding:** the commander runs its own checks and **sends fixes back to the dialogue lane (dp_chat) on the strength of checks run mid-conversation** — an evaluator-optimizer. First real use was 2026-07-15: DP implemented the F6 flow hook v2 (a mechanism that detects the moment an AI answers without consulting its memory) through this loop.
 
 ## 8. Observability and the commander
 

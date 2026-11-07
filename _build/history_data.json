@@ -111,7 +111,7 @@
     "major": true,
     "d": "2026-07-15",
     "t": "Active coding loop in real use",
-    "b": "The commander runs checks with checks and sends fixes back to a DP chat lane in an evaluator-optimizer loop; DP implemented the F6 flow hook v2 (mechanical detection of answers that skip memory). dp_swarm completed, response cleaning made permanent. Even the system manual was written by DP."
+    "b": "The commander runs its own checks and sends fixes back to a DP chat lane in an evaluator-optimizer loop; DP implemented the F6 flow hook v2 (mechanical detection of answers that skip memory). dp_swarm completed, response cleaning made permanent. Even the system manual was written by DP."
    },
    {
     "major": true,

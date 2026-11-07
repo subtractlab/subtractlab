@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MeaningSpace Architecture — DP multi-agent, self-learning and self-repair | SubtractLab (Koji Okuda)</title>
-<meta name="description" content="The full architecture of MeaningSpace, illustrated: web Claude as parallel sub-agents at ¥0 extra cost, self-learning, self-repair and the execution layer. First published 2026-07-16.">
+<meta name="description" content="The full architecture of MeaningSpace, illustrated: web Claude as parallel sub-agents at ¥0 extra cost, self-learning, self-repair and active coding. First published 2026-07-16.">
 <meta name="author" content="Koji Okuda (奥田剛司)">
 <link rel="canonical" href="https://subtractlab.com/architecture.html">
-<meta property="og:type" content="website"><meta property="og:site_name" content="SubtractLab"><meta property="og:title" content="MeaningSpace Architecture — DP multi-agent, self-learning and self-repair | SubtractLab (Koji Okuda)"><meta property="og:description" content="The full architecture of MeaningSpace, illustrated: web Claude as parallel sub-agents at ¥0 extra cost, self-learning, self-repair and the execution layer. First published 2026-07-16."><meta property="og:url" content="https://subtractlab.com/architecture.html"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@subtractlabo">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SubtractLab"><meta property="og:title" content="MeaningSpace Architecture — DP multi-agent, self-learning and self-repair | SubtractLab (Koji Okuda)"><meta property="og:description" content="The full architecture of MeaningSpace, illustrated: web Claude as parallel sub-agents at ¥0 extra cost, self-learning, self-repair and active coding. First published 2026-07-16."><meta property="og:url" content="https://subtractlab.com/architecture.html"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@subtractlabo">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/sl.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://subtractlab.com/#koji-okuda", "name": "Koji Okuda", "alternateName": ["奥田剛司", "おくだ こうじ"], "url": "https://subtractlab.com/about.html", "jobTitle": "Independent builder / SubtractLab", "knowsAbout": ["AI-native systems", "semantic memory", "MeaningSpace", "3Gravity Architecture"], "sameAs": ["https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB", "https://github.com/subtractlab"]}</script>
@@ -28,12 +28,12 @@ figure svg{width:100%;height:auto}figcaption{font-size:13px;color:var(--mouse);m
 <main class="wrap"><div class="crumb"><a href="/">SubtractLab</a> / Architecture</div><div class="article">
 <p class="kicker">MeaningSpace architecture / technical disclosure</p>
 <h1>One human, one AI,<br>and five stand-ins.</h1>
-<p class="lead">MeaningSpace is a semantic memory OS for an AI — and at the same time a <b>commander architecture</b> that turns web Claude itself (the chat page in a browser) into a group of sub-agents running in parallel at ¥0 extra API cost. This page lays out the whole structure, illustrated: DP multi-agent, self-learning, self-repair, and the execution layer (checks).</p>
+<p class="lead">MeaningSpace is a semantic memory OS for an AI — and at the same time a <b>commander architecture</b> that turns web Claude itself (the chat page in a browser) into a group of sub-agents running in parallel at ¥0 extra API cost. This page lays out the whole structure, illustrated: DP multi-agent, self-learning, self-repair, and active coding.</p>
 <div class="anchorbox"><b>Digital anchor</b> — first published <b>2026-07-16 (JST)</b>. The date each mechanism went live is given in the text and in the <a href="/history.html">prior-art timeline</a>. The git commit history of this repository serves as a tamper-evident timestamp.</div>
 
 <h2 id="overview">Overview — three layers and a commander</h2>
 <p>There are only four parts. <b>(1) A human</b> talks; <b>(2) the commander AI</b> (Eliza = Claude Desktop) decides; <b>(3) the semantic memory</b> (MeaningSpace / DuckDB) supplies the past; <b>(4) the DP lanes</b> (stand-ins of web Claude) do the work in parallel.</p>
-<div class="plain"><b>In plain words:</b> the owner (human) only talks to a capable secretary (the commander AI). The secretary pulls the company records (semantic memory), hands work to five part-timers (DP lanes), checks what comes back, and reports — all inside one PC.</div>
+<div class="plain"><b>In plain words:</b> the owner (human) only talks to a capable secretary (the commander AI). The secretary pulls the company records (semantic memory), hands work to five part-timers (DP lanes), checks what comes back, and reports — all inside one environment.</div>
 <figure>
 <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg">
 <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1a1a1a"/></marker></defs>
@@ -42,9 +42,9 @@ figure svg{width:100%;height:auto}figcaption{font-size:13px;color:var(--mouse);m
 <text class="txts" x="85" y="225" text-anchor="middle">only talks</text>
 <rect class="boxc" x="230" y="150" width="200" height="120" rx="8"/>
 <text class="txtb" x="330" y="185" text-anchor="middle">Commander AI (Eliza)</text>
-<text class="txts" x="330" y="207" text-anchor="middle">Claude Desktop + MCP</text>
+<text class="txts" x="330" y="207" text-anchor="middle">Claude Desktop</text>
 <text class="txts" x="330" y="225" text-anchor="middle">decide, design, inspect</text>
-<text class="txts" x="330" y="243" text-anchor="middle">checks</text>
+<text class="txts" x="330" y="243" text-anchor="middle">verify every result</text>
 <rect class="boxg" x="510" y="30" width="320" height="100" rx="8"/>
 <text class="txtb" x="670" y="62" text-anchor="middle">MeaningSpace (semantic memory)</text>
 <text class="txts" x="670" y="84" text-anchor="middle">DuckDB / 1,983 crystals (as of 2026-07-16)</text>
@@ -52,8 +52,8 @@ figure svg{width:100%;height:auto}figcaption{font-size:13px;color:var(--mouse);m
 <rect class="boxo" x="510" y="250" width="320" height="140" rx="8"/>
 <text class="txtb" x="670" y="280" text-anchor="middle">DP lanes ×5 (web Claude stand-ins)</text>
 <text class="txts" x="670" y="302" text-anchor="middle">5 Chromes driven over CDP</text>
-<text class="txts" x="670" y="320" text-anchor="middle">DP1 / DP2 / DP3</text>
-<text class="txts" x="670" y="338" text-anchor="middle">DP4 / DP5</text>
+<text class="txts" x="670" y="320" text-anchor="middle">DP1 / DP2 / DP3 / DP4 / DP5</text>
+<text class="txts" x="670" y="338" text-anchor="middle">one lane = one isolated browser</text>
 <text class="txts" x="670" y="362" text-anchor="middle">¥0 extra API cost (web plan only)</text>
 <path class="arrow" d="M150,210 L230,210"/><text class="txts" x="190" y="200" text-anchor="middle">talk</text>
 <path class="arrowc" d="M430,180 L510,95"/><text class="txts" x="470" y="120" text-anchor="middle">warp / SQL</text>
@@ -77,11 +77,11 @@ figure svg{width:100%;height:auto}figcaption{font-size:13px;color:var(--mouse);m
 <text class="txts" x="430" y="192" text-anchor="middle">ticket lock · stale recovery 15 min · 2.5 s stagger</text>
 <path class="arrowc" d="M430,90 L430,130"/>
 <rect class="boxo" x="30" y="270" width="140" height="90" rx="8"/><rect class="boxo" x="195" y="270" width="140" height="90" rx="8"/><rect class="boxo" x="360" y="270" width="140" height="90" rx="8"/><rect class="boxo" x="525" y="270" width="140" height="90" rx="8"/><rect class="boxo" x="690" y="270" width="140" height="90" rx="8"/>
-<text class="txtb" x="100" y="300" text-anchor="middle">DP1</text><text class="txts" x="100" y="320" text-anchor="middle"></text><text class="txts" x="100" y="338" text-anchor="middle">Sonnet/Haiku</text>
-<text class="txtb" x="265" y="300" text-anchor="middle">DP2</text><text class="txts" x="265" y="320" text-anchor="middle"></text><text class="txts" x="265" y="338" text-anchor="middle">Sonnet/Haiku</text>
-<text class="txtb" x="430" y="300" text-anchor="middle">DP3</text><text class="txts" x="430" y="320" text-anchor="middle"></text><text class="txts" x="430" y="338" text-anchor="middle">Sonnet/Haiku</text>
-<text class="txtb" x="595" y="300" text-anchor="middle">DP4</text><text class="txts" x="595" y="320" text-anchor="middle"></text><text class="txts" x="595" y="338" text-anchor="middle">Sonnet/Haiku</text>
-<text class="txtb" x="760" y="300" text-anchor="middle">DP5</text><text class="txts" x="760" y="320" text-anchor="middle"></text><text class="txts" x="760" y="338" text-anchor="middle">Sonnet/Haiku</text>
+<text class="txtb" x="100" y="300" text-anchor="middle">DP1</text><text class="txts" x="100" y="320" text-anchor="middle">lane 1</text><text class="txts" x="100" y="338" text-anchor="middle">Sonnet/Haiku</text>
+<text class="txtb" x="265" y="300" text-anchor="middle">DP2</text><text class="txts" x="265" y="320" text-anchor="middle">lane 2</text><text class="txts" x="265" y="338" text-anchor="middle">Sonnet/Haiku</text>
+<text class="txtb" x="430" y="300" text-anchor="middle">DP3</text><text class="txts" x="430" y="320" text-anchor="middle">lane 3</text><text class="txts" x="430" y="338" text-anchor="middle">Sonnet/Haiku</text>
+<text class="txtb" x="595" y="300" text-anchor="middle">DP4</text><text class="txts" x="595" y="320" text-anchor="middle">lane 4</text><text class="txts" x="595" y="338" text-anchor="middle">Sonnet/Haiku</text>
+<text class="txtb" x="760" y="300" text-anchor="middle">DP5</text><text class="txts" x="760" y="320" text-anchor="middle">lane 5</text><text class="txts" x="760" y="338" text-anchor="middle">Sonnet/Haiku</text>
 <path class="arrow" d="M370,202 L110,270"/><path class="arrow" d="M400,202 L272,270"/><path class="arrow" d="M430,202 L430,270"/><path class="arrow" d="M460,202 L588,270"/><path class="arrow" d="M490,202 L750,270"/>
 <rect class="box" x="230" y="400" width="400" height="46" rx="8"/>
 <text class="txt" x="430" y="422" text-anchor="middle">Emergency stop dp_abort.py — (1) abort flag (2) stop response (3) kill</text>
@@ -101,12 +101,12 @@ figure svg{width:100%;height:auto}figcaption{font-size:13px;color:var(--mouse);m
 </table>
 
 <h2 id="coding">Active coding — the one who touches and the one who decides</h2>
-<p>Claude in a browser has no file system, so the roles are split. <b>Python (the commander's execution layer) touches; the DP agent decides.</b> (1) Python reads files and injects them into the prompt (hydration) → (2) DP returns only a diff or a new body → (3) Python applies, runs and verifies it. Because the commander itself has <code>checks</code>  and <code>checks</code> , a loop forms <b>in the middle of a conversation: write code, run it, look at the result, and send a fix back to DP</b>.</p>
-<div class="plain"><b>In plain words:</b> the architect (DP agent) only draws plans; the carpenter on site (the Python execution layer) builds and load-tests. If the test fails, the plan goes back. The architect never gets a hammer (delete permission) — that is the core of the safety.</div>
+<p>Claude in a browser has no file system, so the roles are split. <b>The commander touches; the DP agent decides.</b> (1) The commander hands DP the relevant source (hydration) → (2) DP returns only a diff or a new body → (3) the commander applies and verifies it. Because the commander checks results itself, a loop forms <b>in the middle of a conversation: write code, run it, look at the result, and send a fix back to DP</b>.</p>
+<div class="plain"><b>In plain words:</b> the architect (DP agent) only draws plans; the carpenter on site (the commander) builds and load-tests. If the test fails, the plan goes back. The architect never gets a hammer (delete permission) — that is the core of the safety.</div>
 <figure>
 <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
 <rect class="boxc" x="30" y="110" width="180" height="90" rx="8"/>
-<text class="txtb" x="120" y="140" text-anchor="middle">Commander</text><text class="txts" x="120" y="160" text-anchor="middle">checks</text><text class="txts" x="120" y="178" text-anchor="middle">hydrate · apply · verify</text>
+<text class="txtb" x="120" y="140" text-anchor="middle">Commander</text><text class="txts" x="120" y="160" text-anchor="middle">inside MeaningSpace</text><text class="txts" x="120" y="178" text-anchor="middle">hydrate · apply · verify</text>
 <rect class="boxo" x="340" y="30" width="200" height="80" rx="8"/>
 <text class="txtb" x="440" y="60" text-anchor="middle">dp_chat (dialogue lane)</text><text class="txts" x="440" y="82" text-anchor="middle">diff anchor-replace / NEWFILE</text>
 <rect class="boxg" x="340" y="190" width="200" height="80" rx="8"/>
@@ -176,13 +176,13 @@ figure svg{width:100%;height:auto}figcaption{font-size:13px;color:var(--mouse);m
 <table>
 <tr><th>Layer</th><th>Main components</th></tr>
 <tr><td>Memory</td><td>DuckDB / 1,983 crystals (2026-07-16) / warp search (ruri-v3-310m embeddings, 768 dimensions + BM25 + reranker) / QIS (quantum-inspired interference scoring, Model 2 fixed 2026-06-11)</td></tr>
-<tr><td>Commander</td><td>Claude Desktop + MCP (SSE) / checks / a DB write queue (resolves single-writer conflicts)</td></tr>
+<tr><td>Commander</td><td>Claude Desktop inside MeaningSpace's own environment / a DB write queue (resolves single-writer conflicts)</td></tr>
 <tr><td>Stand-ins</td><td>Chrome ×5 + CDP / dp_lease (slot lock across processes) / dp_journal (structured run records) / dp_abort (coordinated emergency stop) / dp_swarm (bulk fan-out) / COMMANDER_PLAYBOOK (decision table)</td></tr>
 <tr><td>Self-improvement</td><td>SelfEval → EWMA → self_preferences → worn at boot / SelfRepair auto-filing / F6 flow hook (mechanical detection of answers that skip memory, v2 2026-07-15)</td></tr>
 </table>
 
 <h2 id="position">Relation to similar systems</h2>
-<p>Agentic coding tools (for example, Claude Code) are designed around a single agent working from a terminal. What is specific here is threefold: <b>(1) a ¥0 route that turns the chat UI itself into parallel sub-agents</b>; <b>(2) a persistent semantic memory and a self-improvement loop permanently wired to the commander</b>; and <b>(3) active coding, in which the commander fires checks mid-conversation and sends work back to DP on the strength of the results</b>. For the first date of each mechanism, including the dialogue-bridge design (Clara bridge, from 2026-07-05), see the <a href="/history.html">timeline</a>.</p>
+<p>Agentic coding tools (for example, Claude Code) are designed around a single agent working from a terminal. What is specific here is threefold: <b>(1) a ¥0 route that turns the chat UI itself into parallel sub-agents</b>; <b>(2) a persistent semantic memory and a self-improvement loop permanently wired to the commander</b>; and <b>(3) active coding, in which the commander checks results mid-conversation and sends work back to DP on the strength of the results</b>. For the first date of each mechanism, including the dialogue-bridge design (Clara bridge, from 2026-07-05), see the <a href="/history.html">timeline</a>.</p>
 </div></main><footer class="sl-foot"><div class="wrap"><div class="row"><a href="/meaningspace.html">MeaningSpace</a><a href="/3gravity.html">3Gravity</a><a href="/qis.html">QIS</a><a href="/ARCHITECTURE.html">Architecture</a><a href="/products.html">Products</a><a href="/faq.html">FAQ</a><a href="/history.html">Timeline</a><a href="/about.html">About</a></div><div class="row"><a href="https://note.com/subtractlab">note</a><a href="https://x.com/subtractlabo">X</a><a href="https://www.youtube.com/@SUBTRACTLAB">YouTube</a><a href="https://github.com/subtractlab">GitHub</a></div><div>Developed by <a href="/about.html">Koji Okuda (奥田剛司)</a> · SubtractLab · © 2024–2026 Koji Okuda / SubtractLab.</div></div></footer><script src="/assets/js/sl-motion.js" defer></script>
 </body>
 </html>
