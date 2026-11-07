@@ -141,7 +141,7 @@ def build_index(hist):
              '<p><a href="/meaningspace.html">MeaningSpace in detail</a>　<a href="/3gravity.html">3Gravity</a>　<a href="/qis.html">QIS</a>　<a href="/architecture.html">Architecture</a></p></div>'
              f'<div class="cards">{cs}</div></div></section>')
     how_svg = ('<svg viewBox="0 0 1000 618" role="img" aria-labelledby="hw-t hw-d" data-motion>'
-               '<title id="hw-t">How the work is done without Claude Code</title>'
+               '<title id="hw-t">How the work is done without Claude Code or Codex</title>'
                '<desc id="hw-d">A person talks to Claude in the chat app from any device. The chat app connects over MCP with server-sent events to a proprietary environment, which gives the AI its tools: files, execution, meaning-space search and media.</desc>'
                '<path class="ln draw" d="M60 250 H220 V368 H60 Z"/>'
                '<text class="svgt pop" x="140" y="300" font-size="24" text-anchor="middle" style="--dl:.3s">You</text>'
@@ -161,10 +161,10 @@ def build_index(hist):
                '<text class="svgt pop" x="652" y="302" font-size="18" style="--dl:2.4s">Run</text><text class="svgs pop" x="652" y="328" font-size="14" style="--dl:2.45s">own environment</text>'
                '<text class="svgt pop" x="652" y="382" font-size="18" style="--dl:2.6s">Memory</text><text class="svgs pop" x="652" y="408" font-size="14" style="--dl:2.65s">warp · skills that light up · SQL</text>'
                '<text class="svgt pop" x="652" y="462" font-size="18" style="--dl:2.8s">On demand</text><text class="svgs pop" x="652" y="488" font-size="14" style="--dl:2.85s">images · web · video · whiteboard</text>'
-               '<text class="svgs pop" x="500" y="590" font-size="20" text-anchor="middle" style="--dl:3.1s">No terminal. No IDE. No Claude Code. Just conversation.</text>'
+               '<text class="svgs pop" x="500" y="590" font-size="20" text-anchor="middle" style="--dl:3.1s">No terminal. No IDE. No Claude Code. No Codex. Just conversation.</text>'
                '</svg>')
     p.append('<section class="wrap beat" id="how"><div class="mark"><i></i>How it is built</div><div class="golden"><div>'
-             '<h2 class="display">No terminal.<br>No IDE.<br>No Claude Code.</h2>'
+             '<h2 class="display">No terminal.<br>No IDE.<br>No Claude Code.<br>No Codex.</h2>'
              '<p class="lead">Everything here — this site included — is built by talking to Claude in the chat app.</p>'
              '<p>The chat app connects over MCP (server-sent events) to a proprietary environment. That server gives the AI its tools: read, write, search and replace files; do the work; search the meaning space; generate images, search the web, read videos.</p>'
              '<p class="en">On 2026-10-25 the same change was made both ways. Claude Code was faster at searching code and finding holes; MeaningSpace was better at context. So the server gained regex search and exact-match replace. What remains is the difference in context.</p>'
