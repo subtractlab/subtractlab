@@ -19,6 +19,30 @@
     "d": "2025-03",
     "t": "MeaningSpace concept — the direction flips",
     "b": "Stop fitting the AI into the human's file structure; let the human enter the AI's meaning space instead. Development of a personal AI memory OS begins, with subtractive design (remove the noise and meaning crystallizes) as its first principle."
+   },
+   {
+    "major": false,
+    "d": "2025-03-23",
+    "t": "A memory database the AI searches, instead of business software",
+    "b": "Asked whether one large, structured memory database searched by AI could replace business software altogether. The earliest recorded form of the idea that memory, not applications, should be the core."
+   },
+   {
+    "major": false,
+    "d": "2025-03-28",
+    "t": "Why publish: declare existence, prove priority",
+    "b": "\"The same idea will surface elsewhere sooner or later.\" Recorded as the reason to publish with dates rather than keep the work hidden."
+   },
+   {
+    "major": false,
+    "d": "2025-04-08",
+    "t": "Conversation as data — a two-layer model",
+    "b": "A conversation is distilled into a structural layer, and the full text is opened only when the structure is not enough. Conversation itself becomes the data, instead of being collected later for training."
+   },
+   {
+    "major": true,
+    "d": "2025-04-14",
+    "t": "Hybrid storage decided — keep the originals, add a structured layer",
+    "b": "Original material is kept as it is, and a structured extraction is stored alongside it. The originality lies in how the two are combined, not in any single technique. This is the shape MeaningSpace still has: raw logs as ground truth, meaning layered on top."
    }
   ]
  },

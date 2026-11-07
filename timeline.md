@@ -10,6 +10,10 @@ The confirmed date of each mechanism's design, implementation and proof. Source:
 | 2023-02 | First conversations with AI (ChatGPT) — The first conversation is dated 2023-02-07. The 1,567 ChatGPT conversations from this period were later imported into MeaningSpace and can still be retrieved. |
 | 2024-09 | Work automation with Claude begins — Practical automation — RPA, BI, report processing. The operating know-how of working with an AI, which everything later builds on, starts accumulating here. |
 | 2025-03 | **MeaningSpace concept — the direction flips** — Stop fitting the AI into the human's file structure; let the human enter the AI's meaning space instead. Development of a personal AI memory OS begins, with subtractive design (remove the noise and meaning crystallizes) as its first principle. |
+| 2025-03-23 | A memory database the AI searches, instead of business software — Asked whether one large, structured memory database searched by AI could replace business software altogether. The earliest recorded form of the idea that memory, not applications, should be the core. |
+| 2025-03-28 | Why publish: declare existence, prove priority — "The same idea will surface elsewhere sooner or later." Recorded as the reason to publish with dates rather than keep the work hidden. |
+| 2025-04-08 | Conversation as data — a two-layer model — A conversation is distilled into a structural layer, and the full text is opened only when the structure is not enough. Conversation itself becomes the data, instead of being collected later for training. |
+| 2025-04-14 | **Hybrid storage decided — keep the originals, add a structured layer** — Original material is kept as it is, and a structured extraction is stored alongside it. The originality lies in how the two are combined, not in any single technique. This is the shape MeaningSpace still has: raw logs as ground truth, meaning layered on top. |
 
 ## Era 2 — A semantic memory OS takes shape
 | Date | Event |
