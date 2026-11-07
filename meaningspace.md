@@ -38,7 +38,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
       "name": "What has been built on MeaningSpace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Twenty working systems emerged from conversations alone, among them φMovie Duet (a whole video channel from one sentence, with self-drawing motion-graphic explanations), φWriting, φPPT and φHTML decks, image generation, MeaningBoard, auto-filed tasks and projects, BI systems and RPA for SAP and other systems. None required opening a terminal."
+        "text": "Twenty-one working systems emerged from conversations alone, among them large-scale coding on par with Claude Code, φMovie Duet (a whole video channel from one sentence, with self-drawing motion-graphic explanations), φWriting, φPPT and φHTML decks, image generation, MeaningBoard, auto-filed tasks and projects, BI systems and RPA for SAP and other systems. None required opening a terminal."
       }
     }
   ]

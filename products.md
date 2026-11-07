@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Products — What emerges when you just talk to the AI"
-description: "Twenty systems built entirely through conversation with an AI partner on MeaningSpace — video, writing, presentations, images, thinking tools, memory automation and business systems. No terminal. No IDE. No Claude Code. No Codex."
+description: "Twenty-one systems built entirely through conversation with an AI partner on MeaningSpace — video, writing, presentations, images, thinking tools, memory automation, large-scale coding and business systems. No terminal. No IDE. No Claude Code. No Codex."
 ---
 
 # Products
@@ -130,6 +130,14 @@ When a conversation is crystallised, new tasks and projects are filed under the 
 
 The AI records what went wrong as it works, grades its own way of working, and turns the lessons into the procedures it wears next time.
 
+## Building software
+
+### Large-scale coding
+
+**A coding tool on par with Claude Code — inside the conversation.**
+
+Reading a large codebase, tracing where something is defined and used, planning a change, making it and verifying it: the same loop a dedicated coding agent runs, built into MeaningSpace. The difference is memory. A coding agent starts each session by reading files to find its bearings; MeaningSpace already knows why the code is the way it is — every past decision, failure and fix — so large changes start from context instead of from zero. Scouting is done with a low-token structural index rather than by opening file after file, and every change goes through scout → implement → verify. This site, the video pipeline and the memory system itself were built this way.
+
 ## Business systems
 
 ### BI systems
@@ -146,7 +154,7 @@ Login, navigation, download, filing and notification across business systems suc
 
 ---
 
-These twenty systems span video, voice, writing, presentations, images, thinking tools, self-maintaining memory and business systems. They were all built by one person talking to one AI, through one meaning space.
+These twenty-one systems span video, voice, writing, presentations, images, thinking tools, self-maintaining memory, large-scale coding and business systems. They were all built by one person talking to one AI, through one meaning space.
 
 The products are the iceberg's tip. [MeaningSpace](https://subtractlab.com/meaningspace) is everything underneath.
 
