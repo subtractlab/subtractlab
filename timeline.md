@@ -36,5 +36,16 @@
 | 2026-07-15 | **能動的コーディングループ実戦投入** — checks検証 × dp_chat再依頼のEvaluator-OptimizerでF6動線フックv2をDPが実装。dp_swarm完成・応答洗浄恒久化。取扱説明書自体もDPが生成 |
 | 2026-07-16 | **本タイムラインとアーキテクチャ全貌を公開**（[architecture.html](https://subtractlab.com/architecture.html) / [dp-multiagent.md](dp-multiagent.md)） |
 
+## Era 5 — 意味の住所と、公開記録
+| 日付 | 出来事 |
+|---|---|
+| 2026-09-01 | SweepSearch を退役 — 検索を一本化 — 言葉の検索（BM25）と意味の検索（ベクトル）を順位で合わせる検索に一本化。結果からは節へ降りて読む形にした。 |
+| 2026-09 | 結晶の節ごとに、元の行への住所 — 会話の結晶の各節に、元の会話ログの行への住所を付けた。住所はモデルに思い出させず、決まった候補の中から選ばせる。 |
+| 2026-09-21 | **作法を「灯らせて」引く道具** — 作法（手順）を、問いとの近さが閾値0.80を超えた時だけ、題名と読み方だけで返す道具を新設。検索結果への同梱はやめた。 |
+| 2026-10-04 | **プログレスマップ — ファイルの地図と、理由付きの変更台帳** — ファイルとコードの「今」を地図にし、変更ごとに札・理由・逆向きの差分を台帳に積む。札は会話の記録に残り、見る時に会話の節へ結ぶ。git は使わない。 |
+| 2026-10-07 | **設計をリポジトリとして公開（1〜2本目）** — [meaningspace](https://github.com/subtractlab/meaningspace) と [ai-native-groupware](https://github.com/subtractlab/ai-native-groupware) を、日付の入った設計の公開記録として公開。 |
+| 2026-10-24 | 作法の一覧をプロンプトから外す — いつも読み込むプロフィールにあった25行の作法の一覧を外した。外す前に、25枚すべてが自分の仕事の問いで3位以内に灯ることを確かめた。 |
+| 2026-11-07 | **設計の公開（3〜4本目）とトップページの作り直し** — [progress-map](https://github.com/subtractlab/progress-map) と [threshold-skills](https://github.com/subtractlab/threshold-skills) を公開。subtractlab.com のトップを、文字で読める HTML に作り直した。 |
+
 ---
 *追記はコミット単位で日付が刻まれる。改竄不能性の根拠: git履歴・GitHub Pages配信記録・検索エンジンのインデックス日時。*
