@@ -215,7 +215,7 @@ This is what "freed from the context window" looks like. The AI doesn't fit your
 
 ## What This Proves
 
-MeaningSpace is not a concept. It's running in production. Every day. The [products built on it](https://subtractlab.com/products) — video pipelines, BI systems, RPA automation, presentation engines — are the proof. But they're the tip of the iceberg. The real innovation is underneath: **an AI that remembers with judgment, searches with meaning, and acts with its own environment — all through conversation.**
+MeaningSpace is not a concept. It's running in production. Every day. The [products built on it](https://subtractlab.com/products) — video pipelines, BI systems, RPA automation, presentation engines — are the proof. But they're the tip of the iceberg. The real innovation is underneath: **an AI that remembers with judgment, searches with meaning, and does the work itself — all through conversation.**
 
 ## Explore SubtractLab
 
