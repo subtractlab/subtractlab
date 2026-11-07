@@ -11,3 +11,7 @@ header_pages:
   - sweepsearch.md
   - faq.md
   - about.md
+plugins:
+  - jekyll-seo-tag
+exclude:
+  - _build
