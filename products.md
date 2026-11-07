@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Products — What emerges when you just talk to the AI"
-description: "Seven production systems built entirely through conversation with an AI partner on MeaningSpace. No terminal. No IDE. Just conversation."
+description: "Five production systems built entirely through conversation with an AI partner on MeaningSpace. No terminal. No IDE. Just conversation."
 ---
 
 # Products
@@ -24,8 +24,7 @@ Raw camera footage goes in. Published video comes out. Four phases run in sequen
 
 **DuckDB-based business intelligence.**
 
-Financial data from multiple accounting systems consolidated into a single DuckDB instance. The data foundation, transformation logic, and validation queries were all built conversationally.
-
+Financial data from several sources consolidated into a single DuckDB instance and reconciled against the official reports. The data foundation, transformation logic and validation queries were all built conversationally.
 
 ## φPPT (IPPT)
 
@@ -45,15 +44,9 @@ Conversations are automatically extracted from the browser's LevelDB, chunked in
 
 VOICEVOX-powered voice synthesis integrated into the MeaningSpace workflow. The AI speaks its responses aloud while simultaneously displaying structured notes on screen. Toggle on/off from a unified monitor GUI. The voice isn't a gimmick — it changes the collaboration dynamic when you can hear your partner think.
 
-## Browser bridge
-
-
-
-
-
 ---
 
-These seven systems span video production, financial intelligence, presentation design, memory management, and voice interaction. They were all built by one person talking to one AI, on one machine, through one meaning space.
+These five systems span video production, business intelligence, presentation design, memory management and voice interaction. They were all built by one person talking to one AI, on one machine, through one meaning space.
 
 The products are the iceberg's tip. [MeaningSpace](https://subtractlab.com/meaningspace) is everything underneath.
 

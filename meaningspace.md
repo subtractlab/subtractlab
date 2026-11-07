@@ -38,7 +38,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
       "name": "What has been built on MeaningSpace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Seven production systems emerged from conversations alone: φMovie (automated video pipeline), BIApps (DuckDB-based BI), φPPT (golden-ratio presentation design), AutoCrystallize (self-maintaining memory pipeline), VoiceMode (spoken conversation interface). None required opening a terminal."
+        "text": "Five production systems emerged from conversations alone: φMovie (automated video pipeline), BIApps (DuckDB-based BI), φPPT (golden-ratio presentation design), AutoCrystallize (self-maintaining memory pipeline) and VoiceMode (spoken conversation interface). None required opening a terminal."
       }
     }
   ]
