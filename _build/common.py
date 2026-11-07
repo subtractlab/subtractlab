@@ -23,7 +23,7 @@ def ld(*objs):
     return "\n".join('<script type="application/ld+json">%s</script>' % json.dumps(o, ensure_ascii=False) for o in objs)
 
 
-NAV = [("/#architectures", "Architectures"), ("/history.html", "Timeline"),
+NAV = [("/#how", "How it is built"), ("/#architectures", "Architectures"), ("/history.html", "Timeline"),
        ("/#writing", "Writing"), ("/about.html", "About")]
 
 
