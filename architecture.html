@@ -5,60 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MeaningSpace Architecture — DPマルチエージェント・自己学習・自己修復の全貌 | SubtractLab</title>
 <meta name="description" content="Web Claudeを束ねる¥0マルチエージェント基盤（DP: Debug Port lanes）、SelfEval自己学習ループ、SelfRepair自己修復、checks実行系を持つ司令塔アーキテクチャの技術全貌。図解つき。2026-07-16公開。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<meta name="author" content="奥田剛司 (Koji Okuda)">
+<link rel="canonical" href="https://subtractlab.com/architecture.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SubtractLab"><meta property="og:title" content="MeaningSpace Architecture — DPマルチエージェント・自己学習・自己修復の全貌 | SubtractLab"><meta property="og:description" content="Web Claudeを束ねる¥0マルチエージェント基盤（DP: Debug Port lanes）、SelfEval自己学習ループ、SelfRepair自己修復、checks実行系を持つ司令塔アーキテクチャの技術全貌。図解つき。2026-07-16公開。"><meta property="og:url" content="https://subtractlab.com/architecture.html"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@subtractlabo">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/sl.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://subtractlab.com/#koji-okuda", "name": "奥田剛司", "alternateName": ["Koji Okuda", "おくだ こうじ"], "url": "https://subtractlab.com/about.html", "jobTitle": "Independent builder / SubtractLab", "knowsAbout": ["AI-native systems", "semantic memory", "MeaningSpace", "3Gravity Architecture"], "sameAs": ["https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB", "https://github.com/subtractlab"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://subtractlab.com/#subtractlab", "name": "SubtractLab", "url": "https://subtractlab.com/", "founder": {"@id": "https://subtractlab.com/#koji-okuda"}, "sameAs": ["https://github.com/subtractlab", "https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB"]}</script>
 <style>
-  html{scroll-behavior:smooth}
-  body{margin:0;background:#0a0a0a;color:#e0e0e0;font-family:'Inter','Noto Sans JP',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
-  ::selection{background:#00d4ff;color:#0a0a0a}
-  a{color:#00d4ff;text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
-  header.fixed{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 34px;backdrop-filter:blur(12px);background:rgba(10,10,10,.6);border-bottom:1px solid rgba(255,255,255,.05)}
-  .brand{font-size:15px;font-weight:600;letter-spacing:.04em;color:#fff}
-  .navlinks a{font-size:13px;margin-left:18px;color:#9ca3af}
-  .navlinks a:hover{color:#00d4ff}
-  section{padding:96px 0 24px}
-  h1{font-size:44px;line-height:1.15;font-weight:700;color:#fff;letter-spacing:-.02em;margin:0}
-  h2{font-size:28px;font-weight:600;color:#fff;margin:72px 0 8px;border-left:4px solid #00d4ff;padding-left:14px}
-  h3{font-size:19px;font-weight:600;color:#fff;margin:40px 0 6px}
-  .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#00d4ff;margin:0 0 10px}
-  .lead{font-size:19px;font-weight:300;color:#cfd4da}
-  .anchorbox{margin:28px 0;padding:16px 20px;border:1px solid rgba(255,107,53,.45);border-radius:6px;background:rgba(255,107,53,.06);font-size:14px;color:#ffb08a}
-  .plain{margin:14px 0;padding:16px 20px;border-left:3px solid #3b4653;background:rgba(255,255,255,.03);border-radius:0 6px 6px 0;font-size:15px;color:#c7ccd2}
-  .plain b{color:#fff}
-  figure{margin:28px 0;padding:22px;background:#0e1116;border:1px solid rgba(255,255,255,.07);border-radius:8px}
-  figcaption{margin-top:12px;font-size:13px;color:#8b929b;text-align:center}
-  svg{width:100%;height:auto;display:block}
-  table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0}
-  th,td{padding:9px 12px;border:1px solid rgba(255,255,255,.09);text-align:left;vertical-align:top}
-  th{background:rgba(0,212,255,.07);color:#fff;font-weight:600}
-  code{font-family:ui-monospace,Consolas,monospace;font-size:.92em;color:#7ee7ff;background:rgba(0,212,255,.07);padding:1px 6px;border-radius:4px}
-  footer{margin-top:110px;padding:34px 24px;border-top:1px solid rgba(255,255,255,.06);font-size:13px;color:#7a828c;text-align:center}
-  .txt{font:12px 'Noto Sans JP',sans-serif;fill:#dfe4ea}
-  .txts{font:10.5px 'Noto Sans JP',sans-serif;fill:#9aa3ad}
-  .txtb{font:600 13px 'Noto Sans JP',sans-serif;fill:#fff}
-  .box{fill:#141a22;stroke:#2c3949;stroke-width:1.2;rx:8}
-  .boxc{fill:rgba(0,212,255,.10);stroke:#00d4ff;stroke-width:1.4;rx:8}
-  .boxo{fill:rgba(255,107,53,.10);stroke:#ff6b35;stroke-width:1.4;rx:8}
-  .boxg{fill:rgba(94,222,146,.08);stroke:#5ede92;stroke-width:1.3;rx:8}
-  .arrow{stroke:#5b6b7d;stroke-width:1.6;fill:none;marker-end:url(#ah)}
-  .arrowc{stroke:#00d4ff;stroke-width:1.8;fill:none;marker-end:url(#ahc)}
+.kicker{font-size:13px;color:var(--mouse);letter-spacing:.06em;margin:34px 0 13px}
+.anchorbox,.plain{border:1px solid var(--hair);border-radius:8px;padding:13px 21px;margin:0 0 21px;font-size:13px;line-height:1.8;color:var(--ink2);background:#fff8}
+figure{margin:0 0 34px;border:1px solid var(--rule);border-radius:8px;padding:21px;background:var(--paper)}
+figure svg{width:100%;height:auto}figcaption{font-size:13px;color:var(--mouse);margin-top:8px}
+.box,.boxc,.boxg,.boxo,.boxp,.boxr{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+.boxc{stroke-width:2}.txtb{fill:var(--ink);font-weight:500;font-size:14px}.txts{fill:var(--mouse);font-size:12px}
+.arr,.arrc,line,polyline{stroke:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:0 0 34px}th,td{border-bottom:1px solid var(--hair);padding:8px 13px 8px 0;text-align:left;vertical-align:top}th{font-weight:500;border-bottom:1px solid var(--ink)}
 </style>
 </head>
 <body>
-<header class="fixed">
-  <span class="brand">SubtractLab</span>
-  <nav class="navlinks">
-    <a href="index.html">Home</a>
-    <a href="MeaningSpace.html">MeaningSpace</a>
-    <a href="history.html">History</a>
-    <a href="https://github.com/subtractlab/subtractlab">GitHub</a>
-  </nav>
-</header>
+<header class="sl-head"><div class="wrap"><a class="sl-brand" href="/">SubtractLab</a><nav class="sl-nav" aria-label="サイト内"><a href="/#architectures">設計</a><a href="/history.html">年表</a><a href="/#writing">書いたもの</a><a href="/about.html">About</a></nav></div></header>
+<main>
 
-<section class="wrap">
+
+<section class="wrap"><div class="crumb"><a href="/">SubtractLab</a> ／ Architecture</div><div class="article">
   <p class="kicker">MeaningSpace Architecture / Technical Disclosure</p>
   <h1>ひとりの人間と、一体のAIと、<br>五体の分身。</h1>
   <p class="lead">MeaningSpace は「AIの意味記憶OS」であると同時に、Web版Claude（ブラウザのチャット画面）そのものをサブエージェント群として束ね、追加API費用¥0で並列稼働させる<b>司令塔アーキテクチャ</b>です。このページでは、その全構造 — DPマルチエージェント、自己学習、自己修復、実行系（checks）— を図解で公開します。</p>
@@ -70,8 +40,8 @@
   <figure>
     <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5b6b7d"/></marker>
-        <marker id="ahc" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#00d4ff"/></marker>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1a1a1a"/></marker>
+        <marker id="ahc" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1a1a1a"/></marker>
       </defs>
       <rect class="box" x="20" y="170" width="130" height="80" rx="8"/>
       <text class="txtb" x="85" y="205" text-anchor="middle">人間</text>
@@ -255,7 +225,7 @@
     <tr><td>API従量課金（Batch API等）</td><td>従量（本システムの旧経路で約¥18/run）</td><td>封印。起動は人間決裁のみ</td></tr>
     <tr><td><b>DPルート（本方式)</b></td><td><b>追加費用¥0</b>（定額サブスクリプションのWeb利用枠のみ消費）</td><td>正規ルート。並列数は枠の消費速度に影響</td></tr>
   </table>
-  <p style="font-size:14px;color:#9aa3ad">※利用枠はアカウント全体（5時間ローリング＋週次）で共有。DP方式は課金体系の抜け道ではなく、定額枠の範囲内で並列度を設計する運用手法です。</p>
+  <p style="font-size:14px;color:var(--mouse)">※利用枠はアカウント全体（5時間ローリング＋週次）で共有。DP方式は課金体系の抜け道ではなく、定額枠の範囲内で並列度を設計する運用手法です。</p>
 
   <h2 id="stack">技術スタック要約</h2>
   <table>
@@ -270,8 +240,9 @@
   <p>エージェント型コーディングツール（例: Claude Code）はターミナルを起点に単一エージェントが作業する設計です。本システムの固有性は次の3点にあります: <b>①チャットUIそのものを並列サブエージェント化</b>する¥0経路、<b>②永続する意味記憶と自己進化ループが司令塔に常時接続</b>されていること、<b>③会話の途中で司令塔がchecksを撃ち、検証結果を根拠にDPへ再依頼する能動的コーディング</b>。同型の対話ブリッジ設計（Clara bridge, 2026-07-05〜）を含め、各機構の初出日は <a href="history.html">History</a> を参照してください。</p>
 </section>
 
-<footer>
-  © 2026 SubtractLab — Built by one person talking to one AI. / First published 2026-07-16. <a href="history.html">Prior-art timeline</a> · <a href="https://github.com/subtractlab/subtractlab">Source &amp; commit history</a>
-</footer>
+
+
+
+</div></main><footer class="sl-foot"><div class="wrap"><div class="row"><a href="/meaningspace.html">MeaningSpace</a><a href="/3gravity.html">3Gravity</a><a href="/qis.html">QIS</a><a href="/ARCHITECTURE.html">Architecture</a><a href="/products.html">Products</a><a href="/faq.html">FAQ</a><a href="/history.html">年表</a><a href="/about.html">About</a></div><div class="row"><a href="https://note.com/subtractlab">note</a><a href="https://x.com/subtractlabo">X</a><a href="https://www.youtube.com/@SUBTRACTLAB">YouTube</a><a href="https://github.com/subtractlab">GitHub</a></div><div>Developed by <a href="/about.html">奥田剛司 / Koji Okuda</a> · SubtractLab · © 2024–2026 Koji Okuda / SubtractLab.</div></div></footer><script src="/assets/js/sl-motion.js" defer></script>
 </body>
 </html>

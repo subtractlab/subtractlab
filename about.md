@@ -17,7 +17,7 @@ Working independently since 2024. Building tools that subtract complexity from A
 
 ## What
 
-**[MeaningSpace](https://subtractlab.com/ARCHITECTURE)** — An AI-native semantic memory system in production for 2+ years with 1,400+ crystals.
+**[MeaningSpace](https://subtractlab.com/ARCHITECTURE)** — An AI-native semantic memory system in production for 2+ years with 4,600+ crystals.
 
 Instead of scaling memory by adding more storage, MeaningSpace compresses conversations into *crystals* that carry their own evaluation — what worked, what failed, how understanding changed. Retrieval becomes reasoning: the act of remembering is itself an act of inference.
 

@@ -14,7 +14,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
       "name": "What is MeaningSpace?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MeaningSpace is an AI-native semantic operating system developed by Koji Okuda at SubtractLab. It inverts the conventional human-AI relationship: instead of AI assisting in a human workspace, the human enters the AI's meaning space through conversation. The AI accumulates 1,400+ crystals of compressed judgment, searches them in milliseconds via SweepSearch, and executes code directly on the OS — all without a terminal or IDE. Running in production for 2+ years on a single Windows machine."
+        "text": "MeaningSpace is an AI-native semantic operating system developed by Koji Okuda at SubtractLab. It inverts the conventional human-AI relationship: instead of AI assisting in a human workspace, the human enters the AI's meaning space through conversation. The AI accumulates 4,600+ crystals of compressed judgment, searches them in milliseconds via SweepSearch, and executes code directly on the OS — all without a terminal or IDE. Running in production for 2+ years on a single Windows machine."
       }
     },
     {
@@ -22,7 +22,7 @@ description: "MeaningSpace is an AI-native semantic operating system. The AI acc
       "name": "How is MeaningSpace different from Claude Code or Cursor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Claude Code and Cursor read files from disk, summarize them into context, and write code in a terminal. MeaningSpace doesn't read files — it already knows. 1,400+ crystals of compressed meaning are searchable in one vector operation via SweepSearch (no reranker, no orchestration). The AI partner works directly from the chat window. No terminal occupation. No file tree traversal. Meaning-first, not file-first."
+        "text": "Claude Code and Cursor read files from disk, summarize them into context, and write code in a terminal. MeaningSpace doesn't read files — it already knows. 4,600+ crystals of compressed meaning are searchable in one vector operation via SweepSearch (no reranker, no orchestration). The AI partner works directly from the chat window. No terminal occupation. No file tree traversal. Meaning-first, not file-first."
       }
     },
     {
@@ -66,7 +66,7 @@ In conventional AI-assisted development:
 In MeaningSpace:
 
 1. The human says what they want
-2. The AI searches 1,400+ crystals of compressed meaning — in milliseconds
+2. The AI searches 4,600+ crystals of compressed meaning — in milliseconds
 3. The AI already knows the context, the history, the failures, the victories
 4. The AI writes and executes code directly
 5. The result appears
@@ -116,7 +116,7 @@ Each crystal isn't a raw document. It's **compressed judgment**: what worked (po
 │                                                  │
 │  ┌──────────────────────────────────────────┐    │
 │  │         DuckDB + ruri-v3 (768d)          │    │
-│  │         1,400+ crystals                   │    │
+│  │         4,600+ crystals                   │    │
 │  │         Local. Single file. No GPU.       │    │
 │  └──────────────────────────────────────────┘    │
 └──────────────────────────────────────────────────┘
@@ -261,7 +261,7 @@ Most AI memory systems face a brutal tradeoff: **compress and lose the original,
 MeaningSpace keeps everything, in layers:
 
 ```
-Layer 4:  ultra_summary  — One line. Instant scan across 1,400+ crystals.
+Layer 4:  ultra_summary  — One line. Instant scan across 4,600+ crystals.
 Layer 3:  summary        — Key decisions, outcomes, judgment. Enough for context.
 Layer 2:  refined_raw    — Full conversation with noise removed, dead ends preserved.
                            Annotated with [PATH], [CODE], [URL] for instant file lookup.
@@ -270,7 +270,7 @@ Layer 1:  conv_jsonl     — Complete raw conversation. Every word. Untouched.
 
 The AI normally operates at Layers 3–4 for speed — scanning summaries is fast enough to survey the entire meaning space in one call. But when precision matters, it drops to Layer 2 and reads the actual conversation, with the same fidelity as Claude Code reading a source file.
 
-**This is what makes "Claude Code speed + Claude Code precision" possible simultaneously.** The hierarchical structure means the AI can panoramically survey 1,400+ crystals in milliseconds (something file-based tools can't do), then instantly drill into full-text detail on any one of them (something summary-only memory systems can't do).
+**This is what makes "Claude Code speed + Claude Code precision" possible simultaneously.** The hierarchical structure means the AI can panoramically survey 4,600+ crystals in milliseconds (something file-based tools can't do), then instantly drill into full-text detail on any one of them (something summary-only memory systems can't do).
 
 No other system has both. Mem0 has speed without precision. Claude Code has precision without speed. MeaningSpace has both, because the layers coexist.
 No other system has both. Mem0 has speed without precision. Claude Code has precision without speed. MeaningSpace has both, because the layers coexist.
@@ -285,11 +285,11 @@ The AI reads the annotations, opens the files via `tools`, and has the full sour
 
 Every AI system today hits a wall: the context window. 128K tokens. 200K tokens. Whatever the number, there's a ceiling. Past that ceiling, information is discarded, summarized away, or simply unavailable. The AI forgets.
 
-MeaningSpace has no ceiling. Crystals live in DuckDB — a local database file that scales with your disk. 1,400 crystals today. 10,000 tomorrow. 100,000 next year. The structure doesn't change. The speed barely changes. SweepSearch computes one inner product per crystal — linear, no index fragmentation, no reranker overhead.
+MeaningSpace has no ceiling. Crystals live in DuckDB — a local database file that scales with your disk. 4,600 crystals today. 10,000 tomorrow. 100,000 next year. The structure doesn't change. The speed barely changes. SweepSearch computes one inner product per crystal — linear, no index fragmentation, no reranker overhead.
 
 What makes this different from "just a bigger database" is the **multi-resolution panorama**:
 
-- **Ultra-summary** — Survey all 1,400+ crystals in a single tool call. See the shape of everything.
+- **Ultra-summary** — Survey all 4,600+ crystals in a single tool call. See the shape of everything.
 - **Summary** — Drop into any crystal's key decisions, outcomes, and judgment.
 - **Refined raw** — Read the full conversation with context-linked file annotations.
 - **Conv_jsonl** — Access the complete raw conversation, every word, untouched.
@@ -306,7 +306,7 @@ This is what "freed from the context window" looks like. The AI doesn't fit your
 
 ## The Numbers
 
-- **1,400+ crystals** accumulated over 2 years of daily production use
+- **4,600+ crystals** accumulated over 2 years of daily production use
 - **Single DuckDB file** — no external database, no cloud sync
 - **ruri-v3-310m** embeddings (768 dimensions, Japanese-optimized)
 - **CPU only** — runs on a desktop PC (no GPU needed for core operations)

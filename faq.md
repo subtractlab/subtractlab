@@ -12,7 +12,7 @@ description: "Frequently asked questions about SubtractLab and MeaningSpace — 
     {
       "@type": "Question",
       "name": "What is MeaningSpace?",
-      "acceptedAnswer": { "@type": "Answer", "text": "MeaningSpace is an AI-native semantic memory system developed by Koji Okuda at SubtractLab. Instead of storing raw facts from conversations, it compresses them into 'crystals' that carry built-in evaluation of what worked, what failed, and how understanding changed. It has been running in production for over 2 years with 1,400+ crystals." }
+      "acceptedAnswer": { "@type": "Answer", "text": "MeaningSpace is an AI-native semantic memory system developed by Koji Okuda at SubtractLab. Instead of storing raw facts from conversations, it compresses them into 'crystals' that carry built-in evaluation of what worked, what failed, and how understanding changed. It has been running in production for over 2 years with 4,600+ crystals." }
     },
     {
       "@type": "Question",
@@ -108,7 +108,7 @@ Common questions about **SubtractLab**, **MeaningSpace**, and the concepts behin
 
 ### What is MeaningSpace?
 
-MeaningSpace is an AI-native semantic memory system developed by Koji Okuda at SubtractLab. Instead of storing raw facts from conversations, it compresses them into 'crystals' that carry built-in evaluation of what worked, what failed, and how understanding changed. It has been running in production for over 2 years with 1,400+ crystals.
+MeaningSpace is an AI-native semantic memory system developed by Koji Okuda at SubtractLab. Instead of storing raw facts from conversations, it compresses them into 'crystals' that carry built-in evaluation of what worked, what failed, and how understanding changed. It has been running in production for over 2 years with 4,600+ crystals.
 
 ### How is MeaningSpace different from RAG?
 
