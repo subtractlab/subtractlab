@@ -1,52 +1,52 @@
-# MeaningSpace / DP Multi-Agent — Prior-Art Timeline（先行実装タイムライン）
+# MeaningSpace / DP Multi-Agent — Prior-Art Timeline
 
-**First published: 2026-07-16 (JST) / SubtractLab（開発者1名 + AI）**
+**First published: 2026-07-16 (JST) · Updated 2026-11-07 · SubtractLab (one builder + AI)**
 
-各機構の設計・実装・実証の確定日を記録する。出典はMeaningSpace内の結晶（作成日時つき構造化開発記録、2026-07-16時点で1,983個）。本リポジトリのgitコミット履歴が第三者検証可能なタイムスタンプとして機能する。HTML版: [history.html](https://subtractlab.com/history.html)
+The confirmed date of each mechanism's design, implementation and proof. Source: crystals inside MeaningSpace (timestamped, structured development records). The git history of this repository serves as a third-party-verifiable timestamp. Illustrated version: [history.html](https://subtractlab.com/history.html)
 
-## Era 1 — AIとの対話、業務自動化からの出発
-| 日付 | 出来事 |
+## Era 1 — Talking with AI, automating work
+| Date | Event |
 |---|---|
-| 2023-02 | AIとの対話を始める（ChatGPT）— 最初の会話は 2023-02-07。この時期の ChatGPT との会話 1,567 件も、のちに MeaningSpace に取り込んだ |
-| 2024-09 | Claudeによる業務自動化を開始（RPA・BI・帳票処理） |
-| 2025-03 | **MeaningSpace構想** — 「人間がAIの意味空間に入る」方向へ反転。減算設計を基本哲学に個人AI記憶OSの開発開始 |
+| 2023-02 | First conversations with AI (ChatGPT) — The first conversation is dated 2023-02-07. The 1,567 ChatGPT conversations from this period were later imported into MeaningSpace and can still be retrieved. |
+| 2024-09 | Work automation with Claude begins — Practical automation — RPA, BI, report processing. The operating know-how of working with an AI, which everything later builds on, starts accumulating here. |
+| 2025-03 | **MeaningSpace concept — the direction flips** — Stop fitting the AI into the human's file structure; let the human enter the AI's meaning space instead. Development of a personal AI memory OS begins, with subtractive design (remove the noise and meaning crystallizes) as its first principle. |
 
-## Era 2 — 意味記憶OSの確立
-| 日付 | 出来事 |
+## Era 2 — A semantic memory OS takes shape
+| Date | Event |
 |---|---|
-| 2026-01-02 | **現行DuckDB結晶データベース稼働**（第1結晶） |
-| 2026-05-16 | マルチエージェント企業OS構想を文書化 |
-| 2026-06-04〜07 | QIS（Quantum Inspired Semantic Space）設計〜Phase 0+1実装（posi_vec/nega_vec全結晶バックフィル） |
-| 2026-06-05〜07 | SubtractLabブランド確立・subtractlab.com公開（GitHub Pages） |
-| 2026-06-11 | QIS干渉式 Model 2 確定（proximity主軸＋成功超過ボーナス／失敗超過ペナルティ） |
-| 2026-06-13 | 結晶化の完全機械化 — 手動Raw方式撤去、会話ログ起点パイプラインへ一本化 |
+| 2026-01-02 | **The current DuckDB crystal database goes live (first crystal)** — Day one of the schema that stores conversations as crystals. It grew to 1,983 crystals by 2026-07-16. |
+| 2026-05-16 | Multi-agent organizational OS concept written down — The idea of running several AI agents as an organization on top of MeaningSpace is crystallized. |
+| 2026-06-04 – 06-07 | QIS (Quantum Inspired Semantic Space): design to Phase 0+1 — Success and failure vectors (posi_vec / nega_vec) back-filled for every crystal; the foundation of interference scoring implemented. |
+| 2026-06-05 – 06-07 | SubtractLab brand established, subtractlab.com launched — Published on GitHub Pages (deployed 06-07), registered in Search Console, sitemap submitted. |
+| 2026-06-11 | QIS interference formula, Model 2 — A combined formula — proximity as the main axis, plus a bonus for excess success and a penalty for excess failure — validated on real data. |
+| 2026-06-13 | Crystallization fully mechanized — manual raw input removed — The path for raw data copied from the screen was closed; everything now flows through a pipeline that starts from the conversation logs. |
 
-## Era 3 — 司令塔と自己進化
-| 日付 | 出来事 |
+## Era 3 — A commander, and self-improvement
+| Date | Event |
 |---|---|
-| 2026-07-04 | サブエージェント作法v2 — Chain / Swarm / Loop 3形態と昇格ラダーを体系化 |
-| 2026-07-05〜 | Clara bridge — AI同士のファイルキュー対話ブリッジ設計・部分実装 |
-| 2026-07-08 | **自己学習パイプライン実装**（SelfEval → EWMA → self_preferences → boot自動装着）。同日 **SelfRepair設計**（弱みスコア≤−3.0で改修Task自動起票）、司令塔構造欠陥4点修正、Loop体系化 |
-| 2026-07-11 | self_preferences v8 稼働。API課金経路とWeb枠経路の費用構造を実測解剖 |
+| 2026-07-04 | Sub-agent practice v2 — Chain, Swarm and Loop — When to run work in sequence, in parallel or in verification loops, and an escalation ladder from light to stronger models, written down as operating rules. |
+| 2026-07-05 – | Clara bridge — a file-queue bridge between two AIs — A two-way bridge with another AI (Clara), built on a file queue and CDP monitoring; designed and partly implemented. |
+| 2026-07-08 | **Self-learning pipeline (SelfEval → EWMA → self_preferences)** — The self-evaluation of every conversation is accumulated with decay and worn automatically as behavioral norms at the next boot. The same day, SelfRepair was designed (a repair task is filed automatically when a weakness score drops to −3.0 or below), four structural defects in the commander were fixed and Loop was formalized. |
+| 2026-07-11 | self_preferences v8; cost structure measured — The cost of the API-billed route and the web-subscription route were measured side by side, and the DP route was made the default. |
 
-## Era 4 — DPマルチエージェント（Web Claudeを束ねる）
-| 日付 | 出来事 |
+## Era 4 — DP multi-agent (orchestrating web Claude)
+| Date | Event |
 |---|---|
-| 2026-07-13 | **DPマルチエージェント基盤確定** — 5レーンCDP構成。同時実行上限・時差投入2.5s・ゾンビ応答と協調停止順序（3.6秒全停止実測）・人格汚染の中和ヘッダ・「触る係=Python/決める係=DP」分離・削除権限不付与。AutoCrystallize DPルート全8ステップ実証 |
-| 2026-07-14 | **恒久化** — dp_lease（プロセス跨ぎスロット排他）、dp_journal（構造化ラン記録）、UI文字列判定全廃、dp_swarm量産基盤（Haiku一次→決定的検証→昇格ラダー、ベンチ4/4 PASS・9〜15秒/件・¥0）、COMMANDER_PLAYBOOK |
-| 2026-07-15 | **能動的コーディングループ実戦投入** — checks検証 × dp_chat再依頼のEvaluator-OptimizerでF6動線フックv2をDPが実装。dp_swarm完成・応答洗浄恒久化。取扱説明書自体もDPが生成 |
-| 2026-07-16 | **本タイムラインとアーキテクチャ全貌を公開**（[architecture.html](https://subtractlab.com/architecture.html) / [dp-multiagent.md](dp-multiagent.md)） |
+| 2026-07-13 | **DP multi-agent foundation — five CDP lanes** — One lane = one Chrome = one profile = one CDP port. Findings fixed by measurement: an account-wide concurrency limit, 2.5-second staggered starts, the order for stopping zombie responses (three generations stopped in 3.6 s), persona contamination from user settings blocked by a neutralizing header, a split where Python touches files and DP decides, and no delete permission. The same day, all eight steps of the AutoCrystallize DP route were demonstrated. |
+| 2026-07-14 | **Made permanent — dp_lease, dp_journal, dp_swarm, COMMANDER_PLAYBOOK** — A global slot lock across processes (ticket files, stale recovery after 15 minutes), a structured run journal, no more decisions based on UI strings (moved to DOM attributes), a Haiku production preset (deterministic check → retry on the same model → escalate), and a decision table for the commander. dp_swarm.py benchmark 4/4 PASS, 9–15 s per item, ¥0 extra cost. |
+| 2026-07-15 | **Active coding loop in real use** — The commander runs checks with checks and sends fixes back to a DP chat lane in an evaluator-optimizer loop; DP implemented the F6 flow hook v2 (mechanical detection of answers that skip memory). dp_swarm completed, response cleaning made permanent. Even the system manual was written by DP. |
+| 2026-07-16 | **This timeline and the full architecture published** — The whole structure — DP multi-agent, self-learning, self-repair, active coding — illustrated on [Architecture](architecture.html). |
 
-## Era 5 — 意味の住所と、公開記録
-| 日付 | 出来事 |
+## Era 5 — Addresses for meaning, and public records
+| Date | Event |
 |---|---|
-| 2026-09-01 | SweepSearch を退役 — 検索を一本化 — 言葉の検索（BM25）と意味の検索（ベクトル）を順位で合わせる検索に一本化。結果からは節へ降りて読む形にした。 |
-| 2026-09 | 結晶の節ごとに、元の行への住所 — 会話の結晶の各節に、元の会話ログの行への住所を付けた。住所はモデルに思い出させず、決まった候補の中から選ばせる。 |
-| 2026-09-21 | **作法を「灯らせて」引く道具** — 作法（手順）を、問いとの近さが閾値0.80を超えた時だけ、題名と読み方だけで返す道具を新設。検索結果への同梱はやめた。 |
-| 2026-10-04 | **プログレスマップ — ファイルの地図と、理由付きの変更台帳** — ファイルとコードの「今」を地図にし、変更ごとに札・理由・逆向きの差分を台帳に積む。札は会話の記録に残り、見る時に会話の節へ結ぶ。git は使わない。 |
-| 2026-10-07 | **設計をリポジトリとして公開（1〜2本目）** — [meaningspace](https://github.com/subtractlab/meaningspace) と [ai-native-groupware](https://github.com/subtractlab/ai-native-groupware) を、日付の入った設計の公開記録として公開。 |
-| 2026-10-24 | 作法の一覧をプロンプトから外す — いつも読み込むプロフィールにあった25行の作法の一覧を外した。外す前に、25枚すべてが自分の仕事の問いで3位以内に灯ることを確かめた。 |
-| 2026-11-07 | **設計の公開（3〜4本目）とトップページの作り直し** — [progress-map](https://github.com/subtractlab/progress-map) と [threshold-skills](https://github.com/subtractlab/threshold-skills) を公開。subtractlab.com のトップを、文字で読める HTML に作り直した。 |
+| 2026-09-01 | SweepSearch retired — one search path — Lexical search (BM25) and vector search fused by rank into a single search; from a result you descend into the section and read it. |
+| 2026-09 | Line-level addresses for every crystal section — Every section of a conversation crystal carries the address of the log lines it came from. The model does not recall addresses; it selects them from a closed candidate set. |
+| 2026-09-21 | **A tool that lights up skills** — Skills (procedures) are returned — title and a query to read them, nothing more — only when their similarity to the task clears a 0.80 threshold. Bundling skills into search results stopped. |
+| 2026-10-04 | **Progress map — a map of files and a change ledger with reasons** — The present state of files and code is kept as a map; every change adds a tag, a reason and a reverse patch to a ledger. The tag stays in the conversation log and is linked to the conversation section when you look. No git. |
+| 2026-10-07 | **Designs published as repositories (1–2)** — [meaningspace](https://github.com/subtractlab/meaningspace) and [ai-native-groupware](https://github.com/subtractlab/ai-native-groupware) published as dated public records of the design. |
+| 2026-10-24 | The skill catalog leaves the prompt — The 25-line skill catalog in the always-loaded profile was removed — after checking that each of the 25 skills lights up within the top 3 for its own task. |
+| 2026-11-07 | **Designs published (3–4) and the site rebuilt** — [progress-map](https://github.com/subtractlab/progress-map) and [threshold-skills](https://github.com/subtractlab/threshold-skills) published. subtractlab.com rebuilt as readable HTML in a single washi-and-sumi design on a golden-ratio grid. |
 
 ---
-*追記はコミット単位で日付が刻まれる。改竄不能性の根拠: git履歴・GitHub Pages配信記録・検索エンジンのインデックス日時。*
+*Every addition is dated by its commit. Evidence that entries were not altered: git history, GitHub Pages deploy records and search-engine index dates.*

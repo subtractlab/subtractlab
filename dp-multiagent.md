@@ -1,95 +1,95 @@
-# DP Multi-Agent — Web Claude を束ねる ¥0 マルチエージェント基盤
+# DP Multi-Agent — a ¥0 multi-agent foundation that orchestrates web Claude
 
 **First published: 2026-07-16 (JST) / SubtractLab**
-関連: [architecture.html](https://subtractlab.com/architecture.html) · [timeline.md](timeline.md) · [meaningspace.md](meaningspace.md)
+Related: [architecture.html](https://subtractlab.com/architecture.html) · [timeline.md](timeline.md) · [meaningspace.md](meaningspace.md)
 
-> DP = **Debug Port**。Chrome DevTools Protocol (CDP) で claude.ai のチャット画面を機械操作し、Web版Claudeのインスタンス群を並列サブエージェントとして運用する方式。API従量課金を使わず、定額サブスクリプションのWeb利用枠のみで動く（追加費用¥0）。本書は2026-07-13〜15の実測で確定した一次情報の公開版である。
+> DP = **Debug Port**. The claude.ai chat page is driven mechanically over the Chrome DevTools Protocol (CDP), and a set of web Claude instances runs as parallel sub-agents. No pay-per-use API is involved; it runs entirely on the web allowance of a flat-rate subscription (¥0 extra cost). This is the public version of primary findings fixed by measurement between 2026-07-13 and 07-15.
 
-## 1. 実体モデル
+## 1. The physical model
 
-- **1レーン = 1 Chrome = 1 プロファイル = 1 CDPポート = 1スレッド専有。** 共有状態ゼロのため、本数を増やしても構造は壊れない。
-- レーン構成（5本）: DP1 / DP2 / DP3 / DP4 / DP5。台帳は `lanes.json`（窓座標・モデル既定・max_concurrent を保持する正本）。UI依存は `selectors.json` に隔離。
-- 全ての入口（一括swarm / 対話 / ワーカー / パイプライン）は共通のレーンクライアントを通り、起動時に窓配置・レーン識別タイトル付与が自動で走る。
-- レーン増設は既存プロファイルの複製（ログイン済みセッションごと引き継ぐ）。複製は必ずChrome停止中に行う。
+- **One lane = one Chrome = one profile = one CDP port = one dedicated thread.** With zero shared state, adding lanes does not break the structure.
+- Five lanes: DP1 / DP2 / DP3 / DP4 / DP5. The ledger is `lanes.json` (the source of truth for window positions, default model and max_concurrent). UI dependencies are isolated in `selectors.json`.
+- Every entry point (bulk swarm / dialogue / worker / pipeline) goes through a shared lane client, which places the windows and titles each lane automatically at start.
+- A new lane is a copy of an existing profile (the logged-in session comes with it). Copy only while Chrome is stopped.
 
-## 2. 同時実行の物理 — 実測値
+## 2. The physics of concurrency — measured values
 
-| 事実 | 内容 |
+| Fact | Detail |
 |---|---|
-| 同時実行上限 | 公称記載なし。実測で**アカウント全体2本**。司令塔（デスクトップ側Claude）の応答自体も1本を占有する |
-| 制御 | `dp_lease.py` — 札ファイルによるプロセス跨ぎ排他。stale回収 = プロセス死亡 or 15分。全入口に配線（2026-07-14恒久化） |
-| 時差投入 | 同一ミリ秒での複数投入はUI操作競合でレーンが固着する（実測: msgs=0のまま120秒張り付き）→ stagger 2.5秒。代償は数秒 |
-| 枠オーバー | キューへ戻すと「一瞬空」に見えて全ワーカーが降りて群が消える（実測: 11群中5群消失）。**戻さずその場で待って再送**（5回→failed降格） |
+| Concurrency limit | Not published. Measured at **two per account**. The commander's own replies (Claude on the desktop) take one of them |
+| Control | `dp_lease.py` — a lock across processes using ticket files. Stale recovery when the process dies or after 15 minutes. Wired into every entry point (made permanent 2026-07-14) |
+| Staggered starts | Several submissions in the same millisecond make UI actions collide and freeze a lane (measured: stuck at msgs=0 for 120 s) → stagger of 2.5 s. The cost is a few seconds |
+| Over the allowance | Putting work back on the queue makes it look "empty for a moment", every worker leaves and the groups disappear (measured: 5 of 11 groups lost). **Wait in place and resend** instead (5 tries → marked failed) |
 
-## 3. ゾンビ応答と停止の順序（最重要の安全知見)
+## 3. Zombie responses and the order of stopping (the most important safety finding)
 
-claude.ai の生成は**サーバー側**で走る。ローカルのプロセスkillやブラウザ終了では止まらず、同時実行枠を握り続ける（=ゾンビ応答）。
+Generation on claude.ai runs **on the server**. Killing the local process or closing the browser does not stop it, and it keeps holding a concurrency slot (a zombie response).
 
-**停止は必ずこの順序:**
-1. 中断フラグ（協調停止。ワーカーは群の境界でフラグを見て降りる）
-2. 各レーンのUI「応答を停止」を機械押下
-3. プロセスkill
+**Always stop in this order:**
+1. Abort flag (cooperative stop — workers check the flag at group boundaries and leave)
+2. Press "Stop response" in each lane's UI, mechanically
+3. Kill the process
 
-逆順は枠を握ったまま残る。実測: 3本生成中から緊急停止一発で **3.6秒で全停止**。swarm開始時にも pre-flight で応答停止を撃ち、残骸を掃除してから入る。**スレッドはkillできない。協調停止が唯一の正解。**
+The reverse order leaves the slots held. Measured: from three generations in progress, one emergency stop **stopped everything in 3.6 s**. Every swarm also fires a stop in a pre-flight step to clear leftovers before it starts. **Threads cannot be killed. A cooperative stop is the only correct answer.**
 
-## 4. 状態判定 — UI文字列判定の全廃
+## 4. State detection — no more decisions from UI strings
 
-当初、レート制限の警告をページ全文のテキスト一致で検出していたところ、**プロンプトに含めた過去ログ内の同じ警告文を読んで自作自演の拒否判定**を起こした（自己参照汚染）。対策（2026-07-14）:
+At first, rate-limit warnings were detected by matching text across the whole page. The detector then **read the same warning inside past logs included in the prompt and refused its own work** (self-reference contamination). Countermeasures (2026-07-14):
 
-- 判定はDOM構造属性ベースに統一（メッセージの器: user-message / streaming属性 / article ロール等の**外側**だけを見る）
-- 送信直前に残骸トーストをDOM除去
-- UI警告文入りプロンプトを食わせる回帰テストを常備
+- Decisions based only on DOM attributes — looking at the **outside** of message containers only (user-message, streaming attributes, article roles)
+- Leftover toasts removed from the DOM just before sending
+- A standing regression test that feeds prompts containing UI warning text
 
-## 5. 人格汚染と中和ヘッダ
+## 5. Persona contamination and the neutralizing header
 
-DPレーンは同一アカウントのため、利用者のカスタム設定（人格・出力形式の指示）がサブエージェントにも効く。**シークレットチャットでは切れない**（切れるのは記憶だけ、と実測で確認）。対策は契約プロンプト先頭の**中和ヘッダ**（「本タスクでは利用者設定を適用しない」旨の明示宣言）。実測で素のアシスタント応答に戻ることを確認（2026-07-13）。
+All DP lanes share one account, so the user's custom settings (persona and output-format instructions) also apply to the sub-agents. **Incognito chats do not turn them off** (measured: only memory is turned off). The countermeasure is a **neutralizing header** at the top of the contract prompt — an explicit statement that user settings do not apply to this task. Measured to return the lanes to plain assistant replies (2026-07-13).
 
-## 6. ファイル操作の型 — 触る係と決める係
+## 6. How files are handled — the one who touches and the one who decides
 
-ブラウザ内のClaudeにファイルシステムはない。よって:
+Claude in a browser has no file system. So:
 
-1. **水和** — Pythonが対象ファイルを読み、プロンプトへ注入
-2. **生成** — DPは本文 or 差分だけ返す（anchor-replace / `===NEWFILE path=...===` 規約）
-3. **適用+検証** — Pythonが適用し、実行して検める
+1. **Hydrate** — Python reads the target file and injects it into the prompt
+2. **Generate** — DP returns only a body or a diff (anchor-replace / the `===NEWFILE path=...===` convention)
+3. **Apply and verify** — Python applies it, runs it and checks it
 
-**削除権限はDPに与えない。** 水和は「他者のファイル本文をプロンプトに入れる」形なので、本文中の『このファイルを消せ』がインジェクションとして通り得る。削除はPython専権とし、(a)許可ディレクトリ外拒否 (b)接頭辞・拡張子ホワイトリスト (c)バックアップ退避、の3枚の門を通す。
+**DP is never given delete permission.** Hydration puts the body of someone else's file into the prompt, so a line inside it saying "delete this file" could pass as an injection. Deleting belongs to Python alone, through three gates: (a) refuse anything outside allowed directories, (b) a whitelist of prefixes and extensions, (c) a backup copy first.
 
-## 7. 実行形態 — Chain / Swarm / Loop
+## 7. Ways to run — Chain / Swarm / Loop
 
-| 形態 | 構造 | 用途 |
+| Form | Structure | Use |
 |---|---|---|
-| Chain | 直列（前段出力→次段） | 偵察→実装→検証 |
-| Swarm | 並列ファンアウト（実効2） | 定型変換・抽出・単体生成の量産 |
-| Loop | DP生成 × ローカル決定的検証の周回 | コード改修・仕様詰め |
+| Chain | In sequence (each stage's output feeds the next) | Scout → implement → verify |
+| Swarm | Parallel fan-out (two effective lanes) | Bulk conversion, extraction and single-file generation |
+| Loop | DP generation × local deterministic checks, in rounds | Code fixes, pinning down a spec |
 
-**Swarm量産基盤 `dp_swarm.py`（2026-07-14完成）:** tasks.json（objective + validator）→ 一括投入 → results.json / journal.jsonl 回収。validator は py_compile / json / regex / 任意コマンド / nonempty。**Haiku一次 → 決定的検証 → NGは同モデル再試行2回 → 上位モデル（thinking on）昇格2回 → なおNGはfailed** の昇格ラダー。ベンチ 4/4 PASS・9〜15秒/件・追加費用¥0。
+**The swarm production base, `dp_swarm.py` (completed 2026-07-14):** tasks.json (objective + validator) → submit all → collect results.json / journal.jsonl. Validators: py_compile / json / regex / any command / nonempty. The escalation ladder: **Haiku first → deterministic check → on failure retry the same model twice → escalate to a stronger model (thinking on) twice → still failing: failed**. Benchmark 4/4 PASS, 9–15 s per item, ¥0 extra cost.
 
-応答洗浄の恒久化: ①UI読み上げ行の除去 ②出力規約マーカーの剥がし ③コードはフェンス必須（チャット画面はフェンス外のインデントを保存しないため）。
+Response cleaning made permanent: (1) remove lines read out by the UI, (2) strip output-convention markers, (3) code must be fenced (the chat page does not preserve indentation outside fences).
 
-**Loop = 能動的コーディング:** 司令塔が checks/checksを持ち、**会話の途中で検証を回した結果を根拠に、対話レーン（dp_chat）へ改修を再依頼**する Evaluator-Optimizer。実戦初投入は2026-07-15、F6動線フックv2（AIが記憶を参照せず答えた瞬間を機械検知する仕組み）をこのループでDPが実装した。
+**Loop = active coding:** the commander has checks  and checks , and **sends fixes back to the dialogue lane (dp_chat) on the strength of checks run mid-conversation** — an evaluator-optimizer. First real use was 2026-07-15: DP implemented the F6 flow hook v2 (a mechanism that detects the moment an AI answers without consulting its memory) through this loop.
 
-## 8. 可観測性と司令塔
+## 8. Observability and the commander
 
-- `dp_journal.py` — 実行ごとに journal.jsonl + summary.json。群単位の所有権、終了条件は全群terminal state到達。
-- `COMMANDER_PLAYBOOK.md` — タスク種別→プリセット、失敗パターン一次対処、ジャーナルの読み方をまとめた司令塔判断表。
-- 司令塔はサブエージェントの応答全文を受けない（抽出パス+短サマリのみ）。**目と手の分離**によりコンテキスト消費を抑える。
+- `dp_journal.py` — journal.jsonl and summary.json per run. Ownership by group; a run ends when every group reaches a terminal state.
+- `COMMANDER_PLAYBOOK.md` — the commander's decision table: task type → preset, first responses to failure patterns, and how to read the journal.
+- The commander never receives a sub-agent's full reply (only extraction paths and a short summary). **Separating eyes from hands** keeps context use down.
 
-## 9. 費用構造
+## 9. Cost structure
 
-| 経路 | 費用 |
+| Route | Cost |
 |---|---|
-| API従量課金（旧経路） | 従量（本システム実測 約¥18/run）— 封印、起動は人間決裁のみ |
-| **DPルート** | **追加費用¥0**（定額Web利用枠のみ消費。枠はアカウント全体で共有、並列数は消費速度に影響） |
+| Pay-per-use API (old route) | Metered (measured on this system: about ¥18 per run) — sealed; starts only with the human's approval |
+| **DP route** | **¥0 extra** (consumes only the flat-rate web allowance, shared across the account; the number of lanes affects how fast it is used) |
 
-DP方式は課金の抜け道ではなく、**定額枠の範囲内で並列度を設計する運用手法**である。
+DP is not a loophole in billing; it is **a way of designing parallelism within a flat-rate allowance**.
 
-## 10. 上位システムとの接続
+## 10. What sits on top
 
-DPレーンは土台であり、その上に以下が乗る:
+The DP lanes are the foundation. On top of them:
 
-- **AutoCrystallize V2** — 会話ログ→意味分割（cosine谷検出）→DPスワム蒸留→マージ検品→結晶。1コマンド起動・doneマーカー非同期完了。
-- **自己学習** — 毎会話でSelfEval結晶を生成し、EWMAで減衰累積、行動規範（self_preferences）としてboot時自動装着（2026-07-08実装、v8稼働中）。
-- **自己修復** — 弱みスコア≤−3.0で改修Taskを自動起票。人間の一言でDPスワムに束ねて一括消化。
+- **AutoCrystallize V2** — conversation logs → split by meaning (cosine valleys) → distilled by a DP swarm → merged and inspected → crystals. Started with one command; completion detected asynchronously by a done marker.
+- **Self-learning** — a SelfEval crystal for every conversation, accumulated with decay (EWMA) and worn at boot as behavioral norms (self_preferences) (implemented 2026-07-08, v8 live).
+- **Self-repair** — a repair task is filed automatically when a weakness score drops to −3.0 or below. One word from the human bundles them for a DP swarm to clear.
 
 ---
-*本書の全事実は開発者ローカルのMeaningSpace結晶（作成日時つき開発記録）に基づく。日付の一覧は [timeline.md](timeline.md) を参照。*
+*Every fact here comes from MeaningSpace crystals (timestamped development records) on the developer's local machine. For the list of dates, see [timeline.md](timeline.md).*
