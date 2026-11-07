@@ -8,6 +8,8 @@
 |---|---|
 | **[meaningspace](https://github.com/subtractlab/meaningspace)** | Every AI session starts from zero. Keep every conversation whole, load only the meaning — with line-level addresses back to the source. |
 | **[ai-native-groupware](https://github.com/subtractlab/ai-native-groupware)** | Everyone writes, everyone reads — without a SaaS or a database server. One file per person on shared storage, DuckDB on every PC. |
+| **[progress-map](https://github.com/subtractlab/progress-map)** | Where every file is now, and why it changed. Each edit carries a reason and a reverse patch, tied to the conversation that caused it — no git. |
+| **[threshold-skills](https://github.com/subtractlab/threshold-skills)** | Keep dozens of AI procedures without even a catalog in the prompt. A skill lights up only when the task clears a similarity threshold. |
 
 Each repository explains the problem, the mechanism and how it compares with what exists today. Implementations are not published.
 
@@ -44,6 +46,9 @@ All built through conversation on MeaningSpace. See **[Products](https://subtrac
 | 2026-10-04 | Progress map: file map + change ledger with reasons and reverse patches |
 | 2026-10-07 | MeaningSpace architecture published as its own repository: [subtractlab/meaningspace](https://github.com/subtractlab/meaningspace) |
 | 2026-10-07 | AI Native Groupware architecture published: [subtractlab/ai-native-groupware](https://github.com/subtractlab/ai-native-groupware) |
+| 2026-11-07 | Progress map published: [subtractlab/progress-map](https://github.com/subtractlab/progress-map) |
+| 2026-11-07 | Threshold skills published: [subtractlab/threshold-skills](https://github.com/subtractlab/threshold-skills) |
+| 2026-11-07 | subtractlab.com top page rebuilt as static, readable HTML (the visual tour moved to tour.html) |
 
 Full dated history: **[timeline.md](timeline.md)**
 
