@@ -5,6 +5,21 @@ Related: [architecture.html](https://subtractlab.com/architecture.html) · [time
 
 > DP = **Debug Port**. The claude.ai chat page is driven mechanically over the Chrome DevTools Protocol (CDP), and a set of web Claude instances runs as parallel sub-agents. No pay-per-use API is involved; it runs entirely on the web allowance of a flat-rate subscription (¥0 extra cost). This is the public version of primary findings fixed by measurement between 2026-07-13 and 07-15.
 
+## Update 2026-11-20: sub-agents work inside MeaningSpace
+
+Until now, a sub-agent in a lane received a task and returned text. Since 2026-11-20 a sub-agent can open the same MeaningSpace host as the commander: it reads memory and edits code with the same tools, and passed the same steps three times in a row. Each agent is treated as one user, so this is also the first working test of MeaningSpace with more than one user — with agents, not yet with people.
+
+The commander (Claude on the desktop) now decides, before any work starts, whether to do it alone or hand it over, and to which model:
+
+| Work | Model / effort |
+|---|---|
+| Finished in a few steps | The commander does it itself |
+| Searching and collecting | Haiku 5.5 / low |
+| Acceptance criteria can be written when the work is handed over | Sonnet 5.5 / high |
+| One whole case, from finding the cause to checking the fix | Opus 5.5 / medium |
+
+The model is fixed at the start, because changing it starts a new conversation and loses the context; the effort may be raised in the same conversation.
+
 ## 1. The physical model
 
 - **One lane = one Chrome = one profile = one CDP port = one dedicated thread.** With zero shared state, adding lanes does not break the structure.

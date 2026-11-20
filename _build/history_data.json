@@ -193,6 +193,12 @@
    {
     "major": true,
     "d": "2026-11-19",
+    "t": "Search learns about time",
+    "b": "Search by meaning alone does not know which result is newest, so an older plan could be returned as the current one. Each result now carries the date and a one-line summary of its conversation, plus the newest conversation on the same topic, checked by a reranker. In a test, an agent with no memory answered 7 of 8 time-sensitive questions correctly with these materials, against 2 of 8 with the old results."
+   },
+   {
+    "major": true,
+    "d": "2026-11-19",
     "t": "A Parquet read layer — many readers, one writer",
     "b": "Search now reads a nightly Parquet copy of the meaning layer; DuckDB stays the single writer. One search went from 1,551 ms to 457 ms with the same top 5 in 30 of 30 queries, the data needed to search shrank from 2.3 GB to 157 MB, and 5 readers at once succeeded 50 of 50 times while a writer held the database (0 of 50 before). Details in <a href=\"https://github.com/subtractlab/meaningspace\">meaningspace</a>."
    },
