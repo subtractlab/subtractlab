@@ -83,6 +83,18 @@ MeaningSpace eliminates orientation entirely.
 
 Each crystal isn't a raw document. It's **compressed judgment**: what worked (posi), what failed (nega), how understanding shifted (evolution_point). Retrieving a crystal doesn't give you text — it gives you *learned experience*.
 
+## November 2026: a Parquet read layer
+
+Search now reads a nightly Parquet copy of the meaning layer instead of the database file itself. DuckDB stays the single writer.
+
+| Measured on the author's PC | Before | After |
+|---|---|---|
+| One search, 2 threads (median) | 1,551 ms | 457 ms, same top 5 in 30 of 30 queries |
+| Data needed to search | 2.3 GB | 157 MB |
+| 5 readers at once while a writer holds the database | 0 of 50 succeeded | 50 of 50 succeeded |
+
+**Multi-user: tested with agents, not yet with people.** Treating each AI agent as one user, a second agent worked on the same host alongside the first — reading memory and editing code — and passed three runs in a row. The 5-reader test ran the read path as five processes, not five full agents. Writes are serialized by one host, so we expect human users to work the same way; that is not tested yet. Details: [github.com/subtractlab/meaningspace](https://github.com/subtractlab/meaningspace).
+
 ## Architecture
 
 One conversation window. Behind it, MeaningSpace — a proprietary environment built and run by SubtractLab. Not Claude Code, not Codex, not an IDE plugin. Inside it the AI partner (internally called Eliza) remembers, searches, builds and checks its own work.
