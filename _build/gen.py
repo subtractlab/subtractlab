@@ -107,10 +107,10 @@ def build_index(hist):
              '<p class="en">奥田剛司 · Koji Okuda</p></div>'
              '<div class="frame">' + HERO_SVG + '</div></div></div></section>')
     p.append('<section class="wrap"><div class="stats reveal" data-motion>'
-             '<div class="stat"><b>4,667</b><span>conversations since February 2023 (ChatGPT 1,567, Claude 3,081 and more)</span></div>'
-             '<div class="stat"><b>34,772</b><span>meaning sections (decided, overturned, open)</span></div>'
-             '<div class="stat"><b>75</b><span>skills that light up</span></div></div>'
-             '<p class="en" style="margin-top:13px">Counted on 2026-11-07 in the local MeaningSpace — a single DuckDB file.</p></section>')
+             '<div class="stat"><b>4,722</b><span>conversations since February 2023 (ChatGPT 1,567, Claude 3,100+ and more)</span></div>'
+             '<div class="stat"><b>35,789</b><span>meaning sections (decided, overturned, open)</span></div>'
+             '<div class="stat"><b>78</b><span>skills that light up</span></div></div>'
+             '<p class="en" style="margin-top:13px">Counted on 2026-11-20 in the local MeaningSpace (DuckDB, read through Parquet).</p></section>')
     p.append('<section class="wrap beat" id="author"><div class="golden"><div class="reveal" data-motion><div class="mark"><i></i>The builder</div>'
              '<h2 class="display">Koji Okuda</h2><p class="en" style="margin-top:-13px">奥田剛司 ／ おくだ こうじ</p></div>'
              '<div class="reveal" data-motion><p class="lead">An independent builder running SubtractLab alone. He talks with AI every day, and builds the structures for working with it — by subtraction.</p>'
