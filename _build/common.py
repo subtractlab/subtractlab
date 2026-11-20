@@ -10,7 +10,7 @@ PERSON = {"@context": "https://schema.org", "@type": "Person", "@id": "https://s
           "name": "Koji Okuda", "alternateName": ["奥田剛司", "おくだ こうじ"], "url": "https://subtractlab.com/about.html",
           "jobTitle": "Independent builder / SubtractLab",
           "knowsAbout": ["AI-native systems", "semantic memory", "MeaningSpace", "3Gravity Architecture"],
-          "sameAs": ["https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB", "https://github.com/subtractlab"]}
+          "sameAs": ["https://orcid.org/0009-0003-9251-8455", "https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB", "https://github.com/subtractlab"]}
 ORG = {"@context": "https://schema.org", "@type": "Organization", "@id": "https://subtractlab.com/#subtractlab",
        "name": "SubtractLab", "url": "https://subtractlab.com/", "founder": {"@id": "https://subtractlab.com/#koji-okuda"},
        "sameAs": ["https://github.com/subtractlab", "https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB"]}
@@ -38,7 +38,7 @@ FOOT = ('<footer class="sl-foot"><div class="wrap">'
         '<a href="/ARCHITECTURE.html">Architecture</a><a href="/products.html">Products</a><a href="/faq.html">FAQ</a>'
         '<a href="/history.html">Timeline</a><a href="/about.html">About</a></div>'
         '<div class="row"><a href="https://note.com/subtractlab">note</a><a href="https://x.com/subtractlabo">X</a>'
-        '<a href="https://www.youtube.com/@SUBTRACTLAB">YouTube</a><a href="https://github.com/subtractlab">GitHub</a></div>'
+        '<a href="https://www.youtube.com/@SUBTRACTLAB">YouTube</a><a href="https://github.com/subtractlab">GitHub</a><a href="https://orcid.org/0009-0003-9251-8455">ORCID</a></div>'
         '<div>Developed by <a href="/about.html">Koji Okuda (奥田剛司)</a> · SubtractLab · © 2024–2026 Koji Okuda / SubtractLab.</div>'
         '</div></footer>')
 
