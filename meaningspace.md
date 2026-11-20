@@ -93,7 +93,7 @@ Search now reads a nightly Parquet copy of the meaning layer instead of the data
 | Data needed to search | 2.3 GB | 157 MB |
 | 5 readers at once while a writer holds the database | 0 of 50 succeeded | 50 of 50 succeeded |
 
-**Multi-user: tested with agents, not yet with people.** Treating each AI agent as one user, a second agent worked on the same host alongside the first — reading memory and editing code — and passed three runs in a row. The 5-reader test ran the read path as five processes, not five full agents. Writes are serialized by one host, so we expect human users to work the same way; that is not tested yet. Details: [github.com/subtractlab/meaningspace](https://github.com/subtractlab/meaningspace).
+**Multi-user: tested with agents, not yet with people.** Treating each AI agent as one user, a second agent worked on the same host alongside the first — reading memory and editing code — and passed three runs in a row. The 5-reader test ran the read path as five processes, not five full agents. Writes are serialized by one host, so we expect human users to work the same way; that is not tested yet. Details: [github.com/subtractlab/meaningspace](https://github.com/subtractlab/meaningspace). Paper (preprint, v0.2): [doi.org/10.5281/zenodo.24388335](https://doi.org/10.5281/zenodo.24388335).
 
 ## Architecture
 
