@@ -207,6 +207,12 @@
     "d": "2026-11-20",
     "t": "A second agent on the same host",
     "b": "Treating each AI agent as one user, a second agent read the memory and edited code on the same host as the first, and passed the same steps three times in a row. Multi-user with people is not tested yet."
+   },
+   {
+    "major": true,
+    "d": "2026-11-20",
+    "t": "Design records archived with DOIs",
+    "b": "The four design records were archived on Zenodo with DOIs under the author's ORCID iD (0009-0003-9251-8455), licensed CC BY 4.0: <a href=\"https://doi.org/10.5281/zenodo.24388284\">meaningspace</a>, <a href=\"https://doi.org/10.5281/zenodo.24388287\">ai-native-groupware</a>, <a href=\"https://doi.org/10.5281/zenodo.24388289\">progress-map</a>, <a href=\"https://doi.org/10.5281/zenodo.24388291\">threshold-skills</a>."
    }
   ]
  }
