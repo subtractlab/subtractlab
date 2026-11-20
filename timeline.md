@@ -1,6 +1,6 @@
 # MeaningSpace / DP Multi-Agent — Prior-Art Timeline
 
-**First published: 2026-07-16 (JST) · Updated 2026-11-07 · SubtractLab (one builder + AI)**
+**First published: 2026-07-16 (JST) · Updated 2026-11-20 · SubtractLab (one builder + AI)**
 
 The confirmed date of each mechanism's design, implementation and proof. Source: crystals inside MeaningSpace (timestamped, structured development records). The git history of this repository serves as a third-party-verifiable timestamp. Illustrated version: [history.html](https://subtractlab.com/history.html)
 
@@ -51,6 +51,8 @@ The confirmed date of each mechanism's design, implementation and proof. Source:
 | 2026-10-07 | **Designs published as repositories (1–2)** — [meaningspace](https://github.com/subtractlab/meaningspace) and [ai-native-groupware](https://github.com/subtractlab/ai-native-groupware) published as dated public records of the design. |
 | 2026-10-24 | The skill catalog leaves the prompt — The 25-line skill catalog in the always-loaded profile was removed — after checking that each of the 25 skills lights up within the top 3 for its own task. |
 | 2026-11-07 | **Designs published (3–4) and the site rebuilt** — [progress-map](https://github.com/subtractlab/progress-map) and [threshold-skills](https://github.com/subtractlab/threshold-skills) published. subtractlab.com rebuilt as readable HTML in a single washi-and-sumi design on a golden-ratio grid. |
+| 2026-11-19 | **A Parquet read layer — many readers, one writer** — Search now reads a nightly Parquet copy of the meaning layer; DuckDB stays the single writer. One search went from 1,551 ms to 457 ms with the same top 5 in 30 of 30 queries, the data needed to search shrank from 2.3 GB to 157 MB, and 5 readers at once succeeded 50 of 50 times while a writer held the database (0 of 50 before). Details in [meaningspace](https://github.com/subtractlab/meaningspace). |
+| 2026-11-20 | A second agent on the same host — Treating each AI agent as one user, a second agent read the memory and edited code on the same host as the first, and passed the same steps three times in a row. Multi-user with people is not tested yet. |
 
 ---
 *Every addition is dated by its commit. Evidence that entries were not altered: git history, GitHub Pages deploy records and search-engine index dates.*

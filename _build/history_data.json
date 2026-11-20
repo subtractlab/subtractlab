@@ -189,6 +189,18 @@
     "d": "2026-11-07",
     "t": "Designs published (3–4) and the site rebuilt",
     "b": "<a href=\"https://github.com/subtractlab/progress-map\">progress-map</a> and <a href=\"https://github.com/subtractlab/threshold-skills\">threshold-skills</a> published. subtractlab.com rebuilt as readable HTML in a single washi-and-sumi design on a golden-ratio grid."
+   },
+   {
+    "major": true,
+    "d": "2026-11-19",
+    "t": "A Parquet read layer — many readers, one writer",
+    "b": "Search now reads a nightly Parquet copy of the meaning layer; DuckDB stays the single writer. One search went from 1,551 ms to 457 ms with the same top 5 in 30 of 30 queries, the data needed to search shrank from 2.3 GB to 157 MB, and 5 readers at once succeeded 50 of 50 times while a writer held the database (0 of 50 before). Details in <a href=\"https://github.com/subtractlab/meaningspace\">meaningspace</a>."
+   },
+   {
+    "major": false,
+    "d": "2026-11-20",
+    "t": "A second agent on the same host",
+    "b": "Treating each AI agent as one user, a second agent read the memory and edited code on the same host as the first, and passed the same steps three times in a row. Multi-user with people is not tested yet."
    }
   ]
  }

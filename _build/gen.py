@@ -198,7 +198,7 @@ def build_history(hist):
     p.append('<div class="crumb"><a href="/">SubtractLab</a> / Timeline</div><div class="golden"><div>'
              '<p class="eyebrow">Prior-art timeline</p><h1>The date it was built<br>does not move.</h1>'
              '<p class="lead">The dates on which each mechanism of MeaningSpace and its DP multi-agent foundation was designed, built and proven — a digital anchor for prior work by one builder and an AI.</p>'
-             '<p class="en">First published 2026-07-16 (JST), last updated 2026-11-07. The git commit history, GitHub Pages deploy records and search-engine index dates attest to when each entry existed. Table version: <a href="/timeline.html">timeline</a></p></div><div>')
+             '<p class="en">First published 2026-07-16 (JST), last updated 2026-11-20. The git commit history, GitHub Pages deploy records and search-engine index dates attest to when each entry existed. Table version: <a href="/timeline.html">timeline</a></p></div><div>')
     for era in hist:
         p.append(f'<div class="tl-era">{era["era"]}</div><div class="tl">')
         for e in era["evs"]:
@@ -211,7 +211,7 @@ def build_history(hist):
 
 def build_timeline_md(hist):
     out = ["# MeaningSpace / DP Multi-Agent — Prior-Art Timeline", "",
-           "**First published: 2026-07-16 (JST) · Updated 2026-11-07 · SubtractLab (one builder + AI)**", "",
+           "**First published: 2026-07-16 (JST) · Updated 2026-11-20 · SubtractLab (one builder + AI)**", "",
            "The confirmed date of each mechanism's design, implementation and proof. Source: crystals inside MeaningSpace (timestamped, structured development records). The git history of this repository serves as a third-party-verifiable timestamp. Illustrated version: [history.html](https://subtractlab.com/history.html)", ""]
     import re
     for era in hist:
