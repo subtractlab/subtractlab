@@ -33,12 +33,17 @@ def header(cur=""):
             '<nav class="sl-nav" aria-label="Site">%s</nav></div></header>' % items)
 
 
+# 2026-11-22 Oku: 訪問者数を数える Google アナリティクス（GA4・測定ID G-L4HCE1J3HK）。全ページの head に入れる
+GA = ('<script async src="https://www.googletagmanager.com/gtag/js?id=G-L4HCE1J3HK"></script>'
+      '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-L4HCE1J3HK");</script>')
+
 FOOT = ('<footer class="sl-foot"><div class="wrap">'
         '<div class="row"><a href="/meaningspace.html">MeaningSpace</a><a href="/3gravity.html">3Gravity</a><a href="/qis.html">QIS</a>'
         '<a href="/ARCHITECTURE.html">Architecture</a><a href="/products.html">Products</a><a href="/faq.html">FAQ</a>'
         '<a href="/history.html">Timeline</a><a href="/about.html">About</a></div>'
         '<div class="row"><a href="https://note.com/subtractlab">note</a><a href="https://x.com/subtractlabo">X</a>'
         '<a href="https://www.youtube.com/@SUBTRACTLAB">YouTube</a><a href="https://github.com/subtractlab">GitHub</a><a href="https://orcid.org/0009-0003-9251-8455">ORCID</a></div>'
+        '<div>Contact: send a message to <a href="https://x.com/subtractlabo">@subtractlabo on X</a></div>'
         '<div>Developed by <a href="/about.html">Koji Okuda (奥田剛司)</a> · SubtractLab · © 2024–2026 Koji Okuda / SubtractLab.</div>'
         '</div></footer>')
 
@@ -55,14 +60,14 @@ def head(title, desc, canon, extra=""):
             f'<meta property="og:type" content="website"><meta property="og:site_name" content="SubtractLab">'
             f'<meta property="og:title" content="{t}"><meta property="og:description" content="{d}"><meta property="og:url" content="{canon}">'
             '<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@subtractlabo">\n'
-            + FONTS + '\n<link rel="stylesheet" href="/assets/css/sl.css">\n' + extra + '\n</head>\n<body>\n')
+            + FONTS + '\n<link rel="stylesheet" href="/assets/css/sl.css">\n' + extra + '\n' + GA + '\n</head>\n<body>\n')
 
 
 def layout():
     return ("---\n---\n<!DOCTYPE html>\n<html lang=\"{{ page.lang | default: 'en' }}\">\n<head>\n<meta charset=\"utf-8\">\n"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n{% seo %}\n"
             "<meta name=\"author\" content=\"Koji Okuda (奥田剛司)\">\n" + FONTS + "\n"
-            "<link rel=\"stylesheet\" href=\"/assets/css/sl.css\">\n" + ld(PERSON, ORG) + "\n</head>\n<body>\n"
+            "<link rel=\"stylesheet\" href=\"/assets/css/sl.css\">\n" + ld(PERSON, ORG) + "\n" + GA + "\n</head>\n<body>\n"
             + header() + "\n<main class=\"wrap\">\n"
             "<div class=\"crumb\"><a href=\"/\">SubtractLab</a> / {{ page.title | split: ' — ' | first | default: page.name }}</div>\n"
             "<article class=\"article\">\n{{ content }}\n</article>\n</main>\n" + FOOT + "\n" + JS + "\n</body>\n</html>\n")
