@@ -10,7 +10,7 @@ PERSON = {"@context": "https://schema.org", "@type": "Person", "@id": "https://s
           "name": "Koji Okuda", "alternateName": ["奥田剛司", "おくだ こうじ"], "url": "https://subtractlab.com/about.html",
           "jobTitle": "Independent builder / SubtractLab",
           "knowsAbout": ["AI-native systems", "semantic memory", "MeaningSpace", "3Gravity Architecture"],
-          "sameAs": ["https://orcid.org/0009-0003-9251-8455", "https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB", "https://github.com/subtractlab"]}
+          "sameAs": ["https://orcid.org/0009-0003-9251-8455", "https://www.wikidata.org/wiki/Q142259383", "https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB", "https://github.com/subtractlab"]}
 ORG = {"@context": "https://schema.org", "@type": "Organization", "@id": "https://subtractlab.com/#subtractlab",
        "name": "SubtractLab", "url": "https://subtractlab.com/", "founder": {"@id": "https://subtractlab.com/#koji-okuda"},
        "sameAs": ["https://github.com/subtractlab", "https://note.com/subtractlab", "https://x.com/subtractlabo", "https://www.youtube.com/@SUBTRACTLAB"]}

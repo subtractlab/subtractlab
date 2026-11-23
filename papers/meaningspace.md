@@ -24,7 +24,8 @@ citation_pdf: "/papers/meaningspace-okuda-2026-v0.2.pdf"
   "name": "Koji Okuda",
   "identifier": "https://orcid.org/0009-0003-9251-8455",
   "sameAs": [
-   "https://orcid.org/0009-0003-9251-8455"
+   "https://orcid.org/0009-0003-9251-8455",
+   "https://www.wikidata.org/wiki/Q142259383"
   ],
   "affiliation": {
    "@id": "https://subtractlab.com/#subtractlab"
@@ -51,7 +52,8 @@ citation_pdf: "/papers/meaningspace-okuda-2026-v0.2.pdf"
  ],
  "sameAs": [
   "https://doi.org/10.5281/zenodo.24388336",
-  "https://zenodo.org/records/24388336"
+  "https://zenodo.org/records/24388336",
+  "https://www.wikidata.org/wiki/Q142259391"
  ],
  "url": "https://subtractlab.com/papers/meaningspace.html",
  "encoding": {
