@@ -11,6 +11,90 @@ citation_institution: "SubtractLab"
 citation_pdf: "/papers/meaningspace-okuda-2026-v0.2.pdf"
 ---
 
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ScholarlyArticle",
+ "@id": "https://doi.org/10.5281/zenodo.24388336",
+ "headline": "MeaningSpace: Keep Every Word, Load Only the Meaning",
+ "name": "MeaningSpace: Keep Every Word, Load Only the Meaning — A lossless conversational memory with line-level addresses, threshold-gated skills, and a time-aware read layer",
+ "author": {
+  "@type": "Person",
+  "@id": "https://subtractlab.com/#koji-okuda",
+  "name": "Koji Okuda",
+  "identifier": "https://orcid.org/0009-0003-9251-8455",
+  "sameAs": [
+   "https://orcid.org/0009-0003-9251-8455"
+  ],
+  "affiliation": {
+   "@id": "https://subtractlab.com/#subtractlab"
+  }
+ },
+ "publisher": {
+  "@id": "https://subtractlab.com/#subtractlab"
+ },
+ "datePublished": "2026-11-20",
+ "version": "0.2",
+ "inLanguage": "en",
+ "license": "https://creativecommons.org/licenses/by/4.0/",
+ "identifier": [
+  {
+   "@type": "PropertyValue",
+   "propertyID": "DOI",
+   "value": "10.5281/zenodo.24388336"
+  },
+  {
+   "@type": "PropertyValue",
+   "propertyID": "DOI (concept)",
+   "value": "10.5281/zenodo.24388335"
+  }
+ ],
+ "sameAs": [
+  "https://doi.org/10.5281/zenodo.24388336",
+  "https://zenodo.org/records/24388336"
+ ],
+ "url": "https://subtractlab.com/papers/meaningspace.html",
+ "encoding": {
+  "@type": "MediaObject",
+  "contentUrl": "https://subtractlab.com/papers/meaningspace-okuda-2026-v0.2.pdf",
+  "encodingFormat": "application/pdf"
+ },
+ "keywords": [
+  "AI memory",
+  "conversational memory",
+  "LLM agents",
+  "MeaningSpace"
+ ],
+ "about": {
+  "@type": "SoftwareApplication",
+  "name": "MeaningSpace",
+  "url": "https://subtractlab.com/meaningspace"
+ },
+ "hasPart": [
+  {
+   "@type": "CreativeWork",
+   "name": "AI Native Groupware: a dated design record",
+   "sameAs": "https://doi.org/10.5281/zenodo.24388288"
+  },
+  {
+   "@type": "CreativeWork",
+   "name": "Threshold Skills: a dated design record",
+   "sameAs": "https://doi.org/10.5281/zenodo.24388292"
+  },
+  {
+   "@type": "CreativeWork",
+   "name": "Progress Map: a dated design record",
+   "sameAs": "https://doi.org/10.5281/zenodo.24388290"
+  },
+  {
+   "@type": "CreativeWork",
+   "name": "MeaningSpace: a dated design record",
+   "sameAs": "https://doi.org/10.5281/zenodo.24388285"
+  }
+ ]
+}
+</script>
+
 # MeaningSpace: Keep Every Word, Load Only the Meaning
 
 **A lossless conversational memory with line-level addresses, threshold-gated skills, and a time-aware read layer**
