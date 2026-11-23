@@ -37,6 +37,15 @@ def header(cur=""):
 GA = ('<script async src="https://www.googletagmanager.com/gtag/js?id=G-L4HCE1J3HK"></script>'
       '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-L4HCE1J3HK");</script>')
 
+# 2026-11-23 Oku: Google Scholar が論文ページを拾えるように、front matter の citation_* から meta タグを出す（Zenodo は Scholar に索引されないため）
+CIT = ('{% if page.citation_title %}<meta name="citation_title" content="{{ page.citation_title }}">'
+       '{% for a in page.citation_authors %}<meta name="citation_author" content="{{ a }}">{% endfor %}'
+       '<meta name="citation_publication_date" content="{{ page.citation_date }}">'
+       '{% if page.citation_doi %}<meta name="citation_doi" content="{{ page.citation_doi }}">{% endif %}'
+       '{% if page.citation_institution %}<meta name="citation_technical_report_institution" content="{{ page.citation_institution }}">{% endif %}'
+       '<meta name="citation_abstract_html_url" content="{{ site.url }}{{ page.url }}">'
+       '<meta name="citation_pdf_url" content="{{ site.url }}{{ page.citation_pdf }}">{% endif %}')
+
 FOOT = ('<footer class="sl-foot"><div class="wrap">'
         '<div class="row"><a href="/meaningspace.html">MeaningSpace</a><a href="/3gravity.html">3Gravity</a><a href="/qis.html">QIS</a>'
         '<a href="/ARCHITECTURE.html">Architecture</a><a href="/products.html">Products</a><a href="/faq.html">FAQ</a>'
@@ -67,7 +76,7 @@ def layout():
     return ("---\n---\n<!DOCTYPE html>\n<html lang=\"{{ page.lang | default: 'en' }}\">\n<head>\n<meta charset=\"utf-8\">\n"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n{% seo %}\n"
             "<meta name=\"author\" content=\"Koji Okuda (奥田剛司)\">\n" + FONTS + "\n"
-            "<link rel=\"stylesheet\" href=\"/assets/css/sl.css\">\n" + ld(PERSON, ORG) + "\n" + GA + "\n</head>\n<body>\n"
+            "<link rel=\"stylesheet\" href=\"/assets/css/sl.css\">\n" + ld(PERSON, ORG) + "\n" + CIT + "\n" + GA + "\n</head>\n<body>\n"
             + header() + "\n<main class=\"wrap\">\n"
             "<div class=\"crumb\"><a href=\"/\">SubtractLab</a> / {{ page.title | split: ' — ' | first | default: page.name }}</div>\n"
             "<article class=\"article\">\n{{ content }}\n</article>\n</main>\n" + FOOT + "\n" + JS + "\n</body>\n</html>\n")

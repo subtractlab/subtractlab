@@ -229,9 +229,14 @@ This is what "freed from the context window" looks like. The AI doesn't fit your
 
 MeaningSpace is not a concept. It's running in production. Every day. The [products built on it](https://subtractlab.com/products) — video pipelines, BI systems, RPA automation, presentation engines — are the proof. But they're the tip of the iceberg. The real innovation is underneath: **an AI that remembers with judgment, searches with meaning, and does the work itself — all through conversation.**
 
+## The Paper
+
+MeaningSpace is described in a paper with measurements: [MeaningSpace: Keep Every Word, Load Only the Meaning](https://subtractlab.com/papers/meaningspace) (draft v0.2, 2026, DOI [10.5281/zenodo.24388336](https://doi.org/10.5281/zenodo.24388336)).
+
 ## Explore SubtractLab
 
 - **MeaningSpace** — you are here
+- [MeaningSpace paper](https://subtractlab.com/papers/meaningspace)
 - [Products built on MeaningSpace](https://subtractlab.com/products)
 - [3Gravity Architecture](https://subtractlab.com/3gravity)
 - [QIS](https://subtractlab.com/qis)
